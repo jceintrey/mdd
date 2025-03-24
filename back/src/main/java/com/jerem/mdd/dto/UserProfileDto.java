@@ -1,20 +1,20 @@
 package com.jerem.mdd.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
+import com.jerem.mdd.model.Subscriptions;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Setter;
+
 
 @Data
-@Schema(description = "Response body containing the authenticated user informations.")
-public class UserDto {
-    private Long id;
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserProfileDto {
 
     @Email
     @Schema(description = "User email")
@@ -24,7 +24,8 @@ public class UserDto {
     @Size(max = 30)
     private String username;
 
-    @Size(max = 120)
-    private String password;
+    private List<Subscriptions> Subscriptions;
+
+
 
 }

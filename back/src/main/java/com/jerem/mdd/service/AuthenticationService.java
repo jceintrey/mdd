@@ -1,5 +1,6 @@
 package com.jerem.mdd.service;
 
+import java.util.Optional;
 import org.springframework.security.authentication.AuthenticationManager;
 import com.jerem.mdd.dto.AuthResponse;
 import com.jerem.mdd.dto.LoginRequest;
@@ -18,5 +19,8 @@ public interface AuthenticationService {
      * @throws Exception if authentication fails
      */
     public AuthResponse authenticate(LoginRequest request) throws Exception;
+
+
+    public Optional<String> getAuthenticatedUsername();
 
 }

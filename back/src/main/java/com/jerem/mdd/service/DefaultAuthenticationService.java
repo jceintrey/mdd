@@ -1,16 +1,18 @@
 package com.jerem.mdd.service;
 
+import java.util.Optional;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.jerem.mdd.dto.AuthResponse;
 import com.jerem.mdd.dto.LoginRequest;
-import com.jerem.mdd.model.UserEntity;
+import com.jerem.mdd.model.User;
 import com.jerem.mdd.repository.UserRepository;
 
 @Service
@@ -29,7 +31,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
     }
 
     public AuthResponse authenticate(LoginRequest request) throws Exception {
-        UserEntity user = userRepository.findByEmail(request.getIdentifier())
+        User user = userRepository.findByEmail(request.getIdentifier())
                 .orElseGet(() -> userRepository.findByUsername(request.getIdentifier()).orElseThrow(
                         () -> new UsernameNotFoundException("Utilisateur non trouvé")));
 
@@ -48,4 +50,19 @@ public class DefaultAuthenticationService implements AuthenticationService {
 
 
     }
+
+    public Optional<String> getAuthenticatedUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            return Optional.of(authentication.getName());
+
+        } else {
+            // throw new AuthenticatedUserNotFound("No authenticated user found in Security
+            // Context",
+            // "AuhtenticationService.getAuthenticatedUserEmail");
+            throw new UsernameNotFoundException("No authenticated user found in Security Context");
+        }
+    }
+
 }
