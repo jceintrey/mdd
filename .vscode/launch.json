@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-MddApplication<mdd>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.jerem.mdd.MddApplication",
+      "projectName": "mdd",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
