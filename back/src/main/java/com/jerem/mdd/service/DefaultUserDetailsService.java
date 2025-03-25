@@ -1,7 +1,7 @@
 package com.jerem.mdd.service;
 
 import com.jerem.mdd.model.AppUserDetails;
-import com.jerem.mdd.model.UserEntity;
+import com.jerem.mdd.model.User;
 import com.jerem.mdd.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        UserEntity user = userRepository.findByEmail(email).orElseThrow(
+        User user = userRepository.findByEmail(email).orElseThrow(
                 () -> new UsernameNotFoundException("User with email: " + email + "not found"));
 
         return new AppUserDetails(user);

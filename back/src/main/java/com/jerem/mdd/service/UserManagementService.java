@@ -1,5 +1,7 @@
 package com.jerem.mdd.service;
 
+import com.jerem.mdd.model.User;
+import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
@@ -59,5 +61,29 @@ public interface UserManagementService {
      * @return a {@link boolean} true if the username already exist, and false otherwise
      */
     public boolean isUsernameAlreadyUsed(String username);
+
+
+    /**
+     * Retrieves the {@link UserEntity} by their Username.
+     * 
+     * This method is intented to be used by other services and not by controllers themselves in
+     * order to respect the layer model.
+     * 
+     * @param {@link String} username of the user
+     * @return an {@link Optional} containing the {@link UserEntity} if found, otherwise empty.
+     */
+    public Optional<User> getUserEntityByUsername(String username);
+
+
+    /**
+     * Retrieves the {@link UserEntity} by their Email.
+     * 
+     * This method is intented to be used by other services and not by controllers themselves in
+     * order to respect the layer model.
+     * 
+     * @param {@link String} email of the user
+     * @return an {@link Optional} containing the {@link UserEntity} if found, otherwise empty.
+     */
+    public Optional<User> getUserEntityByEmail(String email);
 
 }

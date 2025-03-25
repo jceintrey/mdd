@@ -71,10 +71,6 @@ public class AuthController {
         }
     }
 
-    @GetMapping("/status")
-    public ResponseEntity<String> status() {
-        log.debug("@PostMapping(\"/login\")");
-        return ResponseEntity.ok("{'status': 'ok'}");
 
-    }
+
 }
