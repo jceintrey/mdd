@@ -29,9 +29,10 @@ public class UserProfileService {
 
     public UserProfileDto getUserProfile() {
 
-        String authenticatedUsername = authenticationService.getAuthenticatedUsername();
+        String authenticatedUserEmail = authenticationService.getAuthenticatedUserEmail();
+
         Optional<User> authenticatedUser =
-                userManagementService.getUserEntityByUsername(authenticatedUsername);
+                userManagementService.getUserEntityByEmail(authenticatedUserEmail);
 
         if (authenticatedUser.isPresent()) {
 
@@ -40,8 +41,7 @@ public class UserProfileService {
             userDto.setUsername(authenticatedUser.get().getUsername());
             userDto.setSubscriptions(
                     subscriptionService.getSubscriptionsByUser(authenticatedUser.get().getId()));
-
-
+            return userDto;
 
         } else
             throw new UsernameNotFoundException("No authenticated user found");

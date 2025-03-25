@@ -43,7 +43,9 @@ public class DataInitializer implements CommandLineRunner {
         ObjectMapper objectMapper = new ObjectMapper();
         ClassPathResource resource = new ClassPathResource(filePath);
         List<User> users = objectMapper.readValue(resource.getInputStream(),
-                new TypeReference<List<User
+                new TypeReference<List<User>>() {});
+
+
         users.forEach((user) -> {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         });

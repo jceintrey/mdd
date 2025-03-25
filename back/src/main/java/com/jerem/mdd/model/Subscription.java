@@ -1,5 +1,5 @@
-package com.jerem.mdd.dto;
+package com.jerem.mdd.model;
 
-public class Subscriptions {
+public class Subscription {
 
 }

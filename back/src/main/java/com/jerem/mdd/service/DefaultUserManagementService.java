@@ -1,5 +1,6 @@
 package com.jerem.mdd.service;
 
+import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -83,5 +84,16 @@ public class DefaultUserManagementService implements UserManagementService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'isUsernameAlreadyUsed'");
     }
+
+    @Override
+    public Optional<User> getUserEntityByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public Optional<User> getUserEntityByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 
 }

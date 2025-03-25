@@ -1,7 +1,7 @@
 package com.jerem.mdd.dto;
 
 import java.util.List;
-import com.jerem.mdd.model.Subscriptions;
+import com.jerem.mdd.model.Subscription;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -24,7 +24,7 @@ public class UserProfileDto {
     @Size(max = 30)
     private String username;
 
-    private List<Subscriptions> Subscriptions;
+    private List<Subscription> Subscriptions;
 
 
 

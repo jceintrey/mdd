@@ -14,7 +14,9 @@ import com.jerem.mdd.dto.AuthResponse;
 import com.jerem.mdd.dto.LoginRequest;
 import com.jerem.mdd.model.User;
 import com.jerem.mdd.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @Primary
 public class DefaultAuthenticationService implements AuthenticationService {
@@ -51,11 +53,22 @@ public class DefaultAuthenticationService implements AuthenticationService {
 
     }
 
-    public Optional<String> getAuthenticatedUsername() {
+    /**
+     * Retrieves the email of the currently authenticated user.
+     * <p>
+     * This method accesses the {@link SecurityContextHolder} to obtain the authentication details.
+     * </p>
+     * 
+     * @return an {@link Optional} containing the authenticated user's email, or empty if no user is
+     *         authenticated
+     */
+    @Override
+    public String getAuthenticatedUserEmail() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
-            return Optional.of(authentication.getName());
+
+            return authentication.getName();
 
         } else {
             // throw new AuthenticatedUserNotFound("No authenticated user found in Security
