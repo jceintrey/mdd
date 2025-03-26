@@ -1,11 +1,10 @@
 package com.jerem.mdd.service;
 
 import java.util.Optional;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.jerem.mdd.dto.UserDto;
+
 import com.jerem.mdd.dto.UserProfileDto;
 import com.jerem.mdd.model.User;
 

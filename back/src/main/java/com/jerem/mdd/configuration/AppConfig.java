@@ -1,8 +1,10 @@
 package com.jerem.mdd.configuration;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.jerem.mdd.configuration.properties.AppConfigProperties;
 import com.jerem.mdd.repository.UserRepository;
 import com.jerem.mdd.service.DefaultJwtTokenProvider;
@@ -41,6 +43,18 @@ public class AppConfig {
     public UserManagementService userManagementService(UserRepository userRepository,
             PasswordEncoder passwordEncoder) {
         return new DefaultUserManagementService(userRepository, passwordEncoder);
+    }
+
+
+    /**
+     * Defines a modelMapper bean that handles mapping between entity and dto.
+     *
+     * 
+     * @return a ModelMapper instance
+     */
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 
 }
