@@ -1,31 +1,18 @@
 package com.jerem.mdd.dto;
 
 import java.util.List;
-import com.jerem.mdd.model.Subscription;
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Setter;
 
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-public class UserProfileDto {
+public class UserProfileDto extends UserBaseDto {
 
-    @Email
-    @Schema(description = "User email")
-    private String email;
-
-    @NonNull
-    @Size(max = 30)
-    private String username;
-
-    private List<Subscription> Subscriptions;
-
-
+    private Long id;
+    private List<SubscriptionDto> Subscriptions;
 
 }

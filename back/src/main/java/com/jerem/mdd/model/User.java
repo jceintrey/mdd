@@ -2,7 +2,7 @@ package com.jerem.mdd.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +26,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -34,11 +33,14 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JsonManagedReference("user-subscriptions")
     private List<Subscription> subscriptions = new ArrayList<>();
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("user-posts")
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "comments", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("user-comments")
     private List<Comment> comments = new ArrayList<>();
 }

@@ -20,9 +20,11 @@ import com.jerem.mdd.repository.TopicRepository;
 @Component
 public class PostMapper {
     private final ModelMapper modelMapper;
+    private final TopicRepository topicRepository;
 
     public PostMapper(ModelMapper modelMapper, TopicRepository topicRepository) {
         this.modelMapper = modelMapper;
+        this.topicRepository = topicRepository;
     }
 
     public PostDto toDto(Post post) {
@@ -41,10 +43,10 @@ public class PostMapper {
             throws ParseException {
         Post post = modelMapper.map(postDto, Post.class);
 
-        DateFormat DFormat = new SimpleDateFormat("MM/ dd/ yy");
+        DateFormat dateFormat = new SimpleDateFormat("MM/ dd/ yy");
 
         try {
-            post.setCreatedAt(DFormat.parse(postDto.getCreatedAt()));
+            post.setCreatedAt(dateFormat.parse(postDto.getCreatedAt()));
         } catch (ParseException ex) {
             throw new ParseException(ex.toString(), 1);
         }

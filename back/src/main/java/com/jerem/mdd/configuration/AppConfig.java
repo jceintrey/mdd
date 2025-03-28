@@ -1,6 +1,7 @@
 package com.jerem.mdd.configuration;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,6 +12,8 @@ import com.jerem.mdd.service.DefaultJwtTokenProvider;
 import com.jerem.mdd.service.DefaultUserManagementService;
 import com.jerem.mdd.service.JwtTokenProvider;
 import com.jerem.mdd.service.UserManagementService;
+import jakarta.annotation.PostConstruct;
+
 
 /**
  * Configuration class for the application. This class defines beans that will be managed by the
@@ -18,6 +21,14 @@ import com.jerem.mdd.service.UserManagementService;
  */
 @Configuration
 public class AppConfig {
+
+    @Value("${spring.datasource.url}")
+    private String datasourceUrl;
+
+    @PostConstruct
+    public void printDatasourceUrl() {
+        System.out.println("Datasource URL: " + datasourceUrl);
+    }
 
     /**
      * Defines a JwtTokenProvider bean for handling JSON Web Token (JWT) creation and validation.

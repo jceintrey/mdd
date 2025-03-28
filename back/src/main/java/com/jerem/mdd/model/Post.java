@@ -3,7 +3,7 @@ package com.jerem.mdd.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,13 +46,16 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference("user-posts")
     private User author;
 
     @ManyToOne
     @JoinColumn(name = "topic_id", nullable = false)
+    @JsonBackReference("topic-posts")
     private Topic topic;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference("comment-posts")
     private List<Comment> comments = new ArrayList<>();
 
 

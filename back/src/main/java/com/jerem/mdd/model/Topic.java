@@ -2,7 +2,7 @@ package com.jerem.mdd.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,9 +35,11 @@ public class Topic {
 
 
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("topic-subscription")
     private List<Subscription> subscribers = new ArrayList<>();
 
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("topic-posts")
     private List<Post> posts = new ArrayList<>();
 
 

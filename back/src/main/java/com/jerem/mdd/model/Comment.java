@@ -1,6 +1,7 @@
 package com.jerem.mdd.model;
 
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,11 +34,13 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference("user-comments")
     private User author;
 
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
-    private User post;
+    @JsonBackReference("comment-posts")
+    private Post post;
 
 
 
