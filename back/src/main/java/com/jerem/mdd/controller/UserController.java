@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.jerem.mdd.dto.UserProfileDto;
-import com.jerem.mdd.service.AuthenticationService;
 import com.jerem.mdd.service.UserManagementService;
 import com.jerem.mdd.service.UserProfileService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,15 +27,13 @@ import lombok.extern.slf4j.Slf4j;
 @Tag(name = "AuthController", description = "Process user related operations")
 public class UserController {
 
-    private final UserManagementService userManagementService;
     private final UserProfileService userProfileService;
-    private final AuthenticationService authenticationService;
 
-    public UserController(UserManagementService userManagementService,
-            UserProfileService userProfileService, AuthenticationService authenticationService) {
-        this.userManagementService = userManagementService;
+
+    public UserController(UserProfileService userProfileService) {
+
         this.userProfileService = userProfileService;
-        this.authenticationService = authenticationService;
+
     }
 
     @GetMapping("/me")
@@ -46,7 +43,7 @@ public class UserController {
         userProfileService.getUserProfile();
 
         return ResponseEntity.ok(userProfileService.getUserProfile());
-
-
     }
+
+
 }

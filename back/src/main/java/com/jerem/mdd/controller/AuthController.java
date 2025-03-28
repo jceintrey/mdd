@@ -2,13 +2,13 @@ package com.jerem.mdd.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.jerem.mdd.dto.AuthResponse;
 import com.jerem.mdd.dto.LoginRequest;
+import com.jerem.mdd.service.AuthenticationService;
 import com.jerem.mdd.service.DefaultAuthenticationService;
 import com.jerem.mdd.service.UserManagementService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,14 +32,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Tag(name = "AuthController", description = "Process authentication related operations")
 public class AuthController {
-    private final UserManagementService userManagementService;
-    private final DefaultAuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
 
-    public AuthController(DefaultAuthenticationService authenticationService,
-            UserManagementService userManagementService) {
-        this.userManagementService = userManagementService;
+    public AuthController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
-
 
     }
 

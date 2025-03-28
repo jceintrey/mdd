@@ -1,29 +1,36 @@
 package com.jerem.mdd.service;
 
+import java.util.List;
 import java.util.Optional;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.jerem.mdd.dto.UserDto;
+import com.jerem.mdd.dto.SubscriptionDto;
 import com.jerem.mdd.dto.UserProfileDto;
+import com.jerem.mdd.mapper.UserMapper;
+import com.jerem.mdd.model.Subscription;
 import com.jerem.mdd.model.User;
+import lombok.extern.slf4j.Slf4j;
 
 
 @Service
+@Slf4j
 public class UserProfileService {
 
 
     private final UserManagementService userManagementService;
     private final AuthenticationService authenticationService;
-    private final SubscriptionService subscriptionService;
+
+    private final UserMapper userMapper;
 
 
-    private UserProfileService(UserManagementService userManagementService,
-            AuthenticationService authenticationService, SubscriptionService subscriptionService) {
+    public UserProfileService(UserManagementService userManagementService,
+            AuthenticationService authenticationService, UserMapper userMapper) {
         this.userManagementService = userManagementService;
         this.authenticationService = authenticationService;
-        this.subscriptionService = subscriptionService;
+        this.userMapper = userMapper;
     }
 
 
@@ -36,12 +43,7 @@ public class UserProfileService {
 
         if (authenticatedUser.isPresent()) {
 
-            UserProfileDto userDto = new UserProfileDto();
-            userDto.setEmail(authenticatedUser.get().getEmail());
-            userDto.setUsername(authenticatedUser.get().getUsername());
-            userDto.setSubscriptions(
-                    subscriptionService.getSubscriptionsByUser(authenticatedUser.get().getId()));
-            return userDto;
+            return userMapper.toUserProfileDto(authenticatedUser.get());
 
         } else
             throw new UsernameNotFoundException("No authenticated user found");
