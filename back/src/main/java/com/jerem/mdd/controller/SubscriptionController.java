@@ -79,7 +79,9 @@ public class SubscriptionController {
                                         @ApiResponse(responseCode = "401",
                                                         description = "Unauthorized, user must be authenticated"),
                                         @ApiResponse(responseCode = "404",
-                                                        description = "Topic not found")})
+                                                        description = "Topic not found"),
+                                        @ApiResponse(responseCode = "409",
+                                                        description = "Subscription already exist")})
         @PostMapping("/subscribe/{topicId}")
         public ResponseEntity<SubscriptionDto> subscribe(@PathVariable("topicId") String topicId) {
                 log.debug("@PostMapping(\"/subscribe/{topicId}\")");

@@ -5,6 +5,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.jerem.mdd.dto.SubscriptionDetailedDto;
 import com.jerem.mdd.dto.SubscriptionDto;
+import com.jerem.mdd.exception.SubscriptionAlreadyExistException;
+import com.jerem.mdd.exception.SubscriptionNotFoundException;
+import com.jerem.mdd.exception.TopicNotFoundException;
+import com.jerem.mdd.exception.UserNotFoundException;
 import com.jerem.mdd.mapper.SubscriptionMapper;
 import com.jerem.mdd.model.Subscription;
 import com.jerem.mdd.model.Topic;
@@ -13,6 +17,7 @@ import com.jerem.mdd.repository.SubscriptionRepository;
 import com.jerem.mdd.repository.TopicRepository;
 import com.jerem.mdd.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+
 
 @Service
 public class SubscriptionService {
@@ -42,14 +47,16 @@ public class SubscriptionService {
 
     public SubscriptionDto subscribe(String topicId) {
         String username = authenticationService.getAuthenticatedUserEmail();
-        User user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User user = userRepository.findByEmail(username).orElseThrow(
+                () -> new UserNotFoundException("User not found", "SubscriptionService.subscribe"));
 
         Topic topic = topicRepository.findById(Long.parseLong(topicId))
-                .orElseThrow(() -> new EntityNotFoundException("Topic not found"));
+                .orElseThrow(() -> new TopicNotFoundException("Topic not found",
+                        "SubscriptionService.subscribe"));
 
         if (subscriptionRepository.findByUserAndTopic(user, topic).isPresent())
-            throw new IllegalArgumentException("A subscription already exists");
+            throw new SubscriptionAlreadyExistException("A subscription already exists",
+                    "SubscriptionService.subscribe");
 
         Subscription subscription = new Subscription(user, topic);
 
@@ -70,14 +77,16 @@ public class SubscriptionService {
         String username = authenticationService.getAuthenticatedUserEmail();
 
         User user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found",
+                        "SubscriptionService.unsubscribe"));
 
         Topic topic = topicRepository.findById(Long.parseLong(topicId))
-                .orElseThrow(() -> new EntityNotFoundException("Topic not found"));
+                .orElseThrow(() -> new TopicNotFoundException("Topic not found",
+                        "SubscriptionService.unsubscribe"));
 
-        // On récupère directement la subscription spécifique
         Subscription subscription = subscriptionRepository.findByUserAndTopic(user, topic)
-                .orElseThrow(() -> new EntityNotFoundException("Subscription not found"));
+                .orElseThrow(() -> new SubscriptionNotFoundException("Subscription not found",
+                        "SubscriptionService.unsubscribe"));
 
         subscriptionRepository.delete(subscription);
     }
@@ -96,8 +105,8 @@ public class SubscriptionService {
      */
     public List<SubscriptionDetailedDto> findAll() {
         String username = authenticationService.getAuthenticatedUserEmail();
-        User user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User user = userRepository.findByEmail(username).orElseThrow(
+                () -> new UserNotFoundException("User not found", "SubscriptionService.findAll"));
 
         List<Subscription> subscriptions = subscriptionRepository.findByUserWithTopics(user);
         return subscriptionMapper.toDetailedDto(subscriptions);
