@@ -81,7 +81,7 @@ public class DataInitializer implements CommandLineRunner {
         ClassPathResource resource = new ClassPathResource(filePath);
         List<Topic> topics = objectMapper.readValue(resource.getInputStream(),
                 new TypeReference<List<Topic>>() {});
-
+        topics.forEach((topic) -> log.info(topic.getName()));
         return topics;
     }
 

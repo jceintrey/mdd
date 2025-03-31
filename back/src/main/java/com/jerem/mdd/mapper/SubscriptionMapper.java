@@ -12,7 +12,7 @@ import com.jerem.mdd.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 @Component
-public class SubscriptionMapper {
+public class SubscriptionMapper implements Mapper<Subscription, SubscriptionDto> {
 
 
     private final ModelMapper modelMapper;
@@ -27,6 +27,7 @@ public class SubscriptionMapper {
         this.topicRepository = topicRepository;
     }
 
+    @Override
     public SubscriptionDto toDto(Subscription subscription) {
         SubscriptionDto subscriptionDto = modelMapper.map(subscription, SubscriptionDto.class);
         subscriptionDto.setUserId(subscription.getUser().getId());
@@ -35,6 +36,7 @@ public class SubscriptionMapper {
 
     }
 
+    @Override
     public Subscription toEntity(SubscriptionDto subscriptionDto) {
 
         Subscription subscription = modelMapper.map(subscriptionDto, Subscription.class);
@@ -48,14 +50,14 @@ public class SubscriptionMapper {
                         "Topic not found with id: " + subscriptionDto.getTopicId())));
         return subscription;
     }
+    // @Override
+    // public List<SubscriptionDto> toDto(List<Subscription> subscriptions) {
+    // return subscriptions.stream().map(this::toDto).collect(Collectors.toList());
+    // }
 
-    public List<SubscriptionDto> toDto(List<Subscription> subscriptions) {
-        return subscriptions.stream().map(this::toDto).collect(Collectors.toList());
-    }
-
-    public List<Subscription> toEntity(List<SubscriptionDto> subscriptionDtos) {
-        return subscriptionDtos.stream().map(this::toEntity).collect(Collectors.toList());
-    }
+    // public List<Subscription> toEntity(List<SubscriptionDto> subscriptionDtos) {
+    // return subscriptionDtos.stream().map(this::toEntity).collect(Collectors.toList());
+    // }
 
     public SubscriptionDetailedDto toDetailedDto(Subscription subscription) {
         return new SubscriptionDetailedDto(subscription.getId(), subscription.getUser().getId(),

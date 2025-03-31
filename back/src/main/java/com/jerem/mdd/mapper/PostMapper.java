@@ -18,7 +18,7 @@ import com.jerem.mdd.model.User;
 import com.jerem.mdd.repository.TopicRepository;
 
 @Component
-public class PostMapper {
+public class PostMapper implements Mapper<Post, PostDto> {
     private final ModelMapper modelMapper;
     private final TopicRepository topicRepository;
 
@@ -27,6 +27,7 @@ public class PostMapper {
         this.topicRepository = topicRepository;
     }
 
+    @Override
     public PostDto toDto(Post post) {
         PostDto postDto = modelMapper.map(post, PostDto.class);
 
@@ -56,6 +57,12 @@ public class PostMapper {
                 .orElseThrow(() -> new RuntimeException("Topic not found")));
 
         return post;
+    }
+
+    @Override
+    public Post toEntity(PostDto dto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toEntity'");
     }
 
 }
