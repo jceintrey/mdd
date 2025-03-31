@@ -1,8 +1,6 @@
 package com.jerem.mdd.mapper;
 
 
-import java.util.List;
-import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import com.jerem.mdd.dto.TopicDto;
@@ -34,10 +32,10 @@ public class TopicMapper implements Mapper<Topic, TopicDto> {
         return modelMapper.map(topicDto, Topic.class);
     }
 
-    @Override
-    public List<TopicDto> toDto(List<Topic> topics) {
-        return topics.stream().map(this::toDto).collect(Collectors.toList());
-    }
+    // @Override
+    // public List<TopicDto> toDto(List<Topic> topics) {
+    // return topics.stream().map(this::toDto).collect(Collectors.toList());
+    // }
 
 
 

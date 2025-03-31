@@ -1,5 +1,8 @@
 package com.jerem.mdd.mapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Generic interface for mapping between entity and DTO.
  *

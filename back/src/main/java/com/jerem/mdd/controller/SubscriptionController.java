@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Controller class used for subscription purpose.
  * <p>
- * This class implements the authentication endpoints of the application.
+ * This class implements the subscription endpoints of the application.
  * </p>
  * <p>
  * - {@link DefaultAuthenticationService} service that process the user authentication -

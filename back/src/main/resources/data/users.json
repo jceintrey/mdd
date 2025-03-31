@@ -1,12 +1,17 @@
 [
-    {
-      "username": "john_doe",
-      "email": "john@example.com",
-      "password": "test!123"
-    },
-    {
-      "username": "jane_doe",
-      "email": "jane@example.com",
-      "password": "Azerty!"
-    }
-  ]
+  {
+    "username": "jdoe",
+    "email": "john@some.com",
+    "password": "test!123"
+  },
+  {
+    "username": "jdoe666",
+    "email": "jane@mx.com",
+    "password": "Azerty!"
+  },
+  {
+    "username": "mike_horn",
+    "email": "mikehorn@example.com",
+    "password": "Azerty!"
+  }
+]

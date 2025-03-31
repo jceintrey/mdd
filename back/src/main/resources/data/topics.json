@@ -1,10 +1,50 @@
 [
     {
         "name": "RxJS",
-        "description": "RxJS est une librairie..."
+        "description": "RxJS est une bibliothèque JavaScript pour la programmation réactive utilisant des Observables, facilitant la gestion des événements asynchrones."
     },
     {
         "name": "POO",
-        "description": "Tout ce qui concerne la programmation orientée Objet"
+        "description": "Tout ce qui concerne la programmation orientée objet : concepts de classes, héritage, polymorphisme, encapsulation et abstraction."
+    },
+    {
+        "name": "Java Streams",
+        "description": "Les Streams en Java permettent de traiter des collections de données de manière déclarative avec des opérations comme le filtrage, le mapping et la réduction."
+    },
+    {
+        "name": "Java Lambda",
+        "description": "Les expressions lambda en Java facilitent l'écriture de code fonctionnel et permettent de passer des comportements en paramètre."
+    },
+    {
+        "name": "Les directives Angular",
+        "description": "Les directives Angular permettent d'étendre le HTML en ajoutant des comportements dynamiques aux éléments DOM."
+    },
+    {
+        "name": "Spring Boot",
+        "description": "Spring Boot simplifie le développement d'applications Java en fournissant un cadre de configuration automatique et une gestion facile des dépendances."
+    },
+    {
+        "name": "Docker",
+        "description": "Docker est une plateforme permettant de créer, déployer et exécuter des applications dans des conteneurs légers et portables."
+    },
+    {
+        "name": "Kubernetes",
+        "description": "Kubernetes est un orchestrateur de conteneurs permettant d'automatiser le déploiement, la mise à l'échelle et la gestion des applications conteneurisées."
+    },
+    {
+        "name": "TypeScript",
+        "description": "TypeScript est un sur-ensemble de JavaScript ajoutant un typage statique et des fonctionnalités avancées pour un développement plus structuré et robuste."
+    },
+    {
+        "name": "Node.js",
+        "description": "Node.js est un environnement d'exécution JavaScript basé sur le moteur V8, permettant de construire des applications côté serveur performantes et évolutives."
+    },
+    {
+        "name": "REST API",
+        "description": "Les API REST (Representational State Transfer) permettent de structurer des services web en utilisant les méthodes HTTP standards."
+    },
+    {
+        "name": "GraphQL",
+        "description": "GraphQL est un langage de requête pour les API permettant aux clients de demander exactement les données dont ils ont besoin, améliorant ainsi l'efficacité des échanges."
     }
 ]
