@@ -71,10 +71,8 @@ public class DefaultAuthenticationService implements AuthenticationService {
             return authentication.getName();
 
         } else {
-            // throw new AuthenticatedUserNotFound("No authenticated user found in Security
-            // Context",
-            // "AuhtenticationService.getAuthenticatedUserEmail");
-            throw new UsernameNotFoundException("No authenticated user found in Security Context");
+
+            throw new UsernameNotFoundException("User not authenticated");
         }
     }
 
