@@ -10,10 +10,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Table(name = "subscriptions")
+@NoArgsConstructor
 public class Subscription {
 
     @Id
@@ -30,4 +32,10 @@ public class Subscription {
     @JsonBackReference("topic-subscription")
     private Topic topic;
 
+
+
+    public Subscription(User user, Topic topic) {
+        this.user = user;
+        this.topic = topic;
+    }
 }

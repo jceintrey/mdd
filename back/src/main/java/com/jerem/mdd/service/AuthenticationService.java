@@ -19,7 +19,8 @@ public interface AuthenticationService {
      */
     public AuthResponse authenticate(LoginRequest request) throws Exception;
 
-
     public String getAuthenticatedUserEmail();
+
+
 
 }
