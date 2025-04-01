@@ -8,13 +8,11 @@ import lombok.Data;
 
 @Data
 @Schema(description = "Response body containing the post.")
-public class PostDto {
+public class PostSummaryDto {
 
     private Long id;
 
     private String title;
-
-    private String content;
 
     @JsonProperty("created_at")
     private String createdAt;
@@ -25,7 +23,6 @@ public class PostDto {
     @JsonProperty("topic_id")
     private Long topicId;
 
-    private List<String> comments;
 
 
 }

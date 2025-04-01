@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.jerem.mdd.dto.UserProfileDto;
+import com.jerem.mdd.dto.UserDetailedDto;
 import com.jerem.mdd.service.UserManagementService;
 import com.jerem.mdd.service.UserProfileService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<UserProfileDto> status() {
+    public ResponseEntity<UserDetailedDto> status() {
         log.debug("@GetMapping(\"/me\")");
 
         userProfileService.getUserProfile();

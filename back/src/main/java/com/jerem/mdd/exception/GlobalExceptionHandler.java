@@ -3,9 +3,10 @@ package com.jerem.mdd.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import com.jerem.mdd.dto.ApiErrorResponse;
+import com.jerem.mdd.dto.ErrorResponseDto;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -18,49 +19,58 @@ import lombok.extern.slf4j.Slf4j;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> handleUserNotFoundException(UserNotFoundException ex) {
+    public ResponseEntity<ErrorResponseDto> handleUserNotFoundException(UserNotFoundException ex) {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ApiErrorResponse(ex.getMessage(), ex.getSource()));
+                .body(new ErrorResponseDto(ex.getMessage(), ex.getSource()));
     }
 
     @ExceptionHandler(CommentNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> handleCommentNotFoundException(
+    public ResponseEntity<ErrorResponseDto> handleCommentNotFoundException(
             CommentNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ApiErrorResponse(ex.getMessage(), ex.getSource()));
+                .body(new ErrorResponseDto(ex.getMessage(), ex.getSource()));
     }
 
     @ExceptionHandler(PostNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> handlePostNotFoundException(PostNotFoundException ex) {
+    public ResponseEntity<ErrorResponseDto> handlePostNotFoundException(PostNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ApiErrorResponse(ex.getMessage(), ex.getSource()));
+                .body(new ErrorResponseDto(ex.getMessage(), ex.getSource()));
     }
 
     @ExceptionHandler(SubscriptionNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> handleSubscriptionNotFoundException(
+    public ResponseEntity<ErrorResponseDto> handleSubscriptionNotFoundException(
             SubscriptionNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ApiErrorResponse(ex.getMessage(), ex.getSource()));
+                .body(new ErrorResponseDto(ex.getMessage(), ex.getSource()));
     }
 
     @ExceptionHandler(TopicNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> handleTopicNotFoundException(
+    public ResponseEntity<ErrorResponseDto> handleTopicNotFoundException(
             TopicNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ApiErrorResponse(ex.getMessage(), ex.getSource()));
+                .body(new ErrorResponseDto(ex.getMessage(), ex.getSource()));
     }
 
     @ExceptionHandler(SubscriptionAlreadyExistException.class)
-    public ResponseEntity<ApiErrorResponse> handleSubscriptionAlreadyExistException(
+    public ResponseEntity<ErrorResponseDto> handleSubscriptionAlreadyExistException(
             SubscriptionAlreadyExistException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(new ApiErrorResponse(ex.getMessage(), ex.getSource()));
+                .body(new ErrorResponseDto(ex.getMessage(), ex.getSource()));
     }
 
     @ExceptionHandler(NumberFormatException.class)
-    public ResponseEntity<ApiErrorResponse> handleNumberFormatException(NumberFormatException ex) {
+    public ResponseEntity<ErrorResponseDto> handleNumberFormatException(NumberFormatException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ApiErrorResponse("Erreur conversion en nombre: ", ex.getMessage()));
+                .body(new ErrorResponseDto("Erreur conversion en nombre: ", ex.getMessage()));
     }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponseDto> handleHttpMessageNotReadableException(
+            HttpMessageNotReadableException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponseDto("Erreur de parsing de la requête: ", ex.getMessage()));
+    }
+
+
 }

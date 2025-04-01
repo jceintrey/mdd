@@ -11,7 +11,7 @@ import lombok.NonNull;
 @Data
 @Schema(description = "DTO containing the user informations.")
 @NoArgsConstructor
-public class UserBaseDto {
+public class UserSummaryDto {
     private Long id;
 
     @NonNull

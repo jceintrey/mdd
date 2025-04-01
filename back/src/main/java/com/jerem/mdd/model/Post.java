@@ -38,6 +38,7 @@ public class Post {
 
 
     @Column(nullable = false, columnDefinition = "TEXT")
+    @Size(max = 50000, message = "Le contenu de l'article est trop long")
     private String content;
 
     @Column(nullable = false, updatable = false)

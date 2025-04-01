@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class ApiErrorResponse {
+public class ErrorResponseDto {
 
 
     @Schema(description = "A short description of the error", example = "User with id 8 not found")
@@ -22,7 +22,7 @@ public class ApiErrorResponse {
             example = "UserManagementService.getUserbyId")
     private String source;
 
-    public ApiErrorResponse(String message) {
+    public ErrorResponseDto(String message) {
         this.message = message;
     }
 
