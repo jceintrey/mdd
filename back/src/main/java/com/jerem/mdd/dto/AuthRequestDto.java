@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Request body for user login, containing credentials.")
 @Data
 @NoArgsConstructor
-
 public class AuthRequestDto {
     private String identifier; // Peut être un email ou un username
     private String password;

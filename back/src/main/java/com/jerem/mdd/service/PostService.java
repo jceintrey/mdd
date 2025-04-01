@@ -6,7 +6,7 @@ import java.util.Date;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import com.jerem.mdd.dto.CommentRequest;
+import com.jerem.mdd.dto.CommentRequestDto;
 import com.jerem.mdd.dto.PostDetailedDto;
 import com.jerem.mdd.dto.PostRequestDto;
 import com.jerem.mdd.dto.PostSummaryDto;
@@ -86,7 +86,7 @@ public class PostService {
     }
 
 
-    public PostDetailedDto addPost(Long postId, CommentRequest commentRequest) {
+    public PostDetailedDto addPost(Long postId, CommentRequestDto commentRequest) {
         String authenticatedUserEmail = authenticationService.getAuthenticatedUserEmail();
 
         User authenticatedUser = userManagementService.getUserEntityByEmail(authenticatedUserEmail)

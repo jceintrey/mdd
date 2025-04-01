@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "Request body used to add a comment.")
-public class CommentRequest {
+public class CommentRequestDto {
 
     @Size(max = 5000, message = "The comment is too long")
     private String content;
