@@ -25,6 +25,23 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponseDto(ex.getMessage(), ex.getSource()));
     }
 
+
+    @ExceptionHandler(EmailAlreadyExistException.class)
+    public ResponseEntity<ErrorResponseDto> handleEmailAlreadyExistException(
+            EmailAlreadyExistException ex) {
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponseDto(ex.getMessage(), ex.getSource()));
+    }
+
+    @ExceptionHandler(UsernameAlreadyExistException.class)
+    public ResponseEntity<ErrorResponseDto> handleUsernameAlreadyExistException(
+            UsernameAlreadyExistException ex) {
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponseDto(ex.getMessage(), ex.getSource()));
+    }
+
     @ExceptionHandler(CommentNotFoundException.class)
     public ResponseEntity<ErrorResponseDto> handleCommentNotFoundException(
             CommentNotFoundException ex) {

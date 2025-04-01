@@ -16,15 +16,14 @@ import lombok.Data;
 public class ErrorResponseDto {
 
 
-    @Schema(description = "A short description of the error", example = "User with id 8 not found")
-    private String message;
+    private String description;
 
     @Schema(description = "source that throws the error",
             example = "UserManagementService.getUserbyId")
     private String source;
 
     public ErrorResponseDto(String message) {
-        this.message = message;
+        this.description = message;
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+import com.jerem.mdd.dto.RegisterRequestDto;
 import com.jerem.mdd.dto.SubscriptionDto;
 import com.jerem.mdd.dto.UserSummaryDto;
 import com.jerem.mdd.dto.UserDetailedDto;
@@ -54,5 +55,12 @@ public class UserMapper {
 
         return user;
     }
+
+    public User toUserFromRegisterRequestDto(RegisterRequestDto registerRequestDto) {
+        User user = modelMapper.map(registerRequestDto, User.class);
+
+        return user;
+    }
+
 }
 

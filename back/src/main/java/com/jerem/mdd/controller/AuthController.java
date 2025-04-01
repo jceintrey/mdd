@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.jerem.mdd.dto.AuthResponseDto;
+import com.jerem.mdd.dto.RegisterRequestDto;
+import com.jerem.mdd.dto.UserSummaryDto;
 import com.jerem.mdd.dto.AuthRequestDto;
 import com.jerem.mdd.service.AuthenticationService;
 import com.jerem.mdd.service.DefaultAuthenticationService;
+import com.jerem.mdd.service.DefaultRegistrationService;
 import com.jerem.mdd.service.UserManagementService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -33,9 +36,12 @@ import lombok.extern.slf4j.Slf4j;
 @Tag(name = "AuthController", description = "Process authentication related operations")
 public class AuthController {
     private final AuthenticationService authenticationService;
+    private final DefaultRegistrationService registrationService;
 
-    public AuthController(AuthenticationService authenticationService) {
+    public AuthController(AuthenticationService authenticationService,
+            DefaultRegistrationService registrationService) {
         this.authenticationService = authenticationService;
+        this.registrationService = registrationService;
 
     }
 
@@ -57,7 +63,6 @@ public class AuthController {
                     @ApiResponse(responseCode = "401", description = "Unauthorized")})
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody AuthRequestDto request) {
-        log.debug("@PostMapping(\"/login\")");
         try {
             AuthResponseDto authResponse = authenticationService.authenticate(request);
             return ResponseEntity.ok(authResponse);
@@ -68,6 +73,12 @@ public class AuthController {
         }
     }
 
+
+    @PostMapping("/register")
+    public ResponseEntity<UserSummaryDto> login(@RequestBody RegisterRequestDto request) {
+        UserSummaryDto authResponse = registrationService.register(request);
+        return ResponseEntity.ok(authResponse);
+    }
 
 
 }

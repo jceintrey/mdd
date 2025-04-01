@@ -15,6 +15,6 @@ public class PostRequestDto {
     private Long topicId;
 
     @NotBlank
-    @Size(max = 50000, message = "Le contenu de l'article est trop long")
+    @Size(max = 50000, message = "The post is too long")
     private String content;
 }

@@ -75,14 +75,12 @@ public class DefaultUserManagementService implements UserManagementService {
 
     @Override
     public boolean isEmailAlreadyUsed(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmailAlreadyUsed'");
+        return userRepository.findByEmail(email).isPresent();
     }
 
     @Override
     public boolean isUsernameAlreadyUsed(String username) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isUsernameAlreadyUsed'");
+        return userRepository.findByUsername(username).isPresent();
     }
 
     @Override

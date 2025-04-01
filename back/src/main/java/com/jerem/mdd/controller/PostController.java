@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.jerem.mdd.dto.CommentRequest;
+import com.jerem.mdd.dto.CommentRequestDto;
 import com.jerem.mdd.dto.PostDetailedDto;
 import com.jerem.mdd.dto.PostRequestDto;
 import com.jerem.mdd.dto.PostSummaryDto;
@@ -121,7 +121,7 @@ public class PostController {
 
         @PostMapping("/{postId}/comments/")
         public ResponseEntity<PostDetailedDto> addComment(@PathVariable Long postId,
-                        @Valid @RequestBody CommentRequest commentRequest) {
+                        @Valid @RequestBody CommentRequestDto commentRequest) {
                 return ResponseEntity.status(HttpStatus.CREATED)
                                 .body(postService.addPost(postId, commentRequest));
 
