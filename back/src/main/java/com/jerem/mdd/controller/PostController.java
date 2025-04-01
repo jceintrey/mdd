@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.jerem.mdd.dto.CommentRequest;
 import com.jerem.mdd.dto.PostDetailedDto;
 import com.jerem.mdd.dto.PostRequestDto;
 import com.jerem.mdd.dto.PostSummaryDto;
@@ -104,5 +105,25 @@ public class PostController {
         public ResponseEntity<Void> deletePost(@PathVariable Long postId) {
                 postService.deletePost(postId);
                 return ResponseEntity.noContent().build();
+        }
+
+        /**
+         * Add a comment to a post.
+         *
+         * @param postId Post ID.
+         * @return Post details.
+         */
+        @Operation(summary = "Get post by ID",
+                        description = "Retrieve a specific post by its ID with its content.")
+        @ApiResponse(responseCode = "200", description = "Post found")
+        @ApiResponse(responseCode = "400", description = "Bad Request")
+        @ApiResponse(responseCode = "404", description = "Post not found")
+
+        @PostMapping("/{postId}/comments/")
+        public ResponseEntity<PostDetailedDto> addComment(@PathVariable Long postId,
+                        @Valid @RequestBody CommentRequest commentRequest) {
+                return ResponseEntity.status(HttpStatus.CREATED)
+                                .body(postService.addPost(postId, commentRequest));
+
         }
 }

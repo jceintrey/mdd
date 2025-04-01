@@ -11,7 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.jerem.mdd.dto.AuthResponseDto;
-import com.jerem.mdd.dto.LoginRequestDto;
+import com.jerem.mdd.dto.AuthRequestDto;
 import com.jerem.mdd.model.User;
 import com.jerem.mdd.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
         this.userRepository = userRepository;
     }
 
-    public AuthResponseDto authenticate(LoginRequestDto request) throws Exception {
+    public AuthResponseDto authenticate(AuthRequestDto request) throws Exception {
         User user = userRepository.findByEmail(request.getIdentifier())
                 .orElseGet(() -> userRepository.findByUsername(request.getIdentifier()).orElseThrow(
                         () -> new UsernameNotFoundException("Utilisateur non trouvé")));

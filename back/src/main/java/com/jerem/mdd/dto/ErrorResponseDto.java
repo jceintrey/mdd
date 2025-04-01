@@ -12,6 +12,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
+@Schema(description = "Body containing a standardized error response.")
 public class ErrorResponseDto {
 
 

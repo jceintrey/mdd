@@ -35,6 +35,7 @@ public class PostMapper implements Mapper<Post, PostSummaryDto> {
         postDto.setTopicId(post.getTopic().getId());
 
 
+
         return postDto;
     }
 
@@ -70,6 +71,7 @@ public class PostMapper implements Mapper<Post, PostSummaryDto> {
         postDetailedDto.setCreatedAt(post.getCreatedAt().toString());
         postDetailedDto.setAuthorId(post.getAuthor().getId());
         postDetailedDto.setTopicId(post.getTopic().getId());
+
 
         return postDetailedDto;
 
