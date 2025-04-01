@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Controller class used for authentication purpose.
  * <p>
- * This class implements the authentication endpoints of the application.
+ * This class implements the authentication endpoints like login and register of the application.
  * </p>
  * <p>
  * - {@link DefaultAuthenticationService} service that process the user authentication -
@@ -56,11 +56,9 @@ public class AuthController {
      */
 
     @Operation(summary = "Login to the API",
-            description = "This endpoint allows a user to authenticate by providing credentials. It returns a JWT token.",
-            responses = {
-                    @ApiResponse(responseCode = "200",
-                            description = "Successful authentication, returns a token"),
-                    @ApiResponse(responseCode = "401", description = "Unauthorized")})
+            description = "This endpoint allows a user to authenticate by providing credentials. It returns a JWT token.")
+    @ApiResponse(responseCode = "200", description = "Successful authentication, returns a token")
+    @ApiResponse(responseCode = "401", description = "Unauthorized")
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody AuthRequestDto request) {
         try {
@@ -73,7 +71,19 @@ public class AuthController {
         }
     }
 
-
+    /**
+     * Register to the API.
+     * 
+     * <p>
+     * This method register using POST parameters and return back a user Summary.
+     * 
+     * @param {@link RegisterRequestDto} the request DTO.
+     * @return {@link UserSummaryDto} the response DTO.
+     */
+    @Operation(summary = "Register to the API",
+            description = "This endpoint allows a user to register by providing registerRequest")
+    @ApiResponse(responseCode = "200", description = "Successful authentication, returns a token")
+    @ApiResponse(responseCode = "409", description = "Email or username already exist")
     @PostMapping("/register")
     public ResponseEntity<UserSummaryDto> login(@RequestBody RegisterRequestDto request) {
         UserSummaryDto authResponse = registrationService.register(request);

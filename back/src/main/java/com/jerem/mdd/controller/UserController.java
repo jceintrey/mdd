@@ -5,8 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.jerem.mdd.dto.UserDetailedDto;
-import com.jerem.mdd.service.UserManagementService;
 import com.jerem.mdd.service.UserProfileService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,15 +19,14 @@ import lombok.extern.slf4j.Slf4j;
  * This class implements the user endpoints of the application.
  * </p>
  * <p>
- * - {@link UserManagementService} service for user-related operations -
- * {@link UserManagementService} service used for business operations on users
+ * - {@link UserProfileService} service for the authenticated user-related operations -
  * </p>
  * 
  */
 @RestController
 @RequestMapping("/api/user")
 @Slf4j
-@Tag(name = "AuthController", description = "Process user related operations")
+@Tag(name = "UserController", description = "Process user related operations")
 public class UserController {
 
     private final UserProfileService userProfileService;
@@ -36,11 +38,15 @@ public class UserController {
 
     }
 
+    @Operation(summary = "Get the user profile",
+            description = "Allows a user to get their profile.")
+    @ApiResponse(responseCode = "200", description = "Successfully get profile",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = UserDetailedDto.class)))
+    @ApiResponse(responseCode = "401", description = "Unauthorized, user must be authenticated")
+    @ApiResponse(responseCode = "404", description = "Entity not found")
     @GetMapping("/me")
-    public ResponseEntity<UserDetailedDto> status() {
-        log.debug("@GetMapping(\"/me\")");
-
-        userProfileService.getUserProfile();
+    public ResponseEntity<UserDetailedDto> me() {
 
         return ResponseEntity.ok(userProfileService.getUserProfile());
     }

@@ -11,9 +11,13 @@ public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message, String source) {
         super(message);
         this.source = source;
+        log.error("Source: {} - Message: {}", source, message);
+
     }
 
     public UserNotFoundException(String message) {
         super(message);
+        log.error("Message: {}", message);
+
     }
 }

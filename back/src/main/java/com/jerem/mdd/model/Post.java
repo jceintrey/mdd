@@ -47,16 +47,13 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference("user-posts")
     private User author;
 
     @ManyToOne
     @JoinColumn(name = "topic_id", nullable = false)
-    @JsonBackReference("topic-posts")
     private Topic topic;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference("comment-posts")
     private List<Comment> comments = new ArrayList<>();
 
 

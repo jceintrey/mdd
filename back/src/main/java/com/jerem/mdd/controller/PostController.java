@@ -21,12 +21,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 
 /**
  * Controller class used for post purpose.
  * <p>
- * This class implements the post endpoints of the application.
+ * This class implements the post endpoints like create, get a pagined list of the user posts,..
  * </p>
  * <p>
  * </p>
@@ -34,14 +33,18 @@ import lombok.RequiredArgsConstructor;
  */
 @RestController
 @RequestMapping("/api/posts")
-@RequiredArgsConstructor
 @Tag(name = "Posts", description = "Endpoints for managing posts")
 public class PostController {
 
         private final PostService postService;
 
+        public PostController(PostService postService) {
+                this.postService = postService;
+        }
+
+
         /**
-         * Create a new post.
+         * Create a post.
          *
          * @param postDto DTO containing post details.
          * @return Created post.
@@ -114,8 +117,8 @@ public class PostController {
          * @return Post details.
          */
         @Operation(summary = "Get post by ID",
-                        description = "Retrieve a specific post by its ID with its content.")
-        @ApiResponse(responseCode = "200", description = "Post found")
+                        description = "Add a comment to a Post given the postId")
+        @ApiResponse(responseCode = "201", description = "Comment added successfully")
         @ApiResponse(responseCode = "400", description = "Bad Request")
         @ApiResponse(responseCode = "404", description = "Post not found")
 
