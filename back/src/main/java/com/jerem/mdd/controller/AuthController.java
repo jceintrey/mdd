@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.jerem.mdd.dto.AuthResponseDto;
-import com.jerem.mdd.dto.LoginRequestDto;
+import com.jerem.mdd.dto.AuthRequestDto;
 import com.jerem.mdd.service.AuthenticationService;
 import com.jerem.mdd.service.DefaultAuthenticationService;
 import com.jerem.mdd.service.UserManagementService;
@@ -45,7 +45,7 @@ public class AuthController {
      * <p>
      * This method authenticates using POST parameters and return back a Json Web Token.
      * 
-     * @param {@link LoginRequestDto} the request DTO.
+     * @param {@link AuthRequestDto} the request DTO.
      * @return {@link AuthResponseDto} the response DTO.
      */
 
@@ -56,7 +56,7 @@ public class AuthController {
                             description = "Successful authentication, returns a token"),
                     @ApiResponse(responseCode = "401", description = "Unauthorized")})
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginRequestDto request) {
+    public ResponseEntity<AuthResponseDto> login(@RequestBody AuthRequestDto request) {
         log.debug("@PostMapping(\"/login\")");
         try {
             AuthResponseDto authResponse = authenticationService.authenticate(request);

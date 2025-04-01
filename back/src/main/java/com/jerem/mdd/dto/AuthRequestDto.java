@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 
-public class LoginRequestDto {
+public class AuthRequestDto {
     private String identifier; // Peut être un email ou un username
     private String password;
 
-    public LoginRequestDto(String identifier, String password) {
+    public AuthRequestDto(String identifier, String password) {
         this.identifier = identifier;
         this.password = password;
     }

@@ -2,6 +2,8 @@ package com.jerem.mdd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -12,5 +14,7 @@ public class PostRequestDto {
     @JsonProperty("topic_id")
     private Long topicId;
 
+    @NotBlank
+    @Size(max = 50000, message = "Le contenu de l'article est trop long")
     private String content;
 }

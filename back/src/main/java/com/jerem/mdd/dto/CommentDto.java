@@ -6,16 +6,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(description = "Response body containing the post.")
+@Schema(description = "Body containing a comment.")
 public class CommentDto {
 
     private Long id;
 
     private String content;
 
+    @JsonProperty("created_at")
     private Date createdAt;
-    @JsonProperty("user_id")
-    private Long userId;
+    @JsonProperty("author_id")
+    private Long authorId;
     @JsonProperty("post_id")
     private Long postId;
 }

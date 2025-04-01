@@ -16,7 +16,7 @@ public class PostDetailedDto extends PostSummaryDto {
 
     private String content;
 
-    private List<String> comments;
+    private List<CommentDto> comments;
 
 
 }
