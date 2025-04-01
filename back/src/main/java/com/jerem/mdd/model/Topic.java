@@ -35,11 +35,9 @@ public class Topic {
 
 
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("topic-subscription")
     private List<Subscription> subscribers = new ArrayList<>();
 
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("topic-posts")
     private List<Post> posts = new ArrayList<>();
 
 

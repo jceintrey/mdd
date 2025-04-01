@@ -101,19 +101,7 @@ public class DataInitializer implements CommandLineRunner {
 
     }
 
-    // private List<Topic> loadTopicsFromFile(String filePath)
-    // throws StreamReadException, DatabindException, IOException {
-    // ObjectMapper objectMapper = new ObjectMapper();
-    // ClassPathResource resource = new ClassPathResource(filePath);
-    // List<TopicDto> topicDtos = objectMapper.readValue(resource.getInputStream(),
-    // new TypeReference<List<TopicDto>>() {});
 
-    // List<Topic> topics =
-    // topicDtos.stream().map(topicMapper::toEntity).collect(Collectors.toList());
-    // return topics;
-
-
-    // }
     private List<User> loadUsersFromFile(String filePath)
             throws StreamReadException, DatabindException, IOException {
         ObjectMapper objectMapper = new ObjectMapper();

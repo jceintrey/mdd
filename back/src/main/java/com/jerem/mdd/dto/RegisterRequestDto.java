@@ -14,9 +14,11 @@ public class RegisterRequestDto {
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;
+
     @NotBlank
     @Email
     private String email;
+
     @NotBlank
     @Size(min = 12, max = 32)
     private String password;

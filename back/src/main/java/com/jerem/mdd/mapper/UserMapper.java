@@ -13,22 +13,23 @@ import com.jerem.mdd.dto.UserDetailedDto;
 import com.jerem.mdd.model.User;
 
 @Component
-public class UserMapper {
+public class UserMapper implements Mapper<User, UserSummaryDto> {
     private final ModelMapper modelMapper;
 
     public UserMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
+    @Override
     public UserSummaryDto toDto(User user) {
         UserSummaryDto userDto = modelMapper.map(user, UserSummaryDto.class);
 
         return userDto;
     }
 
+    @Override
     public User toEntity(UserSummaryDto userDto) {
         User user = modelMapper.map(userDto, User.class);
-
 
         return user;
     }
@@ -51,7 +52,6 @@ public class UserMapper {
 
     public User toUserFromUserProfileDto(UserDetailedDto userProfileDto) {
         User user = modelMapper.map(userProfileDto, User.class);
-
 
         return user;
     }

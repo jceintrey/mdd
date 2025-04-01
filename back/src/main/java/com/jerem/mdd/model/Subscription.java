@@ -24,12 +24,10 @@ public class Subscription {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    // @JsonBackReference("user-subscriptions")
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "topic_id", nullable = false)
-    @JsonBackReference("topic-subscription")
     private Topic topic;
 
 

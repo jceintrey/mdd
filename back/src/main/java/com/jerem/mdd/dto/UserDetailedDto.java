@@ -13,6 +13,7 @@ import lombok.Setter;
 public class UserDetailedDto extends UserSummaryDto {
 
     private Long id;
+
     private List<SubscriptionDto> Subscriptions;
 
 }

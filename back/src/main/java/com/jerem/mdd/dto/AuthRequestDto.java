@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class AuthRequestDto {
-    private String identifier; // Peut être un email ou un username
+    @Schema(description = "The identifier can be an email or the username.", example = "jdoe")
+    private String identifier;
     private String password;
 
     public AuthRequestDto(String identifier, String password) {

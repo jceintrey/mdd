@@ -50,14 +50,7 @@ public class SubscriptionMapper implements Mapper<Subscription, SubscriptionDto>
                         "Topic not found with id: " + subscriptionDto.getTopicId())));
         return subscription;
     }
-    // @Override
-    // public List<SubscriptionDto> toDto(List<Subscription> subscriptions) {
-    // return subscriptions.stream().map(this::toDto).collect(Collectors.toList());
-    // }
 
-    // public List<Subscription> toEntity(List<SubscriptionDto> subscriptionDtos) {
-    // return subscriptionDtos.stream().map(this::toEntity).collect(Collectors.toList());
-    // }
 
     public SubscriptionDetailedDto toDetailedDto(Subscription subscription) {
         return new SubscriptionDetailedDto(subscription.getId(), subscription.getUser().getId(),

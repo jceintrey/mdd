@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDto> handleEmailAlreadyExistException(
             EmailAlreadyExistException ex) {
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(new ErrorResponseDto(ex.getMessage(), ex.getSource()));
     }
 
@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDto> handleUsernameAlreadyExistException(
             UsernameAlreadyExistException ex) {
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(new ErrorResponseDto(ex.getMessage(), ex.getSource()));
     }
 
