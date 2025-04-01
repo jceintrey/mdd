@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import com.jerem.mdd.dto.SubscriptionDto;
-import com.jerem.mdd.dto.UserBaseDto;
-import com.jerem.mdd.dto.UserProfileDto;
+import com.jerem.mdd.dto.UserSummaryDto;
+import com.jerem.mdd.dto.UserDetailedDto;
 import com.jerem.mdd.model.User;
 
 @Component
@@ -19,13 +19,13 @@ public class UserMapper {
         this.modelMapper = modelMapper;
     }
 
-    public UserBaseDto toDto(User user) {
-        UserBaseDto userDto = modelMapper.map(user, UserBaseDto.class);
+    public UserSummaryDto toDto(User user) {
+        UserSummaryDto userDto = modelMapper.map(user, UserSummaryDto.class);
 
         return userDto;
     }
 
-    public User toEntity(UserBaseDto userDto) {
+    public User toEntity(UserSummaryDto userDto) {
         User user = modelMapper.map(userDto, User.class);
 
 
@@ -33,8 +33,8 @@ public class UserMapper {
     }
 
 
-    public UserProfileDto toUserProfileDto(User user) {
-        UserProfileDto userProfileDto = modelMapper.map(user, UserProfileDto.class);
+    public UserDetailedDto toUserProfileDto(User user) {
+        UserDetailedDto userProfileDto = modelMapper.map(user, UserDetailedDto.class);
 
         List<SubscriptionDto> subscriptionDtos = user.getSubscriptions().stream().map(sub -> {
             SubscriptionDto subscriptionDto = new SubscriptionDto();
@@ -48,7 +48,7 @@ public class UserMapper {
         return userProfileDto;
     }
 
-    public User toUserFromUserProfileDto(UserProfileDto userProfileDto) {
+    public User toUserFromUserProfileDto(UserDetailedDto userProfileDto) {
         User user = modelMapper.map(userProfileDto, User.class);
 
 

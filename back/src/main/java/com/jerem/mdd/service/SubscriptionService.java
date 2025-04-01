@@ -1,7 +1,6 @@
 package com.jerem.mdd.service;
 
 import java.util.List;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.jerem.mdd.dto.SubscriptionDetailedDto;
 import com.jerem.mdd.dto.SubscriptionDto;
@@ -16,7 +15,6 @@ import com.jerem.mdd.model.User;
 import com.jerem.mdd.repository.SubscriptionRepository;
 import com.jerem.mdd.repository.TopicRepository;
 import com.jerem.mdd.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 
 
 @Service

@@ -5,12 +5,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-
-import com.jerem.mdd.dto.PostDto;
+import com.jerem.mdd.dto.PostDetailedDto;
+import com.jerem.mdd.dto.PostSummaryDto;
 import com.jerem.mdd.model.Comment;
 import com.jerem.mdd.model.Post;
 import com.jerem.mdd.model.Topic;
@@ -18,7 +17,7 @@ import com.jerem.mdd.model.User;
 import com.jerem.mdd.repository.TopicRepository;
 
 @Component
-public class PostMapper implements Mapper<Post, PostDto> {
+public class PostMapper implements Mapper<Post, PostSummaryDto> {
     private final ModelMapper modelMapper;
     private final TopicRepository topicRepository;
 
@@ -28,19 +27,18 @@ public class PostMapper implements Mapper<Post, PostDto> {
     }
 
     @Override
-    public PostDto toDto(Post post) {
-        PostDto postDto = modelMapper.map(post, PostDto.class);
+    public PostSummaryDto toDto(Post post) {
+        PostSummaryDto postDto = modelMapper.map(post, PostSummaryDto.class);
 
         postDto.setCreatedAt(post.getCreatedAt().toString());
         postDto.setAuthorId(post.getAuthor().getId());
         postDto.setTopicId(post.getTopic().getId());
-        postDto.setComments(post.getComments().stream().map((c) -> c.getId().toString())
-                .collect(Collectors.toList()));
+
 
         return postDto;
     }
 
-    public Post toEntity(PostDto postDto, User author, Topic topic, List<Comment> comments)
+    public Post toEntity(PostSummaryDto postDto, User author, Topic topic, List<Comment> comments)
             throws ParseException {
         Post post = modelMapper.map(postDto, Post.class);
 
@@ -60,9 +58,22 @@ public class PostMapper implements Mapper<Post, PostDto> {
     }
 
     @Override
-    public Post toEntity(PostDto dto) {
+    public Post toEntity(PostSummaryDto dto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'toEntity'");
     }
+
+
+    public PostDetailedDto toDetailedDto(Post post) {
+        PostDetailedDto postDetailedDto = modelMapper.map(post, PostDetailedDto.class);
+
+        postDetailedDto.setCreatedAt(post.getCreatedAt().toString());
+        postDetailedDto.setAuthorId(post.getAuthor().getId());
+        postDetailedDto.setTopicId(post.getTopic().getId());
+
+        return postDetailedDto;
+
+    }
+
 
 }

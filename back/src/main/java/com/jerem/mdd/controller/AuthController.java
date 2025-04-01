@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.jerem.mdd.dto.AuthResponse;
-import com.jerem.mdd.dto.LoginRequest;
+import com.jerem.mdd.dto.AuthResponseDto;
+import com.jerem.mdd.dto.LoginRequestDto;
 import com.jerem.mdd.service.AuthenticationService;
 import com.jerem.mdd.service.DefaultAuthenticationService;
 import com.jerem.mdd.service.UserManagementService;
@@ -45,8 +45,8 @@ public class AuthController {
      * <p>
      * This method authenticates using POST parameters and return back a Json Web Token.
      * 
-     * @param {@link LoginRequest} the request DTO.
-     * @return {@link AuthResponse} the response DTO.
+     * @param {@link LoginRequestDto} the request DTO.
+     * @return {@link AuthResponseDto} the response DTO.
      */
 
     @Operation(summary = "Login to the API",
@@ -56,14 +56,15 @@ public class AuthController {
                             description = "Successful authentication, returns a token"),
                     @ApiResponse(responseCode = "401", description = "Unauthorized")})
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginRequestDto request) {
         log.debug("@PostMapping(\"/login\")");
         try {
-            AuthResponse authResponse = authenticationService.authenticate(request);
+            AuthResponseDto authResponse = authenticationService.authenticate(request);
             return ResponseEntity.ok(authResponse);
         } catch (Exception e) {
             log.error("Authentication failed: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthResponse("error"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new AuthResponseDto("error"));
         }
     }
 

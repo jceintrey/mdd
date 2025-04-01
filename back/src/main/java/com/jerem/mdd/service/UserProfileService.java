@@ -3,7 +3,7 @@ package com.jerem.mdd.service;
 import java.util.Optional;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.jerem.mdd.dto.UserProfileDto;
+import com.jerem.mdd.dto.UserDetailedDto;
 import com.jerem.mdd.mapper.UserMapper;
 import com.jerem.mdd.model.User;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class UserProfileService {
     }
 
 
-    public UserProfileDto getUserProfile() {
+    public UserDetailedDto getUserProfile() {
 
         String authenticatedUserEmail = authenticationService.getAuthenticatedUserEmail();
 

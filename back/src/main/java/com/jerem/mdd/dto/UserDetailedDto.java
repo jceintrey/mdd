@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserProfileDto extends UserBaseDto {
+public class UserDetailedDto extends UserSummaryDto {
 
     private Long id;
     private List<SubscriptionDto> Subscriptions;

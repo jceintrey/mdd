@@ -10,8 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.jerem.mdd.dto.AuthResponse;
-import com.jerem.mdd.dto.LoginRequest;
+import com.jerem.mdd.dto.AuthResponseDto;
+import com.jerem.mdd.dto.LoginRequestDto;
 import com.jerem.mdd.model.User;
 import com.jerem.mdd.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
         this.userRepository = userRepository;
     }
 
-    public AuthResponse authenticate(LoginRequest request) throws Exception {
+    public AuthResponseDto authenticate(LoginRequestDto request) throws Exception {
         User user = userRepository.findByEmail(request.getIdentifier())
                 .orElseGet(() -> userRepository.findByUsername(request.getIdentifier()).orElseThrow(
                         () -> new UsernameNotFoundException("Utilisateur non trouvé")));
@@ -44,7 +44,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
 
             String token = jwtTokenProvider.generateToken(authentication);
 
-            return new AuthResponse(token);
+            return new AuthResponseDto(token);
 
         } catch (AuthenticationException e) {
             throw new AuthenticationServiceException("Authentication failed", e);
