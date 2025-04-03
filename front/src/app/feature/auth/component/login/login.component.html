@@ -1,0 +1,25 @@
+<div class="login-container">
+    <h2>Connexion</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="identifier">Login</label>
+        <input id="identifier" type="identifier" formControlName="identifier">
+        <div *ngIf="loginForm.get('identifier')?.invalid && loginForm.get('identifier')?.touched">
+          <span *ngIf="loginForm.get('identifier')?.errors?.['required']">Le login est requis.</span>
+        </div>
+      </div>
+  
+      <div>
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" formControlName="password">
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          <span *ngIf="loginForm.get('password')?.errors?.['required']">Le mot de passe est requis.</span>
+          <span *ngIf="loginForm.get('password')?.errors?.['minlength']">12 caractères minimum.</span>
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="loginForm.invalid">Se connecter</button>
+      <p *ngIf="onError" class="error">Identifiants incorrects</p>
+    </form>
+  </div>
+  
