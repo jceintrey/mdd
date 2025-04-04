@@ -6,6 +6,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import com.jerem.mdd.configuration.filters.JwtDebugFilter;
 import com.jerem.mdd.service.JwtTokenProvider;
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -55,10 +57,12 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
+
                 .sessionManagement(
                         session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth.requestMatchers(AUTH_WHITELIST).permitAll()
                         .anyRequest().authenticated())
+                .addFilterBefore(new JwtDebugFilter(), UsernamePasswordAuthenticationFilter.class)
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(withDefaults())).build();
     }
 
