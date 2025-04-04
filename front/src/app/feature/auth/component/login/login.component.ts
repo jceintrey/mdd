@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../../interfaces/loginRequest.interface';
 import { AuthService } from '../../services/auth.service';
@@ -15,45 +15,45 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
   public onError = false;
 
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {}
+  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
-   this.loginForm = this.formBuilder.group({
-    identifier: [
-      '',
-      [
-        Validators.required,
+    this.loginForm = this.formBuilder.group({
+      identifier: [
+        '',
+        [
+          Validators.required,
+        ]
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.min(12)
+        ]
       ]
-    ],
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.min(12)
-      ]
-    ]
-   });
+    });
   }
 
   onSubmit() {
-   const LoginRequest = this.loginForm.value as LoginRequest;
+    const LoginRequest = this.loginForm.value as LoginRequest;
 
-   this.authService.login(LoginRequest).subscribe({
-    next: () => {
-      console.log('Connexion réussie');
-     this.router.navigate(['']);
-    },
-    error: (err: any) => {
-      this.onError = true;
-      console.error(err);
-    }
+    this.authService.login(LoginRequest).subscribe({
+      next: () => {
+        console.log("authService.login ok");
+        this.router.navigate(['home']);
+      },
+      error: (err: any) => {
+        this.onError = true;
+        console.error(err);
+      }
 
-  });
+    });
   }
 }
