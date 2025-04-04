@@ -47,7 +47,7 @@ public class UserController {
     @ApiResponse(responseCode = "404", description = "Entity not found")
     @GetMapping("/me")
     public ResponseEntity<UserDetailedDto> me() {
-
+        log.debug("Me requested");
         return ResponseEntity.ok(userProfileService.getUserProfile());
     }
 
