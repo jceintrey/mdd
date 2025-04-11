@@ -1,0 +1,44 @@
+<div class="login-container">
+
+  @if (isMobile){
+  <div class="arrow-container">
+    <button mat-icon-button class="icon-button" routerLink="/landing">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  <div class="login-header">
+    <img src="../../../assets/logo_p6.png" alt="Logo MDD" class="logo" />
+  </div>
+  }
+
+  @else{
+  <div class="pc-login-header">
+    <img src="../../../assets/logo_p6 9.svg" routerLink="/home" class="pc-logo">
+  </div>
+  <div class="arrow-container">
+    <button mat-icon-button class="icon-button" routerLink="/landing">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  }
+
+  <h1 class="login-title">Se connecter</h1>
+  <div class="login-content">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <label for="identifier">E-mail ou nom d'utilisateur</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput formControlName="identifier" />
+      </mat-form-field>
+      <label for="identifier">Mot de passe</label>
+      <mat-form-field appearance="outline" class="full-width">
+
+        <input matInput type="password" formControlName="password" />
+      </mat-form-field>
+
+      <button mat-flat-button class="login-button" type="submit">
+        Se connecter
+      </button>
+    </form>
+  </div>
+
+</div>
