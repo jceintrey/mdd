@@ -16,6 +16,7 @@ export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn):
 
   const authService = inject(AuthService);
   if (req.url.includes('/api/auth/login') || req.url.includes('/api/auth/register')) {
+    console.log("interceptor do nothing")
     return next(req);
   }
   const token = authService.getToken();
