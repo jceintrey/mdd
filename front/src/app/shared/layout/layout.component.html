@@ -1,0 +1,74 @@
+<div class="global-content">
+
+    @if (isMobile) {
+    <!-- Nav for mobile -->
+    <mat-sidenav-container autosize="true" class="sidenav-container">
+
+        <mat-sidenav #drawer class="side-nav" position="end" [ngClass]="!isCollapsed ? 'expanded' : ''"
+            [opened]="!isCollapsed">
+            <mat-nav-list>
+                @if (!isCollapsed) {
+                <div class="side-item">
+                    <a mat-list-item (click)="logout()">
+                        <span class="logout-item">Se déconnecter</span>
+                    </a>
+                </div>
+                <div class="side-item">
+                    <a mat-list-item [routerLink]="'/posts'">
+                        <span class="nav-items">Articles</span>
+                    </a>
+                </div>
+                <div class="side-item">
+                    <a mat-list-item [routerLink]="'/topics'">
+                        <span class="nav-items">Thèmes</span>
+                    </a>
+                </div>
+                <div class="spacer"></div>
+                <div class="side-item">
+                    <a mat-list-item [routerLink]="'/me'">
+                        <span class="nav-items" [routerLink]="'/me'"><img src="../../../assets/user.svg"
+                                routerLink="/me" class="user-icon"></span>
+                    </a>
+                </div>
+                }
+            </mat-nav-list>
+
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+
+            <mat-toolbar>
+                <mat-toolbar-row class="mobile-toolbar">
+                    <img src="../../../assets/logo_p6 9.svg" routerLink="/home" class="logo">
+                    <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                </mat-toolbar-row>
+            </mat-toolbar>
+            <!-- Main content under navbar -->
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+    }
+
+    @else {
+    <!-- Nav for PC -->
+    <mat-toolbar class="pc-toolbar">
+        <mat-toolbar-row>
+            <span><img src="../../../assets/logo_p6 9.svg" routerLink="/home" class="pc-logo"></span>
+            <span class="spacer"></span>
+            <span class="pc-logout-item" (click)="logout()">Se déconnecter</span>
+            <span class="pc-nav-items" [routerLink]="'/posts'" routerLinkActive="active-link">Articles</span>
+            <span class="pc-nav-items" [routerLink]="'/topics'" routerLinkActive="active-link">Thèmes</span>
+            <span class="pc-nav-items" [routerLink]="'/me'" routerLinkActive="active-link"><img
+                    src="../../../assets/user.svg" routerLink="/me" class="user-icon"></span>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <!-- Main content under navbar -->
+    <div class="main-content">
+        <router-outlet></router-outlet>
+    </div>
+    }
+</div>
