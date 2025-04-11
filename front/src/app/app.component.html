@@ -1,25 +1,2 @@
-<div class="app">
-  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
-    @if ($isLogged()| async) {
-    <div>
-      <span (click)="logout()" class="link">Se déconnecter</span>
-      <a routerLink="me" class="link">Articles</a>
-      <a routerLink="me">Thèmes</a>
-      <a routerLink="me">Profile</a>
-    </div>
-
-    }
-
-    @else{
-    <div>
-      not logged
-    </div>
-    }
-
-
-  </mat-toolbar>
-
-  <div>
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<!-- <app-navbar></app-navbar> -->
+<router-outlet></router-outlet>

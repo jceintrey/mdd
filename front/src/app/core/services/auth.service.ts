@@ -1,28 +1,35 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginRequest } from '../interfaces/loginRequest.interface';
+import { LoginRequest } from '../../core/interfaces/loginRequest.interface';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
-import { LoginResponse } from '../interfaces/loginResponse.interface';
+import { LoginResponse } from '../../core/interfaces/loginResponse.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   readonly pathService = '/api/auth';
-  public isLogged = false;
-  private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
+  private isLoggedSubject = new BehaviorSubject<boolean>(this.hasToken());
+  public isLogged$ = this.isLoggedSubject.asObservable();
+
+  constructor(private http: HttpClient, private router: Router) { }
 
 
-  constructor(private http: HttpClient) { }
 
-
-  public $isLogged(): Observable<boolean> {
+  isLoggedIn$() {
     return this.isLoggedSubject.asObservable();
   }
 
+  private hasToken(): boolean {
+    return !!localStorage.getItem('jwt');
+  }
+
   public login(credentials: LoginRequest): Observable<boolean> {
+    console.log("login called");
     return this.http.post<LoginResponse>(`${this.pathService}/login`, credentials).pipe(
       tap((response) => {
+        console.log("set jwt in localstorage");
         localStorage.setItem('jwt', response.token);
         this.isLoggedSubject.next(true);
       }),
@@ -37,5 +44,6 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('jwt');
     this.isLoggedSubject.next(false);
+    this.router.navigate(["/landing"]);
   }
 }
