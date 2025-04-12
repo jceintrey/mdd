@@ -13,18 +13,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JwtDebugFilter extends OncePerRequestFilter {
 
+    @SuppressWarnings("null")
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
-        log.info("auth Type: " + request.getAuthType());
-        log.info("auth method: " + request.getMethod());
-        log.info("auth path: " + request.getQueryString());
 
-
-
-        log.info("Authorization Header received : " + authHeader);
+        log.debug("Authorization Header received : " + authHeader);
 
         filterChain.doFilter(request, response);
     }

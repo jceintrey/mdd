@@ -25,50 +25,7 @@ export const routes: Routes = [
     },
     { path: 'landing', component: LandingPageComponent },
     { path: 'login', component: LoginComponent, },
-    { path: 'register', component: LoginComponent, },
+    { path: 'register', component: RegisterComponent, },
 
 ];
 
-// export const routes: Routes = [
-//     {
-//         path: '',
-//         redirectTo: 'dashboard',
-//         pathMatch: 'full'
-//     },
-//     {
-//         path: 'landing',
-//         component: LandingPageComponent
-//     },
-//     {
-//         path: 'home',
-//         component: HomeComponent,
-//         canActivate: [AuthGuard] // Protection avec AuthGuard
-//     },
-//     {
-//         path: 'me',
-//         component: MeComponent,
-//         canActivate: [AuthGuard] // Protection avec AuthGuard
-//     },
-//     {
-//         path: 'topics',
-//         component: TopicsComponent,
-//         canActivate: [AuthGuard] // Protection avec AuthGuard
-//     },
-//     {
-//         path: 'posts',
-//         component: PostsComponent,
-//         canActivate: [AuthGuard] // Protection avec AuthGuard
-//     },
-//     {
-//         path: 'login',
-//         component: LoginComponent,
-//     },
-//     {
-//         path: 'layout',
-//         component: LayoutComponent,
-//     },
-//     {
-//         path: '**',
-//         redirectTo: 'landing' // Redirection vers landing pour les routes inconnues
-//     }
-// ];
