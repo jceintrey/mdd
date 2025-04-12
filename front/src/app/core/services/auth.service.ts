@@ -4,11 +4,13 @@ import { LoginRequest } from '../../core/interfaces/loginRequest.interface';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { LoginResponse } from '../../core/interfaces/loginResponse.interface';
 import { Router } from '@angular/router';
+import { RegisterRequest } from '../interfaces/registerRequest.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
   readonly pathService = '/api/auth';
   private isLoggedSubject = new BehaviorSubject<boolean>(this.hasToken());
   public isLogged$ = this.isLoggedSubject.asObservable();
@@ -35,6 +37,12 @@ export class AuthService {
       }),
       map((response) => !!response.token)
     );
+  }
+
+  public register(registerRequest: RegisterRequest): Observable<void> {
+    console.log("authService register called");
+    return this.http.post<void>(`${this.pathService}/register`, registerRequest);
+
   }
 
   getToken(): string | null {

@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { User } from '../../interfaces/User';
+import { User } from '../../../../core/interfaces/User';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../../core/services/auth.service';
+import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-me',
@@ -15,16 +17,20 @@ export class MeComponent {
   errorMessage: string | null = null;
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.http.get<User>('/api/user/me').subscribe({
+
+    this.userService.getMe().subscribe({
       next: (data) => (this.user = data),
       error: (err) => {
-        console.error('Erreur de chargement du profil', err);
-        this.errorMessage = 'Impossible de récupérer les infos utilisateur.';
-      },
-    });
+        console.log("Error on Mecomponent.getMe()");
+        this.errorMessage = "Error while getting infos";
+      }
+    })
   }
-
+  logout() {
+    this.authService.logout();
+    console.log("me.logout")
+  }
 }
