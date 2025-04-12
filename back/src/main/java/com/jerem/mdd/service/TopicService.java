@@ -67,7 +67,6 @@ public class TopicService {
         return topics.stream().map(topic -> {
             TopicDto topicDto = topicMapper.toDto(topic);
             topicDto.setSubscribed(subscriptionsTopicIds.contains(topic.getId()));
-            log.debug(" suscribed: " + subscriptionsTopicIds.contains(topic.getId()));
             return topicDto;
         }).collect(Collectors.toList());
 

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Topic } from '../interfaces/topicResponse.interface';
+import { Topic } from '../interfaces/topic.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
