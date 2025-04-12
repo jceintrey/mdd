@@ -75,6 +75,7 @@ public class DefaultUserManagementService implements UserManagementService {
 
     @Override
     public boolean isEmailAlreadyUsed(String email) {
+        log.debug(email + " looking for in database");
         return userRepository.findByEmail(email).isPresent();
     }
 

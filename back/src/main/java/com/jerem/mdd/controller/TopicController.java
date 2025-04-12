@@ -53,7 +53,7 @@ public class TopicController {
         @ApiResponse(responseCode = "404", description = "Entity not found")
         @GetMapping()
         public ResponseEntity<List<TopicDto>> findAll() {
-
+                log.debug("TopicController findAll");
                 List<TopicDto> topicDtos = topicService.findAll();
                 return ResponseEntity.ok(topicDtos);
         }
