@@ -22,5 +22,7 @@ public class TopicDto {
     @Size(min = 0, max = 5000)
     private String description;
 
+    private boolean subscribed;
+
 
 }

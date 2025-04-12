@@ -107,7 +107,8 @@ public class SubscriptionController {
          */
         @Operation(summary = "Unsubscribe from a topic",
                         description = "Allows an authenticated user to unsubscribe from a topic by providing its ID.")
-        @ApiResponse(responseCode = "200", description = "Successfully unsubscribed from the topic")
+        @ApiResponse(responseCode = "204",
+                        description = "Successfully unsubscribed from the topic and no content return")
         @ApiResponse(responseCode = "400", description = "Bad request, invalid topic ID")
         @ApiResponse(responseCode = "401", description = "Unauthorized, user must be authenticated")
         @ApiResponse(responseCode = "404", description = "Entity not found")
@@ -116,7 +117,7 @@ public class SubscriptionController {
                 log.debug("@DeleteMapping(\"/unsubscribe/{topicId}\")");
 
                 subscriptionService.unsubscribe(topicId);
-                return ResponseEntity.ok("Successfully unsubscribed");
+                return ResponseEntity.noContent().build();
         }
 
 }
