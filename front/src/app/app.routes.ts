@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './feature/auth/login/login.component';
 import { MeComponent } from './feature/user/component/me/me.component';
-import { HomeComponent } from './feature/home/home.component';
 import { LandingPageComponent } from './shared/landing-page/landing-page.component';
 import { AuthGuard } from './guards/auth.guards';
 import { RegisterComponent } from './feature/auth/register/register.component';
 import { TopicsComponent } from './feature/topics/topics.component';
 import { LayoutComponent } from './shared/layout/layout.component';
-import { PostComponent } from './feature/post/post.component';
+import { PostComponent } from './feature/post/main/post.component';
+import { CreatepostComponent } from './feature/post/createpost/createpost.component';
 
 
 export const routes: Routes = [
@@ -18,6 +18,7 @@ export const routes: Routes = [
             { path: 'posts', component: PostComponent, canActivate: [AuthGuard], },
             { path: 'topics', component: TopicsComponent, canActivate: [AuthGuard], },
             { path: 'me', component: MeComponent, canActivate: [AuthGuard], },
+            { path: 'posts/create', component: CreatepostComponent, canActivate: [AuthGuard], }
 
 
 
@@ -28,4 +29,3 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent, },
 
 ];
-

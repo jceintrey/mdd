@@ -1,17 +1,17 @@
 import { Component, Input } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
-import { Post } from '../../core/interfaces/post.interface';
-import { PostService } from '../../core/services/post.service';
+import { Post } from '../../../core/interfaces/post.interface';
+import { PostService } from '../../../core/services/post.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-post',
-  imports: [AsyncPipe, MatCardModule, MatButtonModule, DatePipe, RouterLink, MatIcon],
+  imports: [AsyncPipe, RouterModule, MatCardModule, MatButtonModule, DatePipe, RouterLink, MatIcon],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })

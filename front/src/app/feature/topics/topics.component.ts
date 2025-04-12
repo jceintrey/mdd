@@ -11,7 +11,7 @@ import { SubscriptionService } from 'app/core/services/subscription.service';
 
 @Component({
   selector: 'app-post',
-  imports: [AsyncPipe, MatCardModule, MatButtonModule, DatePipe, RouterLink, MatIcon, NgClass],
+  imports: [AsyncPipe, MatCardModule, MatButtonModule, RouterLink, NgClass],
   templateUrl: './topics.component.html',
   styleUrl: './topics.component.scss'
 })
