@@ -1,0 +1,36 @@
+<div class="global-container">
+    <div class="header">
+        <button mat-icon-button class="icon-button" routerLink="/posts">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <h1>Créer un nouvel article</h1>
+    </div>
+    @if (post$ | async; as post){
+    <mat-card>
+        <mat-card-header>
+            <mat-card-subtitle> {{post.title}} {{post.author_id}} {{post.topic_id}}</mat-card-subtitle>
+
+        </mat-card-header>
+        <mat-card-content>
+            {{post.content}}
+        </mat-card-content>
+    </mat-card>
+    <mat-divider></mat-divider>
+    <h2>Commentaires</h2>
+    @if (post.comments?.length){
+    <mat-list>
+        @for (comment of post.comments; track comment) {
+        <mat-list-item>
+            <div>
+                <span>{{ comment.author_id}}</span> — {{ comment.content }}
+            </div>
+        </mat-list-item>
+        }
+    </mat-list>
+    }
+    }
+    @else {
+    L'article n'a pas pu être récupéré.
+    }
+
+</div>

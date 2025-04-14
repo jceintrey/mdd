@@ -1,3 +1,5 @@
+import { Comment } from "./comment.interface";
+
 export interface Post {
     id?: number;
     title: string;
@@ -5,7 +7,8 @@ export interface Post {
     created_at: string;
     author_id: number;
     topic_id: number;
-    extract?: string;
+    content?: string;
+    comments?: Comment[]
 }
 
 export interface PostResponse {

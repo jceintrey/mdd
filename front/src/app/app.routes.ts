@@ -8,6 +8,7 @@ import { TopicsComponent } from './feature/topics/topics.component';
 import { LayoutComponent } from './shared/layout/layout.component';
 import { PostComponent } from './feature/post/main/post.component';
 import { CreatepostComponent } from './feature/post/createpost/createpost.component';
+import { PostDetailsComponent } from './feature/post/postdetails/postdetails.component';
 
 
 export const routes: Routes = [
@@ -18,8 +19,8 @@ export const routes: Routes = [
             { path: 'posts', component: PostComponent, canActivate: [AuthGuard], },
             { path: 'topics', component: TopicsComponent, canActivate: [AuthGuard], },
             { path: 'me', component: MeComponent, canActivate: [AuthGuard], },
-            { path: 'posts/create', component: CreatepostComponent, canActivate: [AuthGuard], }
-
+            { path: 'posts/create', component: CreatepostComponent, canActivate: [AuthGuard], },
+            { path: 'posts/:id', component: PostDetailsComponent, canActivate: [AuthGuard], }
 
 
         ]

@@ -10,6 +10,7 @@ import { PostRequest } from '../interfaces/postRequest.interface';
 export class PostService {
 
 
+
   private pathService = 'api/posts';
 
   constructor(private httpClient: HttpClient) { }
@@ -20,5 +21,10 @@ export class PostService {
 
   public createPost(postRequest: PostRequest): Observable<void> {
     return this.httpClient.post<void>(this.pathService, postRequest);
+  }
+
+  getPost(id: string | null): Observable<Post> {
+    console.log("get post " + id)
+    return this.httpClient.get<Post>(`${this.pathService}/${id}`);
   }
 }
