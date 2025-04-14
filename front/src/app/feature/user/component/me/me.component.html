@@ -1,10 +1,28 @@
-<button mat-button (click)="logout()">Déconnexion</button>
-<div *ngIf="user; else errorBlock">
-  <h2>Mon Profil</h2>
-  <p><strong>Nom d'utilisateur :</strong> {{ user.username }}</p>
-  <p><strong>Email :</strong> {{ user.email }}</p>
-</div>
+<div class="global-container">
 
-<ng-template #errorBlock>
-  <p class="error">{{ errorMessage }}</p>
-</ng-template>
+  <div class="header">
+    <h1>Profil utilisateur</h1>
+  </div>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="addcomment-form">
+    <mat-form-field>
+      <mat-label>{{user?.username}}</mat-label>
+      <input matInput formControlName="username">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{user?.email}}</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Mot de passe</mat-label>
+      <input matInput formControlName="password">
+    </mat-form-field>
+    <button type="submit">
+      Sauvegarder
+    </button>
+  </form>
+  <mat-divider></mat-divider>
+  <h1>Abonnements</h1>
+
+
+</div>
