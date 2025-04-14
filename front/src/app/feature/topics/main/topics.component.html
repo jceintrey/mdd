@@ -21,25 +21,8 @@
 
 <div class="pc-topics-grid">
     @for (topic of topics$ | async; track topic) {
-    <mat-card class="pc-topic-card" appearance="outlined">
-        <mat-card-header>
-            <mat-card-title>
-                {{topic.name}}
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            {{topic.description}}
-        </mat-card-content>
-
-
-
-        <button mat-flat-button [ngClass]="topic.subscribed?'btn-subscribed' : 'btn-notsubscribed'"
-            (click)="topic.subscribed? unsubscribe(topic.id) : subscribe(topic.id)">
-            {{topic.subscribed? 'Se désabonner' : "S'abonner" }}
-        </button>
-
-
-    </mat-card>
+    <app-topic [topic]="topic" (subscribe)="subscribe($event)" (unsubscribe)="unsubscribe($event)">
+    </app-topic>
     }
 </div>
 

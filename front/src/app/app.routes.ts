@@ -4,7 +4,7 @@ import { MeComponent } from './feature/user/component/me/me.component';
 import { LandingPageComponent } from './shared/landing-page/landing-page.component';
 import { AuthGuard } from './guards/auth.guards';
 import { RegisterComponent } from './feature/auth/register/register.component';
-import { TopicsComponent } from './feature/topics/topics.component';
+import { TopicsComponent } from './feature/topics/main/topics.component';
 import { LayoutComponent } from './shared/layout/layout.component';
 import { PostComponent } from './feature/post/main/post.component';
 import { CreatepostComponent } from './feature/post/createpost/createpost.component';

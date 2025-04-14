@@ -15,7 +15,7 @@ export class SubscriptionService {
     return this.httpClient.post<void>(`${this.pathService}/subscribe/${id}`, null);
   }
   public unsubscribe(id: number): Observable<void> {
-    console.log("unsubscribe from " + id);
+    console.log("SubscriptionService.unsubscribe from " + id);
     return this.httpClient.delete<void>(`${this.pathService}/unsubscribe/${id}`);
   }
 }

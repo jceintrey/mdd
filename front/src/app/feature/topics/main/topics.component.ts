@@ -8,10 +8,11 @@ import { MatIcon } from '@angular/material/icon';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { TopicService } from 'app/core/services/topic.service';
 import { SubscriptionService } from 'app/core/services/subscription.service';
+import { TopicComponent } from "../topic/topic.component";
 
 @Component({
   selector: 'app-post',
-  imports: [AsyncPipe, MatCardModule, MatButtonModule, RouterLink, NgClass],
+  imports: [AsyncPipe, MatCardModule, MatButtonModule, RouterLink, NgClass, TopicComponent],
   templateUrl: './topics.component.html',
   styleUrl: './topics.component.scss'
 })
