@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
-import com.jerem.mdd.dto.TopicDto;
+import com.jerem.mdd.dto.TopicDetailedDto;
 import com.jerem.mdd.exception.UserNotFoundException;
 import com.jerem.mdd.mapper.TopicMapper;
 import com.jerem.mdd.model.Subscription;
@@ -44,7 +44,7 @@ public class TopicService {
                 .orElseThrow(() -> new RuntimeException("Topic not found with id " + id));
     }
 
-    public List<TopicDto> findAll() {
+    public List<TopicDetailedDto> findAll() {
         List<Topic> topics = topicRepository.findAll();
 
 
@@ -54,23 +54,22 @@ public class TopicService {
                 .orElseThrow(() -> new UserNotFoundException("User not found",
                         "PostService.createPost"));
 
-        Set<Long> subscriptionsTopicIds =
-                subscriptionService.getSubscriptionsByUser(authenticatedUser).stream()
-                        .map(sub -> sub.getTopic().getId()).collect(Collectors.toSet());
+        // Set<Long> subscriptionsTopicIds =
+        // subscriptionService.getSubscriptionsByUser(authenticatedUser).stream()
+        // .map(sub -> sub.getTopic().getId()).collect(Collectors.toSet());
 
         log.debug("FindAllTopics: ");
         log.debug("User: " + authenticatedUser.getUsername());
-        log.debug("subscriptionTopicsIds " + subscriptionsTopicIds);
+        // log.debug("subscriptionTopicsIds " + subscriptionsTopicIds);
 
 
 
         return topics.stream().map(topic -> {
-            TopicDto topicDto = topicMapper.toDto(topic);
-            topicDto.setSubscribed(subscriptionsTopicIds.contains(topic.getId()));
+            TopicDetailedDto topicDto = topicMapper.toDto(topic);
+            topicDto.setSubscribed(subscriptionService.isSubscribed(authenticatedUser, topic));
             return topicDto;
         }).collect(Collectors.toList());
 
-
-
     }
+
 }

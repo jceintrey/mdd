@@ -5,19 +5,18 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "Response body containing the topic.")
-public class TopicDto {
+public class TopicDetailedDto extends TopicSummaryDto {
 
-    private Long id;
-
-    @NonNull
-    @Size(max = 30)
-    private String name;
+    public TopicDetailedDto(Long id, String name, String description, boolean subscribed) {
+        super(id, name);
+        this.description = description;
+        this.subscribed = subscribed;
+    }
 
     @Size(min = 0, max = 5000)
     private String description;

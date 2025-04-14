@@ -19,4 +19,6 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
 
     Optional<Subscription> findByUserAndTopic(User user, Topic topic);
 
+    boolean existsByUserAndTopic(User user, Topic topic);
+
 }

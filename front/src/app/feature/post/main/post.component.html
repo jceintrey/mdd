@@ -26,11 +26,11 @@
                     {{post.title}}
                 </mat-card-title>
                 <mat-card-subtitle>
-                    {{post.created_at | date: 'longDate'}} {{post.author_id}}
+                    {{post.created_at | date: 'longDate'}} {{post.author.username}}
                 </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-                {{post.extract}}
+                {{post.content }}
             </mat-card-content>
         </mat-card>
         }
@@ -41,7 +41,7 @@
 
 <div class="pc-flex-header">
     <div class="pc-flex-header-items">
-        <button mat-flat-button class="btn" type="submit">
+        <button routerLink="/posts/create" mat-flat-button class="btn" type="submit">
             Créer un article
         </button>
     </div>
@@ -68,11 +68,11 @@
                 {{post.title}}
             </mat-card-title>
             <mat-card-subtitle>
-                {{post.created_at | date: 'longDate'}} {{post.author_id}}
+                {{post.created_at | date: 'longDate'}} {{post.author.username}}
             </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            {{post.extract}}
+            {{post.content}}
         </mat-card-content>
     </mat-card>
     }

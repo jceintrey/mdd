@@ -1,5 +1,6 @@
 package com.jerem.mdd.service;
 
+import com.jerem.mdd.model.Topic;
 import com.jerem.mdd.model.User;
 import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -85,5 +86,6 @@ public interface UserManagementService {
      * @return an {@link Optional} containing the {@link UserEntity} if found, otherwise empty.
      */
     public Optional<User> getUserEntityByEmail(String email);
+
 
 }

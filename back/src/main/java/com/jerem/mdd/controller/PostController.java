@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Controller class used for post purpose.
@@ -31,6 +32,7 @@ import jakarta.validation.Valid;
  * </p>
  * 
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/posts")
 @Tag(name = "Posts", description = "Endpoints for managing posts")
@@ -116,7 +118,7 @@ public class PostController {
          * @param postId Post ID.
          * @return Post details.
          */
-        @Operation(summary = "Get post by ID",
+        @Operation(summary = "Add a comment",
                         description = "Add a comment to a Post given the postId")
         @ApiResponse(responseCode = "201", description = "Comment added successfully")
         @ApiResponse(responseCode = "400", description = "Bad Request")
@@ -125,6 +127,7 @@ public class PostController {
         @PostMapping("/{postId}/comments/")
         public ResponseEntity<PostDetailedDto> addComment(@PathVariable Long postId,
                         @Valid @RequestBody CommentRequestDto commentRequest) {
+                log.debug("AuthController.addComment");
                 return ResponseEntity.status(HttpStatus.CREATED)
                                 .body(postService.addPost(postId, commentRequest));
 

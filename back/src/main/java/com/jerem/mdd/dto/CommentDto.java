@@ -16,8 +16,7 @@ public class CommentDto {
     @JsonProperty("created_at")
     private Date createdAt;
 
-    @JsonProperty("author_id")
-    private Long authorId;
+    private AuthorDto author;
 
     @JsonProperty("post_id")
     private Long postId;

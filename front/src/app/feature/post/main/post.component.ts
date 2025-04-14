@@ -11,7 +11,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-post',
-  imports: [AsyncPipe, RouterModule, MatCardModule, MatButtonModule, DatePipe, RouterLink, MatIcon],
+  imports: [AsyncPipe, RouterLink, RouterModule, MatCardModule, MatButtonModule, DatePipe, RouterLink, MatIcon],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })

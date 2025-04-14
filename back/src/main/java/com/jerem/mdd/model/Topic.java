@@ -33,7 +33,6 @@ public class Topic {
     @Size(min = 0, max = 5000)
     private String description;
 
-
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Subscription> subscribers = new ArrayList<>();
 
