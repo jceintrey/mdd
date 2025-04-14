@@ -23,6 +23,9 @@
   </form>
   <mat-divider></mat-divider>
   <h1>Abonnements</h1>
-
+  @for (topic of topics$ | async; track topic) {
+  <app-topic [topic]="topic" (unsubscribe)="unsubscribe($event)">
+  </app-topic>
+  }
 
 </div>
