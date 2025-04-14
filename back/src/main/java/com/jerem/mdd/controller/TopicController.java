@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.jerem.mdd.dto.TopicDto;
+import com.jerem.mdd.dto.TopicDetailedDto;
 import com.jerem.mdd.service.TopicService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -43,18 +43,18 @@ public class TopicController {
          * This endpoint allows an authenticated user to list all existing topics.
          * </p>
          * 
-         * @return {@link TopicDto} containing detailed subscription.
+         * @return {@link TopicDetailedDto} containing detailed subscription.
          */
         @Operation(summary = "Get all topics", description = "Allows a user to get the topics.")
         @ApiResponse(responseCode = "200", description = "Successfully get topics",
                         content = @Content(mediaType = "application/json", array = @ArraySchema(
-                                        schema = @Schema(implementation = TopicDto.class))))
+                                        schema = @Schema(implementation = TopicDetailedDto.class))))
         @ApiResponse(responseCode = "401", description = "Unauthorized, user must be authenticated")
         @ApiResponse(responseCode = "404", description = "Entity not found")
         @GetMapping()
-        public ResponseEntity<List<TopicDto>> findAll() {
+        public ResponseEntity<List<TopicDetailedDto>> findAll() {
                 log.debug("TopicController findAll");
-                List<TopicDto> topicDtos = topicService.findAll();
+                List<TopicDetailedDto> topicDtos = topicService.findAll();
                 return ResponseEntity.ok(topicDtos);
         }
 

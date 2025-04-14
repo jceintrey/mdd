@@ -3,11 +3,13 @@ import { Observable } from 'rxjs';
 import { Post, PostResponse } from '../interfaces/post.interface';
 import { HttpClient } from '@angular/common/http';
 import { PostRequest } from '../interfaces/postRequest.interface';
+import { CommentRequest } from '../interfaces/commentRequest.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
+
 
 
 
@@ -26,5 +28,10 @@ export class PostService {
   getPost(id: string | null): Observable<Post> {
     console.log("get post " + id)
     return this.httpClient.get<Post>(`${this.pathService}/${id}`);
+  }
+
+  addComment(id: string, commentRequest: CommentRequest): Observable<Post> {
+    console.log("try to add a comment");
+    return this.httpClient.post<Post>(`${this.pathService}/${id}/comments/`, commentRequest);
   }
 }

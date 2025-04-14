@@ -1,12 +1,14 @@
+import { author } from "./author.interface";
 import { Comment } from "./comment.interface";
+import { Topic } from "./topic.interface";
 
 export interface Post {
     id?: number;
     title: string;
 
     created_at: string;
-    author_id: number;
-    topic_id: number;
+    author: author;
+    topic: Topic;
     content?: string;
     comments?: Comment[]
 }

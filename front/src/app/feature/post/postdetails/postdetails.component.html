@@ -1,14 +1,15 @@
 <div class="global-container">
+    @if (post$ | async; as post){
     <div class="header">
         <button mat-icon-button class="icon-button" routerLink="/posts">
             <mat-icon>arrow_back</mat-icon>
         </button>
-        <h1>Créer un nouvel article</h1>
+        <h1>{{post.title}}</h1>
     </div>
-    @if (post$ | async; as post){
+
     <mat-card>
         <mat-card-header>
-            <mat-card-subtitle> {{post.title}} {{post.author_id}} {{post.topic_id}}</mat-card-subtitle>
+            <mat-card-subtitle> {{post.created_at}} {{post.author.username}} {{post.topic.name}}</mat-card-subtitle>
 
         </mat-card-header>
         <mat-card-content>
@@ -22,12 +23,22 @@
         @for (comment of post.comments; track comment) {
         <mat-list-item>
             <div>
-                <span>{{ comment.author_id}}</span> — {{ comment.content }}
+                <span>{{ comment.author.username}}</span> — {{ comment.content }}
             </div>
         </mat-list-item>
         }
     </mat-list>
     }
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="addcomment-form">
+        <mat-form-field>
+            <mat-label>Écrivez ici votre commentaire</mat-label>
+            <textarea matInput formControlName="content"></textarea>
+        </mat-form-field>
+        <button type="submit" [disabled]="commentForm.invalid">
+            <img src="../../../../assets/icon _send.svg" alt="Envoyer" />
+        </button>
+    </form>
+
     }
     @else {
     L'article n'a pas pu être récupéré.

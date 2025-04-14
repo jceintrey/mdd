@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.jerem.mdd.dto.AuthResponseDto;
+import com.jerem.mdd.exception.UserNotFoundException;
 import com.jerem.mdd.dto.AuthRequestDto;
 import com.jerem.mdd.model.User;
 import com.jerem.mdd.repository.UserRepository;
@@ -23,13 +24,16 @@ public class DefaultAuthenticationService implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
+    private final UserManagementService userManagementService;
 
 
     public DefaultAuthenticationService(AuthenticationManager authenticationManager,
-            JwtTokenProvider jwtTokenProvider, UserRepository userRepository) {
+            JwtTokenProvider jwtTokenProvider, UserRepository userRepository,
+            UserManagementService userManagementService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userRepository = userRepository;
+        this.userManagementService = userManagementService;
     }
 
     public AuthResponseDto authenticate(AuthRequestDto request) throws Exception {
@@ -75,5 +79,13 @@ public class DefaultAuthenticationService implements AuthenticationService {
             throw new UsernameNotFoundException("User not authenticated");
         }
     }
+
+    @Override
+    public User getAuthenticatedUser() {
+        return userManagementService.getUserEntityByEmail(getAuthenticatedUserEmail())
+                .orElseThrow(() -> new UserNotFoundException("User not authenticated"));
+    }
+
+
 
 }

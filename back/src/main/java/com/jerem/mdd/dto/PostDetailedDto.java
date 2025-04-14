@@ -14,8 +14,8 @@ import lombok.Setter;
 @Schema(description = "Response body containing the post with its content and comments.")
 public class PostDetailedDto extends PostSummaryDto {
 
-    private String content;
 
+    private TopicDetailedDto topic;
     private List<CommentDto> comments;
 
 

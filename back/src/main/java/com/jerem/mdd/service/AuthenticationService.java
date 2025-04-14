@@ -2,6 +2,7 @@ package com.jerem.mdd.service;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import com.jerem.mdd.dto.AuthResponseDto;
+import com.jerem.mdd.model.User;
 import com.jerem.mdd.dto.AuthRequestDto;
 
 public interface AuthenticationService {
@@ -20,6 +21,8 @@ public interface AuthenticationService {
     public AuthResponseDto authenticate(AuthRequestDto request) throws Exception;
 
     public String getAuthenticatedUserEmail();
+
+    public User getAuthenticatedUser();
 
 
 
