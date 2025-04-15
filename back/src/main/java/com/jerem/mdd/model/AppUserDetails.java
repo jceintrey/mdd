@@ -50,7 +50,7 @@ public class AppUserDetails implements UserDetails {
     }
 
     public Long getId() {
-        return Long.valueOf(user.getId().longValue());
+        return user.getId();
     }
 
     public String getEmail() {

@@ -1,16 +1,22 @@
 package com.jerem.mdd.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.jerem.mdd.dto.UserDetailedDto;
+import com.jerem.mdd.dto.UserSummaryDto;
+import com.jerem.mdd.dto.UserUpdateRequestDto;
 import com.jerem.mdd.service.UserProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -31,7 +37,6 @@ public class UserController {
 
     private final UserProfileService userProfileService;
 
-
     public UserController(UserProfileService userProfileService) {
 
         this.userProfileService = userProfileService;
@@ -51,5 +56,25 @@ public class UserController {
         return ResponseEntity.ok(userProfileService.getUserProfile());
     }
 
+    /**
+     * Update userProfile
+     *
+     * @param userUpdateRequestDto DTO containing updated user details.
+     * @return Updated user profile summary.
+     */
+    @Operation(summary = "Update user profile",
+            description = "Allows an authenticated user to update their profile information.")
+    @ApiResponse(responseCode = "202", description = "Profile updated successfully")
+    @ApiResponse(responseCode = "401", description = "Unauthorized")
+    @ApiResponse(responseCode = "404", description = "UserNotFound")
+    @ApiResponse(responseCode = "409", description = "Username or email already exists")
+    @ApiResponse(responseCode = "400", description = "Bad request invalid arguments")
+    @PutMapping
+    public ResponseEntity<UserSummaryDto> updateUserProfile(
+            @Valid @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(userProfileService.updateUserProfile(userUpdateRequestDto));
+
+    }
 
 }

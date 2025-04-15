@@ -12,14 +12,13 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
-
+import com.jerem.mdd.model.AppUserDetails;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-
 
 @Slf4j
 @Data
@@ -34,7 +33,6 @@ public class DefaultJwtTokenProvider implements JwtTokenProvider {
         }
         this.secretKey = new SecretKeySpec(secret.getBytes(), "HmacSHA256");
     }
-
 
     @Override
     public JwtDecoder createJwtDecoder() {
@@ -67,6 +65,7 @@ public class DefaultJwtTokenProvider implements JwtTokenProvider {
         return this.jwtEncoder;
     }
 
+
     @Override
     public String generateToken(Authentication authentication) throws Exception {
         log.debug("Generating token for user: {}", authentication.getName());
@@ -91,11 +90,12 @@ public class DefaultJwtTokenProvider implements JwtTokenProvider {
      * @return a {@link JwtClaimsSet} object
      */
     private JwtClaimsSet buildClaims(Authentication authentication) {
-        Instant now = Instant.now();
-        JwtClaimsSet claims = JwtClaimsSet.builder().issuer("self").issuedAt(now)
-                .expiresAt(now.plus(1, ChronoUnit.HOURS)).subject(authentication.getName())
-                .claim("roles", "USER").build();
-        return claims;
+        AppUserDetails userDetails = (AppUserDetails) authentication.getPrincipal();
+
+        return JwtClaimsSet.builder().subject(userDetails.getUsername())
+                .claim("id", userDetails.getId()).claim("email", userDetails.getEmail())
+                .claim("username", userDetails.getUsername()).issuedAt(Instant.now())
+                .expiresAt(Instant.now().plus(1, ChronoUnit.HOURS)).build();
     }
 
     /**
@@ -108,8 +108,8 @@ public class DefaultJwtTokenProvider implements JwtTokenProvider {
     private String encode(JwtClaimsSet claims) {
         log.debug("Encoding JWT with claims: {}");
         try {
-            JwtEncoderParameters jwtEncoderParameters =
-                    JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS256).build(), claims);
+            JwtEncoderParameters jwtEncoderParameters = JwtEncoderParameters
+                    .from(JwsHeader.with(MacAlgorithm.HS256).build(), claims);
             String token = this.getJwtEncoder().encode(jwtEncoderParameters).getTokenValue();
             log.debug("Token successfully encoded.");
             return token;

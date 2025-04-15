@@ -1,7 +1,6 @@
 package com.jerem.mdd.service;
 
 import java.util.Optional;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.jerem.mdd.model.AppUserDetails;
@@ -39,17 +38,6 @@ public class DefaultUserManagementService implements UserManagementService {
     @Override
     public AppUserDetails createUser(String email, String plainPassword, String username) {
 
-        // if (isEmailAlreadyUsed(email) )) {
-        // throw new UserAlreadyUsedException("Email '" + email + "' is already present in
-        // database.",
-        // "DefaultUserManagementService.createUser");
-        // }
-        // if (isUsernameAlreadyUsed(username) )) {
-        // throw new EmailAlreadyUsedException("User '" + username + "' is already present in
-        // database.",
-        // "DefaultUserManagementService.createUser");
-        // }
-
 
         User user = new User();
         user.setEmail(email);
@@ -59,18 +47,6 @@ public class DefaultUserManagementService implements UserManagementService {
         userRepository.save(user);
 
         return new AppUserDetails(user);
-    }
-
-    @Override
-    public UserDetails getUserbyEmail(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserbyEmail'");
-    }
-
-    @Override
-    public UserDetails getUserbyUsername(String username) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserbyUsername'");
     }
 
     @Override
@@ -93,6 +69,7 @@ public class DefaultUserManagementService implements UserManagementService {
     public Optional<User> getUserEntityByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
 
 
 }

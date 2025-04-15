@@ -8,14 +8,12 @@ import com.jerem.mdd.dto.SubscriptionDto;
 import com.jerem.mdd.exception.SubscriptionAlreadyExistException;
 import com.jerem.mdd.exception.SubscriptionNotFoundException;
 import com.jerem.mdd.exception.TopicNotFoundException;
-import com.jerem.mdd.exception.UserNotFoundException;
 import com.jerem.mdd.mapper.SubscriptionMapper;
 import com.jerem.mdd.model.Subscription;
 import com.jerem.mdd.model.Topic;
 import com.jerem.mdd.model.User;
 import com.jerem.mdd.repository.SubscriptionRepository;
 import com.jerem.mdd.repository.TopicRepository;
-import com.jerem.mdd.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 
@@ -24,17 +22,15 @@ public class SubscriptionService {
         private final SubscriptionRepository subscriptionRepository;
         private final AuthenticationService authenticationService;
         private final TopicRepository topicRepository;
-        private final UserRepository userRepository;
         private final SubscriptionMapper subscriptionMapper;
 
         public SubscriptionService(SubscriptionRepository subscriptionRepository,
                         AuthenticationService authenticationService,
-                        TopicRepository topicRepository, UserRepository userRepository,
+                        TopicRepository topicRepository,
                         SubscriptionMapper subscriptionMapper) {
                 this.subscriptionRepository = subscriptionRepository;
                 this.authenticationService = authenticationService;
                 this.topicRepository = topicRepository;
-                this.userRepository = userRepository;
                 this.subscriptionMapper = subscriptionMapper;
         }
 
@@ -47,10 +43,7 @@ public class SubscriptionService {
 
 
         public SubscriptionDto subscribe(String topicId) {
-                String username = authenticationService.getAuthenticatedUserEmail();
-                User user = userRepository.findByEmail(username)
-                                .orElseThrow(() -> new UserNotFoundException("User not found",
-                                                "SubscriptionService.subscribe"));
+                User user = authenticationService.getAuthenticatedUser();
 
                 Topic topic = topicRepository.findById(Long.parseLong(topicId))
                                 .orElseThrow(() -> new TopicNotFoundException("Topic not found",
@@ -76,11 +69,7 @@ public class SubscriptionService {
          * @throws EntityNotFoundException if the subscription does not exist.
          */
         public void unsubscribe(String topicId) {
-                String username = authenticationService.getAuthenticatedUserEmail();
-
-                User user = userRepository.findByEmail(username)
-                                .orElseThrow(() -> new UserNotFoundException("User not found",
-                                                "SubscriptionService.unsubscribe"));
+                User user = authenticationService.getAuthenticatedUser();
 
                 Topic topic = topicRepository.findById(Long.parseLong(topicId))
                                 .orElseThrow(() -> new TopicNotFoundException("Topic not found",
@@ -107,11 +96,7 @@ public class SubscriptionService {
          * @throws UsernameNotFoundException if user not found in repository
          */
         public List<SubscriptionDetailedDto> findAll() {
-                String username = authenticationService.getAuthenticatedUserEmail();
-                User user = userRepository.findByEmail(username)
-                                .orElseThrow(() -> new UserNotFoundException("User not found",
-                                                "SubscriptionService.findAll"));
-
+                User user = authenticationService.getAuthenticatedUser();
                 List<Subscription> subscriptions =
                                 subscriptionRepository.findByUserWithTopics(user);
                 return subscriptionMapper.toDetailedDto(subscriptions);

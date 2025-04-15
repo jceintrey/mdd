@@ -4,7 +4,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.jerem.mdd.model.User;
 import com.jerem.mdd.repository.UserRepository;
-
 import com.jerem.mdd.dto.RegisterRequestDto;
 import com.jerem.mdd.dto.UserSummaryDto;
 import com.jerem.mdd.exception.EmailAlreadyExistException;
@@ -24,7 +23,6 @@ public class DefaultRegistrationService implements RegistrationService {
         this.userMapper = userMapper;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
-
     }
 
     @Override
