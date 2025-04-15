@@ -1,6 +1,5 @@
 package com.jerem.mdd.service;
 
-import com.jerem.mdd.model.Topic;
 import com.jerem.mdd.model.User;
 import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,23 +28,6 @@ public interface UserManagementService {
     public UserDetails createUser(String email, String plainPassword, String username);
 
 
-    /**
-     * Retrieves a {@link UserDetails} object by email. This object should be cast to its
-     * implementation.
-     * 
-     * @param {@link String} the email.
-     * @return a {@link UserDetails}
-     */
-    public UserDetails getUserbyEmail(String email);
-
-    /**
-     * Retrieves a {@link UserDetails} object by username. This object should be cast to its
-     * implementation.
-     * 
-     * @param {@link String} the username.
-     * @return a {@link UserDetails}
-     */
-    public UserDetails getUserbyUsername(String username);
 
     /**
      * Return true if the email is already present in the Database.

@@ -14,9 +14,9 @@ import com.jerem.mdd.service.JwtTokenProvider;
 import com.jerem.mdd.service.UserManagementService;
 import jakarta.annotation.PostConstruct;
 
-
 /**
- * Configuration class for the application. This class defines beans that will be managed by the
+ * Configuration class for the application. This class defines beans that will
+ * be managed by the
  * Spring application.
  */
 @Configuration
@@ -31,8 +31,10 @@ public class AppConfig {
     }
 
     /**
-     * Defines a JwtTokenProvider bean for handling JSON Web Token (JWT) creation and validation.
-     * Here we uses an HMAC-based JWT factory configured with properties from AppConfigProperties.
+     * Defines a JwtTokenProvider bean for handling JSON Web Token (JWT) creation
+     * and validation.
+     * Here we uses an HMAC-based JWT factory configured with properties from
+     * AppConfigProperties.
      *
      * @param appConfigProperties Configuration properties
      * @return a JwtFactory specific implementation
@@ -43,10 +45,11 @@ public class AppConfig {
     }
 
     /**
-     * Defines a UserManagementService bean that handles user management operations. Here we uses a
+     * Defines a UserManagementService bean that handles user management operations.
+     * Here we uses a
      * UserManagementService implementation : DefaultUserManagementService.
      *
-     * @param userRepository Repository for accessing user data.
+     * @param userRepository  Repository for accessing user data.
      * @param passwordEncoder Encoder for hashing passwords.
      * @return a UserManagementService specific implementation
      */
@@ -55,7 +58,6 @@ public class AppConfig {
             PasswordEncoder passwordEncoder) {
         return new DefaultUserManagementService(userRepository, passwordEncoder);
     }
-
 
     /**
      * Defines a modelMapper bean that handles mapping between entity and dto.

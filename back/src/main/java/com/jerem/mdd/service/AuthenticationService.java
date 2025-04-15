@@ -20,10 +20,7 @@ public interface AuthenticationService {
      */
     public AuthResponseDto authenticate(AuthRequestDto request) throws Exception;
 
-    public String getAuthenticatedUserEmail();
-
     public User getAuthenticatedUser();
-
 
 
 }

@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.Date;
 
 import org.springframework.data.domain.Page;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.jerem.mdd.dto.CommentRequestDto;
@@ -12,6 +13,7 @@ import com.jerem.mdd.dto.PostRequestDto;
 import com.jerem.mdd.dto.PostSummaryDto;
 import com.jerem.mdd.mapper.PostMapper;
 import com.jerem.mdd.model.Comment;
+
 import com.jerem.mdd.model.Post;
 import com.jerem.mdd.model.Topic;
 import com.jerem.mdd.model.User;
@@ -24,18 +26,16 @@ import com.jerem.mdd.exception.*;
 public class PostService {
 
     private final AuthenticationService authenticationService;
-    private final UserManagementService userManagementService;
     private final PostMapper postMapper;
     private final PostRepository postRepository;
     private final TopicRepository topicRepository;
     private final CommentRepository commentRepository;
 
     public PostService(AuthenticationService authenticationService,
-            UserManagementService userManagementService, PostMapper postMapper,
+            PostMapper postMapper,
             PostRepository postRepository, TopicRepository topicRepository,
             CommentRepository commentRepository) {
         this.authenticationService = authenticationService;
-        this.userManagementService = userManagementService;
         this.postMapper = postMapper;
         this.postRepository = postRepository;
         this.topicRepository = topicRepository;
@@ -43,11 +43,8 @@ public class PostService {
     }
 
     public PostSummaryDto createPost(PostRequestDto postRequestDto) {
-        String authenticatedUserEmail = authenticationService.getAuthenticatedUserEmail();
 
-        User authenticatedUser = userManagementService.getUserEntityByEmail(authenticatedUserEmail)
-                .orElseThrow(() -> new UserNotFoundException("User not found",
-                        "PostService.createPost"));
+        User authenticatedUser = authenticationService.getAuthenticatedUser();
 
         Topic topic = topicRepository.findById(postRequestDto.getTopicId()).orElseThrow(
                 () -> new TopicNotFoundException("Topic not found", "PostService.createPost"));
@@ -59,11 +56,8 @@ public class PostService {
         post.setTitle(postRequestDto.getTitle());
         post.setContent(postRequestDto.getContent());
 
-
         postRepository.save(post);
         return postMapper.toDto(post);
-
-
 
     }
 
@@ -80,22 +74,11 @@ public class PostService {
         return postMapper.toDetailedDto(post);
     }
 
-    public void deletePost(Long postId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletePost'");
-    }
-
 
     public PostDetailedDto addPost(Long postId, CommentRequestDto commentRequest) {
-        String authenticatedUserEmail = authenticationService.getAuthenticatedUserEmail();
-
-        User authenticatedUser = userManagementService.getUserEntityByEmail(authenticatedUserEmail)
-                .orElseThrow(() -> new UserNotFoundException("User not found",
-                        "PostService.createPost"));
-
+        User authenticatedUser = authenticationService.getAuthenticatedUser();
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new PostNotFoundException("Post not found", "PostService.getAllPosts"));
-
 
         Comment comment = new Comment();
         comment.setAuthor(authenticatedUser);
@@ -105,8 +88,6 @@ public class PostService {
 
         commentRepository.save(comment);
         return postMapper.toDetailedDto(post);
-
-
 
     }
 
