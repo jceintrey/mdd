@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { User } from '../../../../core/interfaces/User.interface';
+import { User, UserUpdateRequest } from '../../../../core/interfaces/User.interface';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth.service';
 import { UserService } from '../../../../core/services/user.service';
@@ -13,11 +13,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { TopicComponent } from "../../../topics/topic/topic.component";
 import { SubscriptionService } from 'app/core/services/subscription.service';
+import { RegisterRequest } from 'app/core/interfaces/registerRequest.interface';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-me',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatDividerModule, TopicComponent],
+  imports: [CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatDividerModule, TopicComponent, MatIconModule],
   templateUrl: './me.component.html',
   styleUrl: './me.component.scss'
 })
@@ -27,34 +30,62 @@ export class MeComponent {
   errorMessage: string | null = null;
   topics$!: Observable<Topic[]>;
   userForm!: FormGroup;
-  constructor(private authService: AuthService, private userService: UserService, private topicService: TopicService, private fb: FormBuilder, private subscriptionService: SubscriptionService) { }
+  hidePassword = true;
+
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private topicService: TopicService,
+    private fb: FormBuilder,
+    private subscriptionService: SubscriptionService,
+    private snack: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
-
     this.userService.getMe().subscribe({
       next: (data) => {
-        this.user = data
-
         this.userForm = this.fb.group({
-          username: ['', [Validators.minLength(3)]],
-          email: ['', [Validators.email]],
-          password: ['', [Validators.minLength(3)]]
+          username: [data.username, [Validators.required, Validators.minLength(3)]],
+          email: [data.email, [Validators.required, Validators.email]],
+          password: ['']
         });
-
         this.reloadSubscriptions();
-
       },
       error: (err) => {
         console.log("Error on Mecomponent.getMe()");
         this.errorMessage = "Error while getting infos";
       }
-    })
+    });
   }
 
 
   onSubmit() {
 
     console.log("try to submit userForm");
+    if (this.userForm.invalid) {
+      this.userForm.markAllAsTouched();
+      return;
+    }
+
+    let userUpdate: UserUpdateRequest = this.userForm.value as UserUpdateRequest;
+
+
+    if (!userUpdate.password) {
+      delete userUpdate.password;
+    }
+
+    this.userService.update(userUpdate).subscribe({
+      next: () => {
+        console.log("user update ok");
+        this.snack.open("Profil utilisateur mis à jour avec succès", "Fermer", { duration: 5000 });
+
+      },
+      error: (err: any) => {
+        this.snack.open("Erreur lors de la mise à jour du profil", "Fermer", { duration: 5000 });
+
+      }
+    })
+
   }
 
   reloadSubscriptions() {

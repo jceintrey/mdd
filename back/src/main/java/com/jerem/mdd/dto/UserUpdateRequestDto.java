@@ -20,7 +20,7 @@ public class UserUpdateRequestDto {
     @Email
     private String email;
 
-    @NotBlank
-    @Size(min = 12, max = 32)
+    // password is optional
+    @Size(min = 6, max = 32)
     private String password;
 }

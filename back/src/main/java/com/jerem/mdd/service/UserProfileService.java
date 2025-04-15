@@ -74,8 +74,9 @@ public class UserProfileService {
         authenticatedUser.setUsername(userUpdateRequestDto.getUsername());
 
 
-        if (!passwordEncoder.matches(userUpdateRequestDto.getPassword(),
-                authenticatedUser.getPassword())) {
+        if (userUpdateRequestDto.getPassword() != null
+                && !passwordEncoder.matches(userUpdateRequestDto.getPassword(),
+                        authenticatedUser.getPassword())) {
             authenticatedUser
                     .setPassword(passwordEncoder.encode(userUpdateRequestDto.getPassword()));
         }

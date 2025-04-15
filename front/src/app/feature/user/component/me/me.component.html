@@ -4,23 +4,30 @@
     <h1>Profil utilisateur</h1>
   </div>
 
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="addcomment-form">
+  @if (userForm){
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <mat-label>{{user?.username}}</mat-label>
+      <mat-label>Nom d'utilisateur</mat-label>
       <input matInput formControlName="username">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>{{user?.email}}</mat-label>
+      <mat-label>Email</mat-label>
       <input matInput formControlName="email">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Mot de passe</mat-label>
-      <input matInput formControlName="password">
+      <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="!hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
     </mat-form-field>
     <button type="submit">
       Sauvegarder
     </button>
   </form>
+  }
+
   <mat-divider></mat-divider>
   <h1>Abonnements</h1>
   @for (topic of topics$ | async; track topic) {
