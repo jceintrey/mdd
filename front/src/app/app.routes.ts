@@ -6,9 +6,9 @@ import { AuthGuard } from './guards/auth.guards';
 import { RegisterComponent } from './feature/auth/register/register.component';
 import { TopicsComponent } from './feature/topics/main/topics.component';
 import { LayoutComponent } from './shared/layout/layout.component';
-import { PostComponent } from './feature/post/main/post.component';
-import { CreatepostComponent } from './feature/post/createpost/createpost.component';
-import { PostDetailsComponent } from './feature/post/postdetails/postdetails.component';
+import { PostsComponent } from './feature/posts/main/posts.component';
+import { CreatepostComponent } from './feature/posts/createpost/createpost.component';
+import { PostDetailsComponent } from './feature/posts/postdetails/postdetails.component';
 
 
 export const routes: Routes = [
@@ -16,7 +16,7 @@ export const routes: Routes = [
         path: '',
         component: LayoutComponent,
         children: [
-            { path: 'posts', component: PostComponent, canActivate: [AuthGuard], },
+            { path: 'posts', component: PostsComponent, canActivate: [AuthGuard], },
             { path: 'topics', component: TopicsComponent, canActivate: [AuthGuard], },
             { path: 'me', component: MeComponent, canActivate: [AuthGuard], },
             { path: 'posts/create', component: CreatepostComponent, canActivate: [AuthGuard], },

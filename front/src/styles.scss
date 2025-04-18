@@ -1,18 +1,216 @@
 /* You can add global styles to this file, and also import other style files */
 
-html,
-body {
+
+/*
+global shared styles
+*/
+html {
+    font-size: 14px;
+    /* ref -> 1rem = 14px */
+    display: flex;
+    flex-direction: column;
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
+    height: 100vh;
+    width: 100vw;
     margin: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif !important;
+    border: solid 1px black;
+    overflow-x: hidden;
 }
 
-.btn {
-    background-color: #7763C5;
-    border-radius: 8px;
-    padding: 6px;
+* {
+    font-family: 'Inter', sans-serif !important;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 1.71rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.standard-button {
+    background-color: #7763C5 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    // width: 47vw;
+    max-width: 250px !important;
+    align-self: center;
+    padding: 12px;
+    font-size: 1.143rem !important;
+    font-weight: 700 !important;
+    font-family: inherit !important;
     color: white;
+    max-width: 50%;
+    // align-self: center;
+}
+
+mat-icon {
+    font-family: 'Material Icons' !important;
+    font-size: 24px;
+    color: black;
+}
+
+
+.clamp-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.clamp-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.clamp-5 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/*
+Forms styles
+*/
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+}
+
+.form-item {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    background-color: transparent;
+}
+
+mat-form-field {
+    appearance: "outline";
+    width: 100%;
+}
+
+
+/*
+Cards styles
+*/
+
+.card-element {
+    background-color: transparent;
+    padding: 0.5rem;
+
+}
+
+.card-container--fit {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.card-container {
+    display: grid;
+    justify-content: center;
+}
+
+mat-card {
+    padding-bottom: 1rem !important;
+    height: 100%;
+
+}
+
+mat-card-title {
+    font-weight: 700 !important;
+    line-height: 100% !important;
+    letter-spacing: 0% !important;
+    font-size: 1.143rem !important;
+    padding-bottom: 1rem !important;
+    font-family: inherit !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap;
+    margin-right: 2rem !important;
+}
+
+mat-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+}
+
+mat-card-subtitle {
+    display: flex !important;
+    width: 100% !important;
+}
+
+mat-card-subtitle span {
+    width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+mat-card-content {
+    font-weight: 400 !important;
+    font-size: 1rem !important;
+    line-height: 100% !important;
+    letter-spacing: 0% !important;
+    padding-bottom: 1rem !important;
+    font-family: inherit !important;
+}
+
+@media screen and (max-width:400px) {
+    .card-container--fit {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media screen and (max-width:800px) {
+    // html {
+    //     font-size: 11.2px;
+    //     /* 1rem = 16px */
+    //     height: 95vh;
+    // }
+
+    // * {
+    //     font-family: 'Inter', sans-serif !important;
+    //     font-size: 11px;
+    // }
+
 }

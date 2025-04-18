@@ -5,10 +5,10 @@
         </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        {{ topic.description }}
+        <p class="clamp-3">Description: {{ topic.description }}</p>
     </mat-card-content>
 
-    <button mat-flat-button [ngClass]="topic.subscribed ? 'btn-subscribed' : 'btn-notsubscribed'"
+    <button mat-flat-button [ngClass]="topic.subscribed ? 'standard-button' : 'standard-button disabled-button'"
         (click)="onToggleSubscription()">
         {{ topic.subscribed ? 'Se désabonner' : 'S’abonner' }}
     </button>

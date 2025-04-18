@@ -1,29 +1,8 @@
-@if (isMobile) {
-<div class=global-container>
-
-    <div class="topics-grid">
-        @for (topic of topics$ | async; track topic) {
-        <mat-card class="topic-card" appearance="outlined" [routerLink]="['/topic', topic.id]">
-            <mat-card-header>
-                <mat-card-title>
-                    {{topic.name}}
-                </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                {{topic.description}}
-            </mat-card-content>
-        </mat-card>
-        }
-    </div>
-</div>
-}
-@else {
-
-<div class="pc-topics-grid">
+<div class="card-container card-container--fit">
     @for (topic of topics$ | async; track topic) {
-    <app-topic [topic]="topic" (subscribe)="subscribe($event)" (unsubscribe)="unsubscribe($event)">
-    </app-topic>
+    <div class="card-element">
+        <app-topic [topic]="topic" (subscribe)="subscribe($event)" (unsubscribe)="unsubscribe($event)">
+        </app-topic>
+    </div>
     }
 </div>
-
-}
