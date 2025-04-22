@@ -78,11 +78,9 @@ export class MeComponent {
       next: () => {
         console.log("user update ok");
         this.snack.open("Profil utilisateur mis à jour avec succès", "Fermer", { duration: 5000 });
-
       },
       error: (err: any) => {
         this.snack.open("Erreur lors de la mise à jour du profil", "Fermer", { duration: 5000 });
-
       }
     })
 

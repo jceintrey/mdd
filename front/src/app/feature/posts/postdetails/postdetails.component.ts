@@ -6,17 +6,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Post } from 'app/core/interfaces/post.interface';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommentRequest } from 'app/core/interfaces/commentRequest.interface';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-postdetails',
-  imports: [MatIconModule, MatCardModule, MatDividerModule, MatListModule, AsyncPipe, RouterLink, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
+  imports: [MatIconModule, MatButtonModule, MatCardModule, MatDividerModule, MatListModule, DatePipe, AsyncPipe, RouterLink, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
   templateUrl: './postdetails.component.html',
   styleUrl: './postdetails.component.scss'
 })

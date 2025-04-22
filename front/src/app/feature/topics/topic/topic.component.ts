@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Topic } from 'app/core/interfaces/topic.interface';

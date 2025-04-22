@@ -1,33 +1,40 @@
-<div class="global-container">
-    <div class="header">
+<div class="header">
+    <div class="header-item">
         <button mat-icon-button class="icon-button" routerLink="/posts">
             <mat-icon>arrow_back</mat-icon>
         </button>
-        <h1>Créer un nouvel article</h1>
-
     </div>
+    <h1 class="header-title">Créer un nouvel article</h1>
+</div>
 
-    <form [formGroup]="createPostForm" (ngSubmit)="onSubmit()" class="createpost-form">
-        <mat-form-field>
+@if (createPostForm){
+<form [formGroup]="createPostForm" (ngSubmit)="onSubmit()">
+    <div class="form-item">
+        <mat-form-field appearance="outline">
             <mat-label>Sélectionner un thème</mat-label>
             <mat-select formControlName="topic_id">
                 @for (topic of topics$ | async; track topic) {
-
                 <mat-option value="{{topic.id}}">{{topic.name}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
-        <mat-form-field>
+    </div>
+    <div class="form-item">
+        <mat-form-field appearance="outline">
             <mat-label>Titre de l'article</mat-label>
             <input matInput formControlName="title">
         </mat-form-field>
-        <mat-form-field>
+    </div>
+    <div class="form-item">
+        <mat-form-field appearance="outline">
             <mat-label>Contenu de l'article</mat-label>
             <textarea matInput formControlName="content"></textarea>
         </mat-form-field>
-        <button mat-flat-button class="submit-button" type="submit" [disabled]="createPostForm.invalid">
+    </div>
+    <div class="form-item">
+        <button class="standard-button" mat-flat-button type="submit" [disabled]="createPostForm.invalid">
             Créer
         </button>
-    </form>
-
-</div>
+    </div>
+</form>
+}

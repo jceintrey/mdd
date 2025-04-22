@@ -1,0 +1,133 @@
+.posts-details-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+
+
+}
+
+.posts-details-item {
+    justify-content: flex-start;
+    // overflow: hidden;
+}
+
+.posts-details-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 4rem;
+    padding-right: 1rem;
+    background-color: transparent;
+
+}
+
+.post-detail-text {
+    font-size: 1.43rem;
+    font-weight: 400;
+    padding-bottom: 1rem !important;
+}
+
+.title {
+    padding-right: 2rem;
+
+}
+
+h2 {
+    align-self: flex-start;
+}
+
+.comment {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 1rem;
+    width: 80%;
+}
+
+.comment-content {
+    border-radius: 8px;
+    background-color: #EEEEEE !important;
+    padding: 1rem;
+    border-style: none;
+    box-shadow: none;
+
+
+}
+
+mat-card-content,
+mat-label {
+    font-size: 1.25rem !important;
+    font-weight: 400;
+}
+
+
+.addcomment-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+    width: 80%;
+}
+
+.custom-textarea {
+    width: 100%;
+    border-radius: 16px !important;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1.43rem !important;
+    color: #8A8C8C !important;
+    font-weight: 400 !important;
+}
+
+
+// button {
+//     background-color: transparent;
+//     border: none;
+// }
+
+.post-content {
+    border-radius: 8px;
+    background-color: transparent !important;
+    padding: 1rem;
+    border-style: none;
+    box-shadow: none;
+
+
+}
+
+mat-card-header {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+mat-card {
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: none !important;
+
+    width: 100%;
+}
+
+mat-card-subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+mat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+p {
+    background-color: transparent;
+}

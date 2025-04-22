@@ -34,6 +34,7 @@ export class LayoutComponent {
     this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
       if (screenSize.matches) {
         this.isMobile = true;
+        this.isCollapsed = true;
       } else {
         this.isMobile = false;
       }
