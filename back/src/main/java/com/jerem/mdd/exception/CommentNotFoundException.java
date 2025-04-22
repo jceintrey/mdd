@@ -3,6 +3,9 @@ package com.jerem.mdd.exception;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Exception thrown when a comment is not found.
+ */
 @Slf4j
 @Getter
 public class CommentNotFoundException extends RuntimeException {

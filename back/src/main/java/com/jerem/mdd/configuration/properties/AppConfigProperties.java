@@ -10,6 +10,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
 
+/**
+ * Custom properties for the application.
+ *
+ * This class binds custom properties defined in application.properties with the prefix {@code mdd}.
+ *
+ */
 @Getter
 @Setter
 @Configuration

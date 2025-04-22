@@ -7,6 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+
+/**
+ * Data Transfer Object (DTO) representing minimal information about a topic.
+ * 
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

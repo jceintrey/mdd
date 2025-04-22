@@ -15,6 +15,10 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * Entity representing a comment posted by a user on a specific post.
+ */
 @Entity
 @Data
 @Table(name = "comments")
@@ -40,7 +44,6 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
-
 
 
 }

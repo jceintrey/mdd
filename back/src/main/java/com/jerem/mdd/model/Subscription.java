@@ -11,6 +11,9 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Entity representing a Subscription that relies a user to a topic
+ */
 @Entity
 @Data
 @Table(name = "subscriptions")
@@ -28,8 +31,6 @@ public class Subscription {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "topic_id", nullable = false)
     private Topic topic;
-
-
 
     public Subscription(User user, Topic topic) {
         this.user = user;

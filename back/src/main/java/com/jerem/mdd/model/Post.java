@@ -19,7 +19,9 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+/**
+ * Entity representing a Post posted by a user and linked to a specific {@link Topic}
+ */
 @Entity
 @Table(name = "posts")
 @Data

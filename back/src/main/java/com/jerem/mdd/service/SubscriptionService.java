@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.jerem.mdd.dto.SubscriptionDetailedDto;
-import com.jerem.mdd.dto.SubscriptionDto;
+import com.jerem.mdd.dto.SubscriptionSummaryDto;
 import com.jerem.mdd.exception.SubscriptionAlreadyExistException;
 import com.jerem.mdd.exception.SubscriptionNotFoundException;
 import com.jerem.mdd.exception.TopicNotFoundException;
@@ -16,7 +16,18 @@ import com.jerem.mdd.repository.SubscriptionRepository;
 import com.jerem.mdd.repository.TopicRepository;
 import jakarta.persistence.EntityNotFoundException;
 
-
+/**
+ * Service for managing topic subscriptions.
+ * <p>
+ * This service provides methods to subscribe or unsubscribe from topics, retrieve a user's
+ * subscriptions, and check subscription status. It relies on the currently authenticated user
+ * provided by the {@link AuthenticationService}.
+ * </p>
+ *
+ * @see SubscriptionRepository
+ * @see TopicRepository
+ * @see AuthenticationService
+ */
 @Service
 public class SubscriptionService {
         private final SubscriptionRepository subscriptionRepository;
@@ -42,7 +53,7 @@ public class SubscriptionService {
 
 
 
-        public SubscriptionDto subscribe(String topicId) {
+        public SubscriptionSummaryDto subscribe(String topicId) {
                 User user = authenticationService.getAuthenticatedUser();
 
                 Topic topic = topicRepository.findById(Long.parseLong(topicId))

@@ -8,6 +8,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+/**
+ * Data Transfer Object (DTO) representing minimal information about a user.
+ * 
+ */
 @Data
 @Schema(description = "DTO containing the user informations.")
 @NoArgsConstructor

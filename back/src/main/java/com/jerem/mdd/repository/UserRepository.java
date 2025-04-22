@@ -7,12 +7,11 @@ import org.springframework.stereotype.Repository;
 import com.jerem.mdd.model.User;
 
 
-
 /**
  * Repository interface for managing {@link User} persistence.
  * <p>
  * Extends {@link JpaRepository} to provide standard CRUD operations and database interactions for
- * message entities.
+ * {@link User} entities.
  * </p>
  * 
  * @see JpaRepository
@@ -37,11 +36,28 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      */
     Optional<User> findByUsername(String username);
 
-
+    /**
+     * Retrieves a user by their ID.
+     *
+     * @param id the user ID
+     * @return an {@link Optional} containing the {@link User} if found, or empty otherwise
+     */
     Optional<User> findById(Long id);
 
+    /**
+     * Checks if a user exists by their email.
+     *
+     * @param email the email to check
+     * @return {@code true} if a user with the given email exists, {@code false} otherwise
+     */
     boolean existsByEmail(String email);
 
+    /**
+     * Checks if a user exists by their username.
+     *
+     * @param username the username to check
+     * @return {@code true} if a user with the given username exists, {@code false} otherwise
+     */
     boolean existsByUsername(String username);
 
 }

@@ -13,6 +13,9 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Entity representing a User.
+ */
 @Entity
 @Data
 @Table(name = "users")

@@ -4,6 +4,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 
+/**
+ * Service interface responsible for operations on token.
+ */
 public interface JwtTokenProvider {
     /**
      * Creates a {@link JwtDecoder} used to decode and verify JWT tokens. {@link JwtDecoder} is

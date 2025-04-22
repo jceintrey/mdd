@@ -22,6 +22,14 @@ import com.jerem.mdd.repository.PostRepository;
 import com.jerem.mdd.repository.TopicRepository;
 import com.jerem.mdd.exception.*;
 
+/**
+ * Service for managing posts and comments.
+ * <p>
+ * This service handles the creation of posts, retrieval of posts, and the addition of comments to a
+ * post. It also interacts with repositories for data persistence and handles user authentication
+ * through {@link AuthenticationService}.
+ * </p>
+ */
 @Service
 public class PostService {
 
@@ -42,6 +50,17 @@ public class PostService {
         this.commentRepository = commentRepository;
     }
 
+    /**
+     * Creates a new post.
+     * <p>
+     * This method creates a post with the provided details and associates it with the authenticated
+     * user and a specified topic.
+     * </p>
+     *
+     * @param postRequestDto the data transfer object containing the post details
+     * @return a {@link PostSummaryDto} containing the created post's summary
+     * @throws TopicNotFoundException if the specified topic does not exist
+     */
     public PostSummaryDto createPost(PostRequestDto postRequestDto) {
 
         User authenticatedUser = authenticationService.getAuthenticatedUser();
@@ -61,12 +80,28 @@ public class PostService {
 
     }
 
+    /**
+     * Retrieves all posts in a paginated format.
+     * 
+     * @param pageRequest the pagination parameters
+     * @return a {@link Page} of {@link PostSummaryDto} representing the posts
+     */
     public Page<PostSummaryDto> getAllPosts(PageRequest pageRequest) {
         Page<Post> postsPage = postRepository.findAll(pageRequest);
 
         return postsPage.map((post) -> postMapper.toDto(post));
     }
 
+    /**
+     * Retrieves a post by its ID.
+     * <p>
+     * This method returns detailed information about a post, including associated comments.
+     * </p>
+     *
+     * @param postId the ID of the post to retrieve
+     * @return a {@link PostDetailedDto} containing the detailed post information
+     * @throws PostNotFoundException if the post with the specified ID does not exist
+     */
     public PostDetailedDto getPostById(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new PostNotFoundException("Post not found", "PostService.getAllPosts"));
@@ -75,6 +110,18 @@ public class PostService {
     }
 
 
+    /**
+     * Adds a comment to an existing post.
+     * <p>
+     * This method creates a new comment and associates it with a specific post and the
+     * authenticated user.
+     * </p>
+     *
+     * @param postId the ID of the post to add the comment to
+     * @param commentRequest the data transfer object containing the comment details
+     * @return a {@link PostDetailedDto} with updated information including the new comment
+     * @throws PostNotFoundException if the post with the specified ID does not exist
+     */
     public PostDetailedDto addPost(Long postId, CommentRequestDto commentRequest) {
         User authenticatedUser = authenticationService.getAuthenticatedUser();
         Post post = postRepository.findById(postId).orElseThrow(

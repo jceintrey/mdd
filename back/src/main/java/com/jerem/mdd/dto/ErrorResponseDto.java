@@ -15,7 +15,6 @@ import lombok.Data;
 @Schema(description = "Body containing a standardized error response.")
 public class ErrorResponseDto {
 
-
     private String description;
 
     @Schema(description = "source that throws the error",

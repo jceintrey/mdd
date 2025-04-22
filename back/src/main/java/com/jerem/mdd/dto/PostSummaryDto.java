@@ -4,6 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+/**
+ * Data Transfer Object (DTO) representing minimal information about a post.
+ * 
+ * 
+ */
 @Data
 @Schema(description = "Response body containing the post.")
 public class PostSummaryDto {

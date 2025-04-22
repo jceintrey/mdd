@@ -3,6 +3,10 @@ package com.jerem.mdd.exception;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+
+/**
+ * Exception thrown when a user subscribe but the subscription already exists.
+ */
 @Slf4j
 @Getter
 public class SubscriptionAlreadyExistException extends RuntimeException {

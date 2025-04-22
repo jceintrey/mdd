@@ -9,6 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
+
+/**
+ * Used in Spring Security filter Chain to debug http request and responses
+ */
 @Component
 @Slf4j
 public class JwtDebugFilter extends OncePerRequestFilter {

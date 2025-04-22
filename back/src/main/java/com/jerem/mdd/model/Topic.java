@@ -14,6 +14,9 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Entity representing a Topic.
+ */
 @Entity
 @Table(name = "topics")
 @Data

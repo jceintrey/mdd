@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.jerem.mdd.dto.SubscriptionDetailedDto;
-import com.jerem.mdd.dto.SubscriptionDto;
+import com.jerem.mdd.dto.SubscriptionSummaryDto;
 import com.jerem.mdd.service.SubscriptionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -62,7 +62,6 @@ public class SubscriptionController {
         @ApiResponse(responseCode = "404", description = "Entity not found")
         @GetMapping()
         public ResponseEntity<List<SubscriptionDetailedDto>> findAll() {
-
                 List<SubscriptionDetailedDto> subscriptionDtos = subscriptionService.findAll();
                 return ResponseEntity.ok(subscriptionDtos);
         }
@@ -75,23 +74,24 @@ public class SubscriptionController {
          * </p>
          *
          * @param topicId the ID of the topic to subscribe to.
-         * @return {@link SubscriptionDto} containing subscription.
+         * @return {@link SubscriptionSummaryDto} containing subscription.
          */
         @Operation(summary = "Subscribe to a topic",
                         description = "Allows an authenticated user to subscribe to a topic by providing its ID.")
         @ApiResponse(responseCode = "200", description = "Successfully subscribed to the topic",
                         content = @Content(mediaType = "application/json",
-                                        schema = @Schema(implementation = SubscriptionDto.class)))
+                                        schema = @Schema(
+                                                        implementation = SubscriptionSummaryDto.class)))
         @ApiResponse(responseCode = "400", description = "Bad request, invalid topic ID")
         @ApiResponse(responseCode = "401", description = "Unauthorized, user must be authenticated")
         @ApiResponse(responseCode = "404", description = "Entity not found")
         @ApiResponse(responseCode = "409", description = "Subscription already exist")
 
         @PostMapping("/subscribe/{topicId}")
-        public ResponseEntity<SubscriptionDto> subscribe(@PathVariable("topicId") String topicId) {
+        public ResponseEntity<SubscriptionSummaryDto> subscribe(
+                        @PathVariable("topicId") String topicId) {
                 log.debug("@PostMapping(\"/subscribe/{topicId}\")");
-
-                SubscriptionDto subscriptionDto = subscriptionService.subscribe(topicId);
+                SubscriptionSummaryDto subscriptionDto = subscriptionService.subscribe(topicId);
                 return ResponseEntity.ok(subscriptionDto);
         }
 
@@ -115,7 +115,6 @@ public class SubscriptionController {
         @DeleteMapping("/unsubscribe/{topicId}")
         public ResponseEntity<String> unsubscribe(@PathVariable("topicId") String topicId) {
                 log.debug("@DeleteMapping(\"/unsubscribe/{topicId}\")");
-
                 subscriptionService.unsubscribe(topicId);
                 return ResponseEntity.noContent().build();
         }

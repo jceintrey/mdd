@@ -10,6 +10,11 @@ import com.jerem.mdd.exception.EmailAlreadyExistException;
 import com.jerem.mdd.exception.UsernameAlreadyExistException;
 import com.jerem.mdd.mapper.UserMapper;
 
+
+
+/**
+ * Default implementation of {@link RegistrationService} that implements the register method.
+ */
 @Service
 public class DefaultRegistrationService implements RegistrationService {
     private final UserManagementService userManagementService;

@@ -11,9 +11,7 @@ import com.jerem.mdd.dto.RegisterRequestDto;
 import com.jerem.mdd.dto.UserSummaryDto;
 import com.jerem.mdd.dto.AuthRequestDto;
 import com.jerem.mdd.service.AuthenticationService;
-import com.jerem.mdd.service.DefaultAuthenticationService;
-import com.jerem.mdd.service.DefaultRegistrationService;
-import com.jerem.mdd.service.UserManagementService;
+import com.jerem.mdd.service.RegistrationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,13 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Controller class used for authentication purpose.
  * <p>
- * This class implements the authentication endpoints like login and register of
- * the application.
+ * This class implements the authentication endpoints like login and register of the application.
  * </p>
  * <p>
- * - {@link DefaultAuthenticationService} service that process the user
- * authentication -
- * {@link UserManagementService} service used for business operations on users
+ * - {@link AuthenticationService} service that process the user authentication -
+ * {@link RegistrationService} service used for registering new users
  * </p>
  * 
  */
@@ -38,10 +34,10 @@ import lombok.extern.slf4j.Slf4j;
 @Tag(name = "AuthController", description = "Process authentication related operations")
 public class AuthController {
     private final AuthenticationService authenticationService;
-    private final DefaultRegistrationService registrationService;
+    private final RegistrationService registrationService;
 
     public AuthController(AuthenticationService authenticationService,
-            DefaultRegistrationService registrationService) {
+            RegistrationService registrationService) {
         this.authenticationService = authenticationService;
         this.registrationService = registrationService;
 
@@ -51,14 +47,14 @@ public class AuthController {
      * Login to the API.
      * 
      * <p>
-     * This method authenticates using POST parameters and return back a Json Web
-     * Token.
+     * This method authenticates using POST parameters and return back a Json Web Token.
      * 
      * @param {@link AuthRequestDto} the request DTO.
      * @return {@link AuthResponseDto} the response DTO.
      */
 
-    @Operation(summary = "Login to the API", description = "This endpoint allows a user to authenticate by providing credentials. It returns a JWT token.")
+    @Operation(summary = "Login to the API",
+            description = "This endpoint allows a user to authenticate by providing credentials. It returns a JWT token.")
     @ApiResponse(responseCode = "200", description = "Successful authentication, returns a token")
     @ApiResponse(responseCode = "401", description = "Unauthorized")
     @PostMapping("/login")
@@ -82,7 +78,8 @@ public class AuthController {
      * @param {@link RegisterRequestDto} the request DTO.
      * @return {@link UserSummaryDto} the response DTO.
      */
-    @Operation(summary = "Register to the API", description = "This endpoint allows a user to register by providing registerRequest")
+    @Operation(summary = "Register to the API",
+            description = "This endpoint allows a user to register by providing registerRequest")
     @ApiResponse(responseCode = "200", description = "Successful authentication, returns a token")
     @ApiResponse(responseCode = "409", description = "Email or username already exist")
     @PostMapping("/register")

@@ -7,6 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+/**
+ * Data Transfer Object (DTO) representing a detailed topic.
+ * <p>
+ * This object contains extends {@link TopicSummaryDto} and adds a description and a subscribed
+ * flag.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

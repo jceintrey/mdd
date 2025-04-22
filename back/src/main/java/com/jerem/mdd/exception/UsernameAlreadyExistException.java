@@ -3,6 +3,9 @@ package com.jerem.mdd.exception;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Exception thrown when the username is already taken by another user.
+ */
 @Slf4j
 @Getter
 public class UsernameAlreadyExistException extends RuntimeException {

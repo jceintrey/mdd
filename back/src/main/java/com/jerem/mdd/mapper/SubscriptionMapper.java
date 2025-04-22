@@ -5,14 +5,19 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import com.jerem.mdd.dto.SubscriptionDetailedDto;
-import com.jerem.mdd.dto.SubscriptionDto;
+import com.jerem.mdd.dto.SubscriptionSummaryDto;
 import com.jerem.mdd.model.Subscription;
 import com.jerem.mdd.repository.TopicRepository;
 import com.jerem.mdd.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 
+
+/**
+ * Mapper class used to convert {@link Subscription} objects to {@link SubscriptionSummaryDto}. It
+ * uses {@link UserRepository} and {@TopicRepository} to get the user and topic from their ids.
+ */
 @Component
-public class SubscriptionMapper implements Mapper<Subscription, SubscriptionDto> {
+public class SubscriptionMapper implements Mapper<Subscription, SubscriptionSummaryDto> {
 
 
     private final ModelMapper modelMapper;
@@ -28,8 +33,9 @@ public class SubscriptionMapper implements Mapper<Subscription, SubscriptionDto>
     }
 
     @Override
-    public SubscriptionDto toDto(Subscription subscription) {
-        SubscriptionDto subscriptionDto = modelMapper.map(subscription, SubscriptionDto.class);
+    public SubscriptionSummaryDto toDto(Subscription subscription) {
+        SubscriptionSummaryDto subscriptionDto =
+                modelMapper.map(subscription, SubscriptionSummaryDto.class);
         subscriptionDto.setUserId(subscription.getUser().getId());
         subscriptionDto.setTopicId(subscription.getTopic().getId());
         return subscriptionDto;
@@ -37,7 +43,7 @@ public class SubscriptionMapper implements Mapper<Subscription, SubscriptionDto>
     }
 
     @Override
-    public Subscription toEntity(SubscriptionDto subscriptionDto) {
+    public Subscription toEntity(SubscriptionSummaryDto subscriptionDto) {
 
         Subscription subscription = modelMapper.map(subscriptionDto, Subscription.class);
 

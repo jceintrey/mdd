@@ -6,6 +6,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+
+/**
+ * Data Transfer Object (DTO) representing a post request.
+ * 
+ * <p>
+ * This class is used to transfer lightweight post information such as title, topicID and the post
+ * content, as part of a request payload in the context of post create endpoint.
+ */
 @Data
 @Schema(description = "Request body used to create a post.")
 public class PostRequestDto {
