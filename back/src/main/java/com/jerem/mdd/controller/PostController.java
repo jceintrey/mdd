@@ -28,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
  * This class implements the post endpoints like create, get a pagined list of the user posts,..
  * </p>
  * <p>
+ * * - {@link PostService} service that manage Post operations
  * </p>
  * 
  */

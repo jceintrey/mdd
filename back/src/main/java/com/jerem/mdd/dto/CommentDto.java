@@ -5,6 +5,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+
+/**
+ * Data Transfer Object (DTO) representing a comment.
+ * 
+ * <p>
+ * This class is used to transfer lightweight comment information such as author or content, in the
+ * context of post controller.
+ */
 @Data
 @Schema(description = "Body containing a comment.")
 public class CommentDto {

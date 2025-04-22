@@ -4,6 +4,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+
+/**
+ * Data Transfer Object (DTO) representing an anthentication response.
+ * 
+ * <p>
+ * This class is used to transfer lightweight anthentication information with token, as part of a
+ * response payload in the context of authentication login endpoint.
+ */
 @Schema(description = "Response body containing the JSON Web Token used for API authentication.")
 @Data
 @AllArgsConstructor

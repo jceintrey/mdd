@@ -20,6 +20,12 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 
+
+
+/**
+ * Default implementation of {@link JwtTokenProvider}. This implementation uses a symetric Hmac with
+ * sha256 algorithm to encode and decode the token. The secret key is provided in constructor.
+ */
 @Slf4j
 @Data
 public class DefaultJwtTokenProvider implements JwtTokenProvider {

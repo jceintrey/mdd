@@ -17,6 +17,15 @@ import com.jerem.mdd.model.User;
 import com.jerem.mdd.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 
+
+/**
+ * Default implementation of {@link AuthenticationService}.
+ * <p>
+ * Handles user authentication using Spring Security's {@link AuthenticationManager} and generates a
+ * JWT using {@link JwtTokenProvider}. Also provides access to the currently authenticated
+ * {@link User}.
+ * </p>
+ */
 @Slf4j
 @Service
 @Primary
@@ -56,15 +65,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
 
     }
 
-    /**
-     * Retrieves the authenticated user.
-     * <p>
-     * This method accesses the {@link SecurityContextHolder} to obtain the authentication. Then it
-     * retrieves the claim id from Jwt
-     * </p>
-     * 
-     * @return an {@link User} the authenticated user
-     */
+
     @Override
     public User getAuthenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

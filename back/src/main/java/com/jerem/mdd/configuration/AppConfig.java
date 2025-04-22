@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jerem.mdd.configuration.properties.AppConfigProperties;
 import com.jerem.mdd.repository.UserRepository;
 import com.jerem.mdd.service.DefaultJwtTokenProvider;
@@ -64,11 +63,6 @@ public class AppConfig {
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
-    }
-
-    @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper();
     }
 
 }

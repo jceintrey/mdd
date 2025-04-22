@@ -44,6 +44,12 @@ public class UserProfileService {
 
     }
 
+    /**
+     * Retrieves the profile details of the currently authenticated user.
+     *
+     * @return a {@link UserDetailedDto} representing the authenticated user's profile
+     * @throws UserNotFoundException if the user is not found in the repository
+     */
 
     public UserDetailedDto getUserProfile() {
 
@@ -51,10 +57,21 @@ public class UserProfileService {
     }
 
 
-
+    /**
+     * Updates the profile of the currently authenticated user with the provided data.
+     * <p>
+     * This method performs uniqueness checks on email and username, and encodes the password if it
+     * has changed.
+     * </p>
+     *
+     * @param userUpdateRequestDto the DTO containing updated profile data
+     * @return a {@link UserDetailedDto} representing the updated user profile
+     * @throws EmailAlreadyExistException if the new email is already taken by another user
+     * @throws UsernameAlreadyExistException if the new username is already taken by another user
+     * @throws UserNotFoundException if the user cannot be found in the repository
+     */
     public UserDetailedDto updateUserProfile(UserUpdateRequestDto userUpdateRequestDto) {
         User authenticatedUser = getAuthenticatedUser();
-
 
         if (!userUpdateRequestDto.getEmail().equals(authenticatedUser.getEmail())
                 && userRepository.existsByEmail(userUpdateRequestDto.getEmail())) {
@@ -87,6 +104,12 @@ public class UserProfileService {
 
     }
 
+    /**
+     * Retrieves the currently authenticated user from the repository using their email.
+     *
+     * @return the authenticated {@link User} entity
+     * @throws UserNotFoundException if the user cannot be found in the repository
+     */
     private User getAuthenticatedUser() {
         String authenticatedUserEmail = authenticationService.getAuthenticatedUser().getEmail();
 

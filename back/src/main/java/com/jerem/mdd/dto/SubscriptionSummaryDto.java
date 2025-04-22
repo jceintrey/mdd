@@ -8,11 +8,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * Data Transfer Object (DTO) representing minimal information about a subscription.
+ * 
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "Response body containing the topic.")
-public class SubscriptionDto {
+public class SubscriptionSummaryDto {
 
     private Long id;
 

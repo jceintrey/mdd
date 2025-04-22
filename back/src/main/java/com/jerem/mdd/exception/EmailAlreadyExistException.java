@@ -3,6 +3,10 @@ package com.jerem.mdd.exception;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+
+/**
+ * Exception thrown when a the email is already taken by another User
+ */
 @Slf4j
 @Getter
 public class EmailAlreadyExistException extends RuntimeException {

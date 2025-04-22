@@ -7,6 +7,17 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * Data Transfer Object (DTO) used when a new user registers to the application.
+ * <p>
+ * This object is sent in the request body and contains the user's credentials: username, email, and
+ * password. It includes validation constraints to ensure that the provided data meets required
+ * formats and security standards.
+ * 
+ * Please notice that {@link UserUpdateRequestDto}, although it is similar, is semantically
+ * different and used in an update context.
+ */
 @Schema(description = "Request body for user register, containing credentials.")
 @Data
 @NoArgsConstructor
@@ -20,7 +31,7 @@ public class RegisterRequestDto {
     private String email;
 
     @NotBlank
-    @Size(min = 12, max = 32)
+    @Size(min = 8, max = 32)
     private String password;
 
 }

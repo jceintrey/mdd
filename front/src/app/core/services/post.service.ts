@@ -11,8 +11,6 @@ import { CommentRequest } from '../interfaces/commentRequest.interface';
 export class PostService {
 
 
-
-
   private pathService = 'api/posts';
 
   constructor(private httpClient: HttpClient) { }

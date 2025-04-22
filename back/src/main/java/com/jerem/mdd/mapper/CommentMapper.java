@@ -1,10 +1,16 @@
 package com.jerem.mdd.mapper;
 
 import org.modelmapper.ModelMapper;
-import com.jerem.mdd.dto.AuthorDto;
+import org.springframework.stereotype.Component;
 import com.jerem.mdd.dto.CommentDto;
 import com.jerem.mdd.model.Comment;
 
+
+/**
+ * Mapper class used to convert {@link Comment} objects to {@link CommentDto}. It uses
+ * {@link AuthorMapper} to convert the auhtor related object
+ */
+@Component
 public class CommentMapper implements Mapper<Comment, CommentDto> {
     private final ModelMapper modelMapper;
     private final AuthorMapper authorMapper;

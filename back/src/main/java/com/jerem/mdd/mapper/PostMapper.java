@@ -11,13 +11,17 @@ import com.jerem.mdd.dto.TopicSummaryDto;
 import com.jerem.mdd.model.Post;
 import com.jerem.mdd.service.AuthenticationService;
 import com.jerem.mdd.service.SubscriptionService;
-import com.jerem.mdd.service.UserManagementService;
 
+
+/**
+ * Mapper class used to convert {@link Post} objects to {@link PostSummaryDto}. It uses
+ * {@link SubscriptionService} and {@AuthenticationService} to implements the toDetailedDto method
+ * containing the subscribed flag
+ */
 @Component
 public class PostMapper implements Mapper<Post, PostSummaryDto> {
     private final ModelMapper modelMapper;
     private final SubscriptionService subscriptionService;
-
     private final AuthenticationService authenticationService;
 
     public PostMapper(ModelMapper modelMapper, SubscriptionService subscriptionService,
@@ -65,7 +69,6 @@ public class PostMapper implements Mapper<Post, PostSummaryDto> {
                                 authenticationService.getAuthenticatedUser(), post.getTopic()));
 
         postDetailedDto.setTopic(topic);
-
 
         return postDetailedDto;
 

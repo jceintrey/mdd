@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
  * This class implements the user endpoints of the application.
  * </p>
  * <p>
- * - {@link UserProfileService} service for the authenticated user-related operations -
+ * - {@link UserProfileService} service for the authenticated standard user-related operations -
  * </p>
  * 
  */
@@ -35,46 +35,44 @@ import lombok.extern.slf4j.Slf4j;
 @Tag(name = "UserController", description = "Process user related operations")
 public class UserController {
 
-    private final UserProfileService userProfileService;
+        private final UserProfileService userProfileService;
 
-    public UserController(UserProfileService userProfileService) {
+        public UserController(UserProfileService userProfileService) {
+                this.userProfileService = userProfileService;
+        }
 
-        this.userProfileService = userProfileService;
+        @Operation(summary = "Get the user profile",
+                        description = "Allows a user to get their profile.")
+        @ApiResponse(responseCode = "200", description = "Successfully get profile",
+                        content = @Content(mediaType = "application/json",
+                                        schema = @Schema(implementation = UserDetailedDto.class)))
+        @ApiResponse(responseCode = "401", description = "Unauthorized, user must be authenticated")
+        @ApiResponse(responseCode = "404", description = "Entity not found")
+        @GetMapping("/me")
+        public ResponseEntity<UserDetailedDto> me() {
+                log.debug("Me requested");
+                return ResponseEntity.ok(userProfileService.getUserProfile());
+        }
 
-    }
+        /**
+         * Update userProfile
+         *
+         * @param userUpdateRequestDto DTO containing updated user details.
+         * @return Updated user profile summary.
+         */
+        @Operation(summary = "Update user profile",
+                        description = "Allows an authenticated user to update their profile information.")
+        @ApiResponse(responseCode = "202", description = "Profile updated successfully")
+        @ApiResponse(responseCode = "401", description = "Unauthorized")
+        @ApiResponse(responseCode = "404", description = "UserNotFound")
+        @ApiResponse(responseCode = "409", description = "Username or email already exists")
+        @ApiResponse(responseCode = "400", description = "Bad request invalid arguments")
+        @PutMapping
+        public ResponseEntity<UserSummaryDto> updateUserProfile(
+                        @Valid @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
+                return ResponseEntity.status(HttpStatus.ACCEPTED)
+                                .body(userProfileService.updateUserProfile(userUpdateRequestDto));
 
-    @Operation(summary = "Get the user profile",
-            description = "Allows a user to get their profile.")
-    @ApiResponse(responseCode = "200", description = "Successfully get profile",
-            content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = UserDetailedDto.class)))
-    @ApiResponse(responseCode = "401", description = "Unauthorized, user must be authenticated")
-    @ApiResponse(responseCode = "404", description = "Entity not found")
-    @GetMapping("/me")
-    public ResponseEntity<UserDetailedDto> me() {
-        log.debug("Me requested");
-        return ResponseEntity.ok(userProfileService.getUserProfile());
-    }
-
-    /**
-     * Update userProfile
-     *
-     * @param userUpdateRequestDto DTO containing updated user details.
-     * @return Updated user profile summary.
-     */
-    @Operation(summary = "Update user profile",
-            description = "Allows an authenticated user to update their profile information.")
-    @ApiResponse(responseCode = "202", description = "Profile updated successfully")
-    @ApiResponse(responseCode = "401", description = "Unauthorized")
-    @ApiResponse(responseCode = "404", description = "UserNotFound")
-    @ApiResponse(responseCode = "409", description = "Username or email already exists")
-    @ApiResponse(responseCode = "400", description = "Bad request invalid arguments")
-    @PutMapping
-    public ResponseEntity<UserSummaryDto> updateUserProfile(
-            @Valid @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body(userProfileService.updateUserProfile(userUpdateRequestDto));
-
-    }
+        }
 
 }
