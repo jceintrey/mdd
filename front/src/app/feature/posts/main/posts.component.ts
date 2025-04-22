@@ -14,7 +14,7 @@ import { Subscription } from 'app/core/interfaces/subscription.interface';
 
 @Component({
   selector: 'app-posts',
-  imports: [AsyncPipe, RouterLink, RouterModule, MatCardModule, MatButtonModule, DatePipe, RouterLink, MatIconModule, PostComponent],
+  imports: [AsyncPipe, RouterLink, RouterModule, MatCardModule, MatButtonModule, RouterLink, MatIconModule, PostComponent],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss'
 })
