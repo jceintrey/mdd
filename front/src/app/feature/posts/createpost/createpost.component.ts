@@ -1,6 +1,6 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,15 +16,18 @@ import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-createpost',
-  imports: [AsyncPipe, RouterModule, ReactiveFormsModule, MatIconModule, MatFormFieldModule, MatSelectModule, MatInputModule],
+  imports: [CommonModule, AsyncPipe, RouterModule, ReactiveFormsModule, MatIconModule, MatFormFieldModule, MatSelectModule, MatInputModule],
   templateUrl: './createpost.component.html',
   styleUrl: './createpost.component.scss'
 })
-export class CreatepostComponent {
+export class CreatepostComponent implements OnInit {
   createPostForm!: FormGroup;
   topics$: Observable<Topic[]> = this.topicService.all();
 
   constructor(private formBuilder: FormBuilder, private router: Router, private topicService: TopicService, private postService: PostService, private snackBar: MatSnackBar) {
+
+  }
+  ngOnInit(): void {
     this.createPostForm = this.formBuilder.group({
       topic_id: [
         '',

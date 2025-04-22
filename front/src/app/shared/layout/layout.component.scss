@@ -8,7 +8,7 @@ Global styles
 
 .global-content {
     // border: 1px solid black !important;
-    background-color: transparent;
+
     height: 100%;
     width: 100%;
 }
@@ -16,6 +16,7 @@ Global styles
 
 .main-content {
     background-color: transparent;
+
     // border: 1px solid black !important;
     height: 100%;
 }
@@ -30,6 +31,7 @@ mat-toolbar-row {
     align-items: center;
     justify-content: space-between;
     gap: 2.3vw;
+    background-color: white !important;
 
 }
 
@@ -38,11 +40,19 @@ mat-toolbar-row {
 mat-toolbar {
     background-color: transparent !important;
     border: 1px solid black !important;
+    width: 100% !important;
 }
 
-.toolbar {
-    width: 100% !important;
-    box-sizing: border-box !important;
+// .toolbar {
+//     width: 100% !important;
+//     box-sizing: border-box !important;
+
+
+// }
+
+mat-toolbar-row {
+    border: 1px solid black !important;
+    width: 100vw !important;
 }
 
 .logout-item {
@@ -96,12 +106,13 @@ button[mat-icon-button] {
 
 mat-sidenav {
     width: 45vw;
-    max-width: 100vw;
+    max-width: 100%;
     height: 100%;
     padding-top: 10%;
     padding-right: 3%;
     border-radius: 0% !important;
     border: 1px solid black !important;
+
 }
 
 mat-nav-list {
@@ -113,14 +124,17 @@ mat-nav-list {
 }
 
 .sidenav-container {
-    width: 100vw;
-    /* largeur 100% de la fenêtre */
-    height: 100vh;
-    /* hauteur 100% de la fenêtre */
-    position: absolute;
-    /* pour s'affranchir du flux si besoin */
-    top: 0;
-    left: 0;
+    width: 95vw;
+    height: 95vh;
+    width: 100%;
+    height: 100%;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    background-color: white !important;
+    // border: 1px solid black !important;
+
+
 }
 
 /**
@@ -143,10 +157,7 @@ ovverides styles for Mobiles
 
     }
 
-    mat-toolbar-row {
-        // border: 1px solid black !important;
 
-    }
 
     .logout-item {
         color: #A40F0F;
