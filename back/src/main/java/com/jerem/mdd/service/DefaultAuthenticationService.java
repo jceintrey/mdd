@@ -25,22 +25,17 @@ public class DefaultAuthenticationService implements AuthenticationService {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
 
-    public DefaultAuthenticationService(AuthenticationManager authenticationManager,
-            JwtTokenProvider jwtTokenProvider, UserRepository userRepository) {
+    public DefaultAuthenticationService(
+            AuthenticationManager authenticationManager,
+            JwtTokenProvider jwtTokenProvider,
+            UserRepository userRepository) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userRepository = userRepository;
 
     }
 
-    /**
-     * authenticate the user given their credentials in request
-     * <p>
-     * The user is retrieved using identifier which can be email or username
-     * </p>
-     * 
-     * @return an {@link AuthResponseDto} the response containing de token
-     */
+
     public AuthResponseDto authenticate(AuthRequestDto request) throws Exception {
         User user = userRepository.findByEmail(request.getIdentifier())
                 .orElseGet(() -> userRepository.findByUsername(request.getIdentifier()).orElseThrow(
