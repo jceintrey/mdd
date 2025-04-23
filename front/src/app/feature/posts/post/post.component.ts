@@ -10,8 +10,7 @@ import { Post } from 'app/core/interfaces/post.interface';
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })
+
 export class PostComponent {
   @Input() post!: Post;
-
-
 }

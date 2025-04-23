@@ -1,44 +1,41 @@
-<div class="login-container">
+<div class="global-container">
 
+  <!-- handle mobile layout -->
   @if (isMobile){
-  <div class="arrow-container">
-    <button mat-icon-button class="icon-button" routerLink="/landing">
+  <div class="header">
+    <button mat-icon-button class="icon-button" routerLink="/greeting">
       <mat-icon>arrow_back</mat-icon>
     </button>
   </div>
-  <div class="login-header">
-    <img src="../../../assets/logo_p6.png" alt="Logo MDD" class="logo" />
-  </div>
+  <img src="../../../assets/logo_p6.png" alt="Logo MDD" class="logo" />
   }
 
+  <!-- handle pc layout -->
   @else{
-  <div class="pc-login-header">
-    <img src="../../../assets/logo_p6 9.svg" routerLink="/home" class="pc-logo">
+  <div class="header">
+    <img src="../../../assets/logo_p6 9.svg" routerLink="/home" class="logo">
   </div>
-  <div class="arrow-container">
-    <button mat-icon-button class="icon-button" routerLink="/landing">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-  </div>
+  <button mat-icon-button class="icon-button" routerLink="/greeting">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
   }
 
-  <h1 class="login-title">Se connecter</h1>
-  <div class="login-content">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-      <label for="identifier">E-mail ou nom d'utilisateur</label>
-      <mat-form-field appearance="outline" class="full-width">
-        <input matInput formControlName="identifier" />
-      </mat-form-field>
-      <label for="identifier">Mot de passe</label>
-      <mat-form-field appearance="outline" class="full-width">
 
-        <input matInput type="password" formControlName="password" />
-      </mat-form-field>
+  <!-- shared layout-->
+  <h1>Se connecter</h1>
+  <!-- <div class="login-content"> -->
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+    <label for="identifier">E-mail ou nom d'utilisateur</label>
+    <mat-form-field appearance="outline" class="full-width">
+      <input matInput formControlName="identifier" />
+    </mat-form-field>
+    <label for="identifier">Mot de passe</label>
+    <mat-form-field appearance="outline" class="full-width">
 
-      <button mat-flat-button class="login-button" type="submit">
-        Se connecter
-      </button>
-    </form>
-  </div>
-
+      <input matInput type="password" formControlName="password" />
+    </mat-form-field>
+    <button mat-flat-button class="submit-button" type="submit">
+      Se connecter
+    </button>
+  </form>
 </div>

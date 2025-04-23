@@ -13,8 +13,6 @@ export class AuthService {
 
   readonly pathService = '/api/auth';
   private isLoggedSubject = new BehaviorSubject<boolean>(this.hasToken());
-  public isLogged$ = this.isLoggedSubject.asObservable();
-
   constructor(private http: HttpClient, private router: Router) { }
 
 
@@ -42,7 +40,6 @@ export class AuthService {
   public register(registerRequest: RegisterRequest): Observable<void> {
     console.log("authService register called");
     return this.http.post<void>(`${this.pathService}/register`, registerRequest);
-
   }
 
   getToken(): string | null {
@@ -52,6 +49,6 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('jwt');
     this.isLoggedSubject.next(false);
-    this.router.navigate(["/landing"]);
+    this.router.navigate(["/greeting"]);
   }
 }

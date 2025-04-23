@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { User, UserUpdateRequest } from '../../../../core/interfaces/User.interface';
 import { CommonModule } from '@angular/common';
@@ -13,7 +12,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { TopicComponent } from "../../../topics/topic/topic.component";
 import { SubscriptionService } from 'app/core/services/subscription.service';
-import { RegisterRequest } from 'app/core/interfaces/registerRequest.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -60,30 +58,22 @@ export class MeComponent {
 
 
   onSubmit() {
-
-    console.log("try to submit userForm");
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
       return;
     }
-
     let userUpdate: UserUpdateRequest = this.userForm.value as UserUpdateRequest;
-
-
     if (!userUpdate.password) {
       delete userUpdate.password;
     }
-
     this.userService.update(userUpdate).subscribe({
       next: () => {
-        console.log("user update ok");
         this.snack.open("Profil utilisateur mis à jour avec succès", "Fermer", { duration: 5000 });
       },
       error: (err: any) => {
         this.snack.open("Erreur lors de la mise à jour du profil", "Fermer", { duration: 5000 });
       }
     })
-
   }
 
   reloadSubscriptions() {
@@ -93,18 +83,13 @@ export class MeComponent {
   }
 
   unsubscribe(topicId: number) {
-    console.log("me.unsuscribe from " + topicId);
     this.subscriptionService.unsubscribe(topicId).subscribe({
       next: () => {
-        console.log("topic.unsubscribe ok");
         this.reloadSubscriptions();
       },
       error: (err: any) => {
-        console.log("topic.unsubscribe error");
-
+        this.snack.open("Erreur lors de la suppression de l'abonnement", "Fermer", { duration: 5000 });
       }
     });
-
   }
-
 }

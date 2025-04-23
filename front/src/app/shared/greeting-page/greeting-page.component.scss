@@ -1,0 +1,58 @@
+.global-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  width: 100%;
+}
+
+.greeting-image {
+  width: 50%;
+  height: auto;
+  max-width: 600px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+}
+
+.greeting-button {
+  background-color: transparent !important;
+  border-radius: 8px !important;
+  border: 1px solid black;
+  max-width: 250px !important;
+  align-self: center;
+  padding: 14px;
+  font-size: 1.143rem !important;
+  font-weight: 700 !important;
+  font-family: inherit !important;
+  color: black
+}
+
+/* Responsive : Mobile view */
+@media screen and (max-width: 800px) {
+  .global-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+  }
+}

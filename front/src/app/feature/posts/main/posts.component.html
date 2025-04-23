@@ -17,12 +17,11 @@
             </button>
         </div>
     </div>
-
     <div class="card-container card-container--fit">
         @for (post of filteredPosts$ | async; track post) {
         <div class="card-element">
             <app-post [post]="post"></app-post>
-
         </div>
         }
     </div>
+</div>

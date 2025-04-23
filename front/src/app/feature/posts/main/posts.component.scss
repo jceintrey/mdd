@@ -1,6 +1,5 @@
 /*Standard style*/
 
-
 .posts-header {
     display: flex;
     flex-direction: row;
@@ -10,8 +9,6 @@
     width: 100%;
     padding: 0.5rem;
     box-sizing: border-box;
-
-
 }
 
 .posts-header-items {
@@ -27,14 +24,7 @@
 }
 
 
-// .arrow-icon {
-//     font-size: 24px;
-//     color: black;
-// }
-
-
-
-/*Small Screens*/
+/*Mobiles Screens*/
 @media screen and (max-width: 800px) {
 
     .posts-header {

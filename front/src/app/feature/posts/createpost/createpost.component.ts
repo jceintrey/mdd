@@ -65,6 +65,7 @@ export class CreatepostComponent implements OnInit {
       next: () => {
         console.log("createPost ok");
         this.snackBar.open('Article créé avec succès', 'Fermer', { duration: 5000 });
+        this.router.navigate(['/posts']);
       },
       error: () => {
         console.log("createPost nok");
