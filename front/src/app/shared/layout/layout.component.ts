@@ -7,7 +7,8 @@ import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/mat
 import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { ScreenService } from 'app/core/services/screen.service';
 
 @Component({
   selector: 'app-layout',
@@ -19,24 +20,18 @@ export class LayoutComponent {
   title = 'material-responsive-sidenav';
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  isMobile = true;
+  isMobile = false;
   isCollapsed = true;
+  private destroy$ = new Subject<void>();
 
-
-
-
-  constructor(private observer: BreakpointObserver, private router: Router, private authService: AuthService) { }
+  constructor(private screenService: ScreenService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
-      if (screenSize.matches) {
-        this.isMobile = true;
-        this.isCollapsed = true;
-      } else {
-        this.isMobile = false;
-      }
-    });
+    this.screenService.isMobile$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(flag => this.isMobile = flag);
   }
+
 
   toggleMenu() {
     if (this.isMobile) {
