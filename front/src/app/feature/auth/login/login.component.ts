@@ -10,8 +10,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subject, takeUntil } from 'rxjs';
+import { ScreenService } from 'app/core/services/screen.service';
 
-
+/**
+ * Displays the login page.
+ *
+ * @remarks
+ * - Uses `AuthService` to submit de login request
+ * - Builds a reactive `FormGroup` with validation rules for identifier and password.
+ *
+ */
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -19,30 +27,33 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
+
 export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm!: FormGroup;
-  isMobile = true;
+  isMobile = false;
   public onError = false;
   private destroy$ = new Subject<void>();
 
-  constructor(private observer: BreakpointObserver, private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
+  constructor(private screenService: ScreenService, private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
-    this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
-      if (screenSize.matches) {
-        this.isMobile = true;
-      } else {
-        this.isMobile = false;
-      }
-    });
-  }
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-
+  /**
+    * Angular lifecycle hook that initializes the component.
+    *
+    * - Sets up a breakpoint observer to track viewport width.  
+    * - Configures `loginForm` with `identifier` and `password` controls and validators.
+    */
   ngOnInit(): void {
+
+    this.screenService.isMobile$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(flag => this.isMobile = flag);
+
     this.loginForm = this.formBuilder.group({
       identifier: [
         '',

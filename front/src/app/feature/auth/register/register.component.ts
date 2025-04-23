@@ -13,6 +13,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ScreenService } from 'app/core/services/screen.service';
 @Component({
   selector: 'app-register',
   imports: [CommonModule, ReactiveFormsModule, MatIconModule, MatFormFieldModule, MatInputModule, RouterLink],
@@ -25,15 +26,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   public onError = false;
   private destroy$ = new Subject<void>();
 
-  constructor(private observer: BreakpointObserver, private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private snackBar: MatSnackBar) {
+  constructor(private screenService: ScreenService, private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private snackBar: MatSnackBar) {
 
-    this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
-      if (screenSize.matches) {
-        this.isMobile = true;
-      } else {
-        this.isMobile = false;
-      }
-    });
+    this.screenService.isMobile$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(flag => this.isMobile = flag);
   }
 
   ngOnDestroy(): void {
