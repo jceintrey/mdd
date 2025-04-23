@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { PostService } from 'app/core/services/post.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -21,44 +21,49 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './postdetails.component.html',
   styleUrl: './postdetails.component.scss'
 })
-export class PostDetailsComponent implements OnInit {
+export class PostDetailsComponent implements OnInit, OnDestroy {
   post$!: Observable<Post>;
   commentForm!: FormGroup;
   postId!: string | null;
+  private destroy$ = new Subject<void>();
 
-  constructor(private postService: PostService, private route: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private postService: PostService, private route: ActivatedRoute, private fb: FormBuilder,) { }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
+
   ngOnInit(): void {
     this.postId = this.route.snapshot.paramMap.get('id');
     console.log('ID article:', this.postId);
     if (this.postId) {
-      this.post$ = this.postService.getPost(this.postId);
-
+      this.post$ = this.postService.getPost(this.postId)
+        .pipe(takeUntil(this.destroy$));
       this.commentForm = this.fb.group({
         content: ['', [Validators.required, Validators.minLength(3)]]
       });
     }
   }
+
   onSubmit() {
-
     if (this.postId) {
-      console.log("submit post comment");
       const commentRequest: CommentRequest = this.commentForm.value as CommentRequest;
-      this.postService.addComment(this.postId, commentRequest).subscribe({
-        next: (value) => {
-          console.log("commentaire posté");
-          console.log(value);
-          this.post$ = this.postService.getPost(this.postId);
+      this.postService.addComment(this.postId, commentRequest)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (value) => {
+            console.log(value);
+            this.post$ = this.postService.getPost(this.postId)
+              .pipe(takeUntil(this.destroy$));
 
-          this.commentForm.reset();
-        },
-        error: (err) => {
-          console.log("Error during post comment");
-          console.log(err);
-        },
-
-      });
+            this.commentForm.reset();
+          },
+          error: (err) => {
+            console.log("Error during post comment");
+            console.log(err);
+          },
+        });
     }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -9,6 +9,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Subject, takeUntil } from 'rxjs';
 
 
 @Component({
@@ -18,12 +19,12 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm!: FormGroup;
   isMobile = true;
   public onError = false;
-
+  private destroy$ = new Subject<void>();
 
   constructor(private observer: BreakpointObserver, private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
 
@@ -34,6 +35,10 @@ export class LoginComponent implements OnInit {
         this.isMobile = false;
       }
     });
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 
@@ -58,17 +63,19 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const LoginRequest = this.loginForm.value as LoginRequest;
 
-    this.authService.login(LoginRequest).subscribe({
-      next: () => {
-        console.log("authService.login ok");
-        this.router.navigate(['/posts']);
-      },
-      error: (err: any) => {
-        console.log("authService.login nok");
-        this.onError = true;
-        console.error(err);
-      }
+    this.authService.login(LoginRequest)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          console.log("authService.login ok");
+          this.router.navigate(['/posts']);
+        },
+        error: (err: any) => {
+          console.log("authService.login nok");
+          this.onError = true;
+          console.error(err);
+        }
 
-    });
+      });
   }
 }
