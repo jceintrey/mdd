@@ -6,8 +6,7 @@ import { AsyncPipe, DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink, RouterModule } from '@angular/router';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatIconModule } from '@angular/material/icon';
 import { PostComponent } from '../post/post.component';
 import { SubscriptionService } from 'app/core/services/subscription.service';
 import { Subscription } from 'app/core/interfaces/subscription.interface';
@@ -20,9 +19,7 @@ import { Subscription } from 'app/core/interfaces/subscription.interface';
 })
 export class PostsComponent implements OnInit {
 
-
   isSortUp = true;
-
   posts$!: Observable<Post[]>
   filteredPosts$!: Observable<Post[]>
   subscriptions$!: Observable<Subscription[]>;
@@ -32,9 +29,8 @@ export class PostsComponent implements OnInit {
   constructor(
     private postService: PostService,
     private subscriptionService: SubscriptionService
-  ) {
+  ) { }
 
-  }
   ngOnInit(): void {
     this.subscriptions$ = this.subscriptionService.all();
 

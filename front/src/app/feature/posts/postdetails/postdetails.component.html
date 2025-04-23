@@ -1,7 +1,5 @@
 <div class="global-container">
     @if (post$ | async; as post){
-
-
     <div class="posts-details-header">
         <div class="posts-details-item">
             <button mat-icon-button routerLink="/posts">
@@ -13,14 +11,11 @@
         </div>
     </div>
     <div class="posts-details-content">
-        <!-- <div class="posts-details-item"> -->
         <h2>
             <span class="title"> {{post.created_at | date: 'longDate'}} </span>
             <span class="title"> {{post.author.username}}</span>
-            <span class="title"> {{post.topic.name}}</span>
+            <span class="title" routerLink="/topics/{{post.topic.id}}"> {{post.topic.name}}</span>
         </h2>
-        <!-- </div>
-        <div class="posts-details-item"> -->
         <div class="post-detail-text">
             <span>Content: </span>
             {{post.content}}
@@ -28,15 +23,9 @@
     </div>
     <mat-divider></mat-divider>
     <div class="posts-details-content">
-
-
-
         <h2>Commentaires</h2>
-
         @if (post.comments?.length){
-        <!-- <mat-list> -->
         @for (comment of post.comments; track comment) {
-        <!-- <mat-list-item> -->
         <div class="comment">
             <span>{{ comment.author.username}}</span>
             <mat-card class="comment-content">
@@ -47,10 +36,8 @@
         </div>
         }
         }
-
         <form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="addcomment-form">
             <mat-form-field appearance="outline">
-                <!-- <mat-label>Écrivez ici votre commentaire</mat-label> -->
                 <textarea matInput formControlName="content" class="custom-textarea"
                     placeholder="Écrivez ici votre commentaire"></textarea>
             </mat-form-field>
@@ -59,7 +46,6 @@
             </button>
         </form>
     </div>
-
     }
     @else {
     L'article n'a pas pu être récupéré.

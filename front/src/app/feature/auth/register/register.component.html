@@ -1,47 +1,42 @@
-<div class="register-container">
+<div class="global-container">
 
+    <!-- handle mobile layout -->
     @if (isMobile){
-    <div class="arrow-container">
-        <button mat-icon-button class="icon-button" routerLink="/landing">
+    <div class="header">
+        <button mat-icon-button class="icon-button" routerLink="/greeting">
             <mat-icon>arrow_back</mat-icon>
         </button>
     </div>
-    <div class="register-header">
-        <img src="../../../assets/logo_p6.png" alt="Logo MDD" class="logo" />
-    </div>
+    <img src="../../../assets/logo_p6.png" alt="Logo MDD" class="logo" />
     }
-
+    <!-- handle pc layout -->
     @else{
-    <div class="pc-register-header">
-        <img src="../../../assets/logo_p6 9.svg" routerLink="/home" class="pc-logo">
+    <div class="header">
+        <img src="../../../assets/logo_p6 9.svg" routerLink="/home" class="logo">
     </div>
-    <div class="arrow-container">
-        <button mat-icon-button class="icon-button" routerLink="/landing">
-            <mat-icon>arrow_back</mat-icon>
-        </button>
-    </div>
+    <button mat-icon-button class="icon-button" routerLink="/greeting">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
     }
+    <!-- shared layout-->
+    <h1>Inscription</h1>
 
-    <h1 class="register-title">Inscription</h1>
-    <div class="register-content">
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
-            <label for="username">Nom d’utilisateur</label>
-            <mat-form-field appearance="outline" class="full-width">
-                <input matInput formControlName="username" />
-            </mat-form-field>
-            <label for="email">Adresse e-mail</label>
-            <mat-form-field appearance="outline" class="full-width">
-                <input matInput formControlName="email" />
-            </mat-form-field>
-            <label for="password">Mot de passe</label>
-            <mat-form-field appearance="outline" class="full-width">
-                <input matInput type="password" formControlName="password" />
-            </mat-form-field>
-            <button mat-flat-button class="register-button" type="submit">
-                S'inscrire
-            </button>
-        </form>
-    </div>
-
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
+        <label for="username">Nom d’utilisateur</label>
+        <mat-form-field appearance="outline" class="full-width">
+            <input matInput formControlName="username" />
+        </mat-form-field>
+        <label for="email">Adresse e-mail</label>
+        <mat-form-field appearance="outline" class="full-width">
+            <input matInput formControlName="email" />
+        </mat-form-field>
+        <label for="password">Mot de passe</label>
+        <mat-form-field appearance="outline" class="full-width">
+            <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+        <button mat-flat-button class="submit-button" type="submit">
+            S'inscrire
+        </button>
+    </form>
 
 </div>

@@ -53,7 +53,7 @@ export class LayoutComponent {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/landing']);
+    this.router.navigate(['/greeting']);
   }
 
   isLoggedIn() {

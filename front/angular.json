@@ -5,7 +5,7 @@
   "projects": {
     "front": {
       "i18n": {
-        "sourceLocale": "fr-FR"
+        "sourceLocale": "fr"
       },
       "projectType": "application",
       "schematics": {

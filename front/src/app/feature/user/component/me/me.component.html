@@ -1,9 +1,7 @@
 <div class="global-container">
-
   <div class="header">
     <h1>Profil utilisateur</h1>
   </div>
-
   <!-- Update Profile -->
   @if (userForm){
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
@@ -30,9 +28,7 @@
     </div>
   </form>
   }
-
   <mat-divider></mat-divider>
-
   <!-- Subscriptions  -->
   <div class="header">
     <h1>Abonnements</h1>

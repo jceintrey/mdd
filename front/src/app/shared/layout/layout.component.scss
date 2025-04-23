@@ -7,8 +7,6 @@ Global styles
 }
 
 .global-content {
-    // border: 1px solid black !important;
-
     height: 100%;
     width: 100%;
 }
@@ -16,44 +14,33 @@ Global styles
 
 .main-content {
     background-color: transparent;
-
-    // border: 1px solid black !important;
-    height: 100%;
+    border: 1px solid black !important;
+    height: 89.5vh;
+    width: 100vw;
 }
 
 .spacer {
-    flex: 1; //used to push following span to the right
+    flex: 1;
 }
 
 mat-toolbar-row {
-    height: 16%;
+    height: 10vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2.3vw;
     background-color: white !important;
+    border: 1px solid black !important;
+    width: 100vw !important;
 
 }
-
 
 
 mat-toolbar {
     background-color: transparent !important;
-    border: 1px solid black !important;
     width: 100% !important;
 }
 
-// .toolbar {
-//     width: 100% !important;
-//     box-sizing: border-box !important;
-
-
-// }
-
-mat-toolbar-row {
-    border: 1px solid black !important;
-    width: 100vw !important;
-}
 
 .logout-item {
     font-family: 'Inter', sans-serif;
@@ -96,23 +83,14 @@ button[mat-icon-button] {
     outline: none !important;
 }
 
-// mat-sidenav-container {
-//     // height: 96vh !important;
-//     // width: 100%;
-//     // // border: solid 1px black;
-//     // background-color: transparent !important;
-// }
-
-
 mat-sidenav {
     width: 45vw;
     max-width: 100%;
-    height: 100%;
+    height: 100vh;
     padding-top: 10%;
     padding-right: 3%;
     border-radius: 0% !important;
     border: 1px solid black !important;
-
 }
 
 mat-nav-list {
@@ -128,13 +106,7 @@ mat-nav-list {
     height: 95vh;
     width: 100%;
     height: 100%;
-    // position: absolute;
-    // top: 0;
-    // left: 0;
     background-color: white !important;
-    // border: 1px solid black !important;
-
-
 }
 
 /**
@@ -154,10 +126,7 @@ ovverides styles for Mobiles
         justify-content: space-between;
         align-items: center;
         background-color: transparent !important;
-
     }
-
-
 
     .logout-item {
         color: #A40F0F;
