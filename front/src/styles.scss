@@ -9,6 +9,8 @@ html {
     /* ref -> 1rem = 14px */
     display: flex;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -129,6 +131,8 @@ form {
     display: flex;
     justify-content: center;
     width: 50%;
+    max-width: 280px;
+
     background-color: transparent;
 }
 
@@ -150,11 +154,13 @@ Cards styles
 
 .card-container--fit {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
 }
 
 .card-container {
     display: grid;
     justify-content: center;
+
 }
 
 mat-card {

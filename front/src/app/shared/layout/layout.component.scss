@@ -14,7 +14,7 @@ Global styles
 
 .main-content {
     background-color: transparent;
-    border: 1px solid black !important;
+    // border: 1px solid black !important;
     height: 89.5vh;
     width: 100vw;
 }
@@ -61,14 +61,14 @@ mat-toolbar {
 }
 
 .logo {
-    width: 140px;
-    height: 81px;
-    padding-top: 1%;
+    height: 7vh;
+
 }
 
 .user-icon {
-    height: 48px;
+    height: 7vh;
     box-sizing: border-box;
+    padding-top: 1vh;
 }
 
 

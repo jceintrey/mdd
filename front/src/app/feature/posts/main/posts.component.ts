@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { combineLatest, filter, map, Observable, of } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, combineLatest, filter, map, Observable, of, Subject, takeUntil } from 'rxjs';
 import { Post } from '../../../core/interfaces/post.interface';
 import { PostService } from '../../../core/services/post.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
@@ -17,13 +17,13 @@ import { Subscription } from 'app/core/interfaces/subscription.interface';
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss'
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnDestroy {
 
   isSortUp = true;
   posts$!: Observable<Post[]>
   filteredPosts$!: Observable<Post[]>
   subscriptions$!: Observable<Subscription[]>;
-
+  private destroy$ = new Subject<void>;
 
 
   constructor(
@@ -31,13 +31,19 @@ export class PostsComponent implements OnInit {
     private subscriptionService: SubscriptionService
   ) { }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   ngOnInit(): void {
-    this.subscriptions$ = this.subscriptionService.all();
+    this.subscriptions$ = this.subscriptionService.all()
+      .pipe(takeUntil(this.destroy$));
 
     this.posts$ = this.postService.all().pipe(
+      takeUntil(this.destroy$),
       map(res => res.content)
     );
-
     this.updateFilteredPosts();
   }
 

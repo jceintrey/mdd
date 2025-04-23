@@ -1,6 +1,6 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,7 +12,7 @@ import { PostRequest } from 'app/core/interfaces/postRequest.interface';
 import { Topic } from 'app/core/interfaces/topic.interface';
 import { PostService } from 'app/core/services/post.service';
 import { TopicService } from 'app/core/services/topic.service';
-import { Observable, tap } from 'rxjs';
+import { Observable, Subject, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'app-createpost',
@@ -20,11 +20,17 @@ import { Observable, tap } from 'rxjs';
   templateUrl: './createpost.component.html',
   styleUrl: './createpost.component.scss'
 })
-export class CreatepostComponent implements OnInit {
+export class CreatepostComponent implements OnInit, OnDestroy {
   createPostForm!: FormGroup;
   topics$: Observable<Topic[]> = this.topicService.all();
+  private destroy$ = new Subject<void>();
 
   constructor(private formBuilder: FormBuilder, private router: Router, private topicService: TopicService, private postService: PostService, private snackBar: MatSnackBar) {
+
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
 
   }
   ngOnInit(): void {
@@ -61,19 +67,20 @@ export class CreatepostComponent implements OnInit {
 
     const postRequest: PostRequest = this.createPostForm.value as PostRequest;
     console.log(postRequest);
-    this.postService.createPost(postRequest).subscribe({
-      next: () => {
-        console.log("createPost ok");
-        this.snackBar.open('Article créé avec succès', 'Fermer', { duration: 5000 });
-        this.router.navigate(['/posts']);
-      },
-      error: () => {
-        console.log("createPost nok");
-        this.snackBar.open('Erreur lors de la création de l\'article', 'Fermer', { duration: 5000 });
+    this.postService.createPost(postRequest)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          console.log("createPost ok");
+          this.snackBar.open('Article créé avec succès', 'Fermer', { duration: 5000 });
+          this.router.navigate(['/posts']);
+        },
+        error: () => {
+          console.log("createPost nok");
+          this.snackBar.open('Erreur lors de la création de l\'article', 'Fermer', { duration: 5000 });
+        }
       }
-
-    }
-    );
+      );
 
   }
 

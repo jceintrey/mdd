@@ -7,6 +7,7 @@ import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/mat
 import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -20,7 +21,6 @@ export class LayoutComponent {
   sidenav!: MatSidenav;
   isMobile = true;
   isCollapsed = true;
-  isLoggedIn$: any;
 
 
 
@@ -28,9 +28,6 @@ export class LayoutComponent {
   constructor(private observer: BreakpointObserver, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    this.isLoggedIn$ = this.authService.isLoggedIn$;
-
-
     this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
       if (screenSize.matches) {
         this.isMobile = true;
@@ -56,7 +53,5 @@ export class LayoutComponent {
     this.router.navigate(['/greeting']);
   }
 
-  isLoggedIn() {
-    return this.authService.isLoggedIn$;
-  }
+
 }
