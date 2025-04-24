@@ -11,6 +11,19 @@ import { PostComponent } from '../post/post.component';
 import { SubscriptionService } from 'app/core/services/subscription.service';
 import { Subscription } from 'app/core/interfaces/subscription.interface';
 
+
+/**
+ * The component displays a page with all posts related to subscribed topics.
+ * 
+ *
+ * @remarks
+ * - Uses `SubscriptionService` to retrieve the user subscriptions
+ * - Uses `PostService` to retrieve posts
+ * - Build a filtered Observable from the two above Observable that contains the posts related to subscribed topics
+ *
+ * @see
+ *  - Even if the user is the author of a topic, the topic is not showing if the user has not subscribed to the topic
+ */
 @Component({
   selector: 'app-posts',
   imports: [AsyncPipe, RouterLink, RouterModule, MatCardModule, MatButtonModule, RouterLink, MatIconModule, PostComponent],
@@ -31,11 +44,21 @@ export class PostsComponent implements OnInit, OnDestroy {
     private subscriptionService: SubscriptionService
   ) { }
 
+  /**
+  * Cleans up any active subscriptions to prevent memory leaks.
+  */
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
+  /**
+   * Initializes the component.
+   *
+   * - get user subscriptions
+   * - get all posts
+   * - build the new Observable
+   */
   ngOnInit(): void {
     this.subscriptions$ = this.subscriptionService.all()
       .pipe(takeUntil(this.destroy$));
@@ -48,7 +71,9 @@ export class PostsComponent implements OnInit, OnDestroy {
   }
 
 
-
+  /**
+   * Join values emited from the two Observable on the topic id and return a new Observable sorted by date asc if sortUp and dsc else
+   */
   private updateFilteredPosts() {
     this.filteredPosts$ = combineLatest([
       this.posts$,
@@ -65,6 +90,10 @@ export class PostsComponent implements OnInit, OnDestroy {
       })
     );
   }
+
+  /**
+   * flip the sortUp flag and rebuild the filtered post Observable
+   */
   flipSort() {
     this.isSortUp = !this.isSortUp;
     this.updateFilteredPosts();

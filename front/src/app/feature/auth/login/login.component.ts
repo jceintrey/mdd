@@ -13,12 +13,11 @@ import { Subject, takeUntil } from 'rxjs';
 import { ScreenService } from 'app/core/services/screen.service';
 
 /**
- * Displays the login page.
+ * Displays the login page and enable the user to login.
  *
  * @remarks
  * - Uses `AuthService` to submit de login request
  * - Builds a reactive `FormGroup` with validation rules for identifier and password.
- *
  */
 @Component({
   selector: 'app-login',
@@ -28,6 +27,13 @@ import { ScreenService } from 'app/core/services/screen.service';
   styleUrl: './login.component.scss'
 })
 
+
+/**
+* Display a login page with a Reactive Form
+* 
+*  @remarks
+*  - use AuthService to login the submited form
+*/
 export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm!: FormGroup;
@@ -37,23 +43,55 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(private screenService: ScreenService, private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
+  /**
+  * Cleans up any active subscriptions to prevent memory leaks.
+  */
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
   /**
-    * Angular lifecycle hook that initializes the component.
-    *
-    * - Sets up a breakpoint observer to track viewport width.  
-    * - Configures `loginForm` with `identifier` and `password` controls and validators.
-    */
+   * Initializes the component.
+   *
+   * - Sets up a breakpoint observer to track the login screen
+   * - Build `loginForm`
+   */
   ngOnInit(): void {
 
     this.screenService.isMobile$
       .pipe(takeUntil(this.destroy$))
       .subscribe(flag => this.isMobile = flag);
 
+
+    this.buildForm();
+  }
+
+
+  /**
+  * Enable the user to login to the application 
+  * Submit the form by calling authService.login
+  */
+  onSubmit() {
+    const LoginRequest = this.loginForm.value as LoginRequest;
+
+    this.authService.login(LoginRequest)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/posts']);
+        },
+        error: (err: any) => {
+          this.onError = true;
+        }
+
+      });
+  }
+
+  /**
+  * Build the form with its constraints
+  */
+  private buildForm() {
     this.loginForm = this.formBuilder.group({
       identifier: [
         '',
@@ -69,24 +107,5 @@ export class LoginComponent implements OnInit, OnDestroy {
         ]
       ]
     });
-  }
-
-  onSubmit() {
-    const LoginRequest = this.loginForm.value as LoginRequest;
-
-    this.authService.login(LoginRequest)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => {
-          console.log("authService.login ok");
-          this.router.navigate(['/posts']);
-        },
-        error: (err: any) => {
-          console.log("authService.login nok");
-          this.onError = true;
-          console.error(err);
-        }
-
-      });
   }
 }
