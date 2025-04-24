@@ -15,6 +15,17 @@ import { SubscriptionService } from 'app/core/services/subscription.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+
+/**
+ * The component displays a page showing
+ * - the user informations like thier username, email with the possibility to change them plus password
+ * - their subscriptions with the possibility to unsusbscribe from
+ *
+ * @remarks
+ * - Uses `UserService` to retrieve or update the user profile
+ * - Uses `SubscriptionService` to unsubscribe from a topic
+ *
+ */
 @Component({
   selector: 'app-me',
   standalone: true,
@@ -28,11 +39,9 @@ export class MeComponent implements OnInit, OnDestroy {
   errorMessage: string | null = null;
   topics$!: Observable<Topic[]>;
   userForm!: FormGroup;
-  hidePassword = true;
   private destroy$ = new Subject<void>();
 
   constructor(
-    private authService: AuthService,
     private userService: UserService,
     private topicService: TopicService,
     private fb: FormBuilder,
@@ -40,12 +49,19 @@ export class MeComponent implements OnInit, OnDestroy {
     private snack: MatSnackBar
   ) { }
 
-
+  /**
+   * Cleans up any active subscriptions to prevent memory leaks.
+   */
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
+  /**
+  * Initializes the component.
+  *
+  * - get the topics
+  */
   ngOnInit(): void {
     this.userService.getMe()
       .pipe(takeUntil(this.destroy$))
@@ -59,13 +75,15 @@ export class MeComponent implements OnInit, OnDestroy {
           this.reloadSubscriptions();
         },
         error: (err) => {
-          console.log("Error on Mecomponent.getMe()");
           this.errorMessage = "Error while getting infos";
         }
       });
   }
 
-
+  /**
+   * Used to update the user profile like their email, username or password.
+   * Submit the form by calling userService.update
+   */
   onSubmit() {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
@@ -87,13 +105,19 @@ export class MeComponent implements OnInit, OnDestroy {
       })
   }
 
-  reloadSubscriptions() {
+  /**
+    * Used to reload the subscription list after any change on subscriptions
+    */
+  private reloadSubscriptions() {
     this.topics$ = this.topicService.all().pipe(
       takeUntil(this.destroy$),
       map(topics => topics.filter(topic => topic.subscribed))
     );
   }
 
+  /**
+* Unsubscribe from the topic by its id and reload subscriptions then
+*/
   unsubscribe(topicId: number) {
     this.subscriptionService.unsubscribe(topicId)
       .pipe(takeUntil(this.destroy$))

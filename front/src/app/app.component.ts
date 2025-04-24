@@ -5,6 +5,12 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subject, takeUntil } from 'rxjs';
 import { ScreenService } from './core/services/screen.service';
 
+
+/**
+ * Root component of the application
+ * @remark
+ * - Use `BreakpointObserver` to follow the change on the screen width and emit true in isMobile$ Observable of the screenService
+ */
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],

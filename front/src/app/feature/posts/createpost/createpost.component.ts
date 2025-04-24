@@ -14,6 +14,15 @@ import { PostService } from 'app/core/services/post.service';
 import { TopicService } from 'app/core/services/topic.service';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
 
+/**
+ * Displays a page that enable the user to add a new Post.
+ *
+ * @remarks
+ * - Uses `TopicService` to retrieve and show the Topic list
+ * - Uses `PostService` to submit the new post request
+ * - Builds a reactive `FormGroup` with validation constraints for the new post
+ * - Uses `MatSnackBar` to popup the user about the creation result
+ */
 @Component({
   selector: 'app-createpost',
   imports: [CommonModule, AsyncPipe, RouterModule, ReactiveFormsModule, MatIconModule, MatFormFieldModule, MatSelectModule, MatInputModule],
@@ -28,12 +37,54 @@ export class CreatepostComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder, private router: Router, private topicService: TopicService, private postService: PostService, private snackBar: MatSnackBar) {
 
   }
+
+  /**
+  * Cleans up any active subscriptions to prevent memory leaks.
+  */
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
 
   }
+
+  /**
+  * Initializes the component.
+  *
+  * - Build `createPostForm`
+  */
   ngOnInit(): void {
+    this.buildForm();
+  }
+
+  /**
+  * Enable the user to create a new post
+  * Submit the form by calling postService.createPost
+  */
+  onSubmit() {
+    if (this.createPostForm.invalid) {
+      this.createPostForm.markAllAsTouched();
+      return;
+    }
+
+    const postRequest: PostRequest = this.createPostForm.value as PostRequest;
+    this.postService.createPost(postRequest)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.snackBar.open('Article créé avec succès', 'Fermer', { duration: 5000 });
+          this.router.navigate(['/posts']);
+        },
+        error: () => {
+          this.snackBar.open('Erreur lors de la création de l\'article', 'Fermer', { duration: 5000 });
+        }
+      }
+      );
+  }
+
+  /**
+  * Build the form with its constraints
+  */
+  private buildForm() {
     this.createPostForm = this.formBuilder.group({
       topic_id: [
         '',
@@ -53,35 +104,9 @@ export class CreatepostComponent implements OnInit, OnDestroy {
           Validators.required,
           Validators.min(10),
           Validators.max(5000)
-
         ]
       ]
     });
-  }
-  onSubmit() {
-    console.log("submit create post");
-    if (this.createPostForm.invalid) {
-      this.createPostForm.markAllAsTouched();
-      return;
-    }
-
-    const postRequest: PostRequest = this.createPostForm.value as PostRequest;
-    console.log(postRequest);
-    this.postService.createPost(postRequest)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => {
-          console.log("createPost ok");
-          this.snackBar.open('Article créé avec succès', 'Fermer', { duration: 5000 });
-          this.router.navigate(['/posts']);
-        },
-        error: () => {
-          console.log("createPost nok");
-          this.snackBar.open('Erreur lors de la création de l\'article', 'Fermer', { duration: 5000 });
-        }
-      }
-      );
-
   }
 
 

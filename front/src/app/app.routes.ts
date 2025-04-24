@@ -22,7 +22,6 @@ export const routes: Routes = [
             { path: 'posts/create', component: CreatepostComponent, canActivate: [AuthGuard], },
             { path: 'posts/:id', component: PostDetailsComponent, canActivate: [AuthGuard], },
             { path: '', redirectTo: 'posts', pathMatch: 'full' }
-
         ]
     },
     { path: 'greeting', component: GreetingComponent },
