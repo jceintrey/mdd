@@ -1,0 +1,906 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>front documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">front documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CreatepostComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/feature/posts/createpost/createpost.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Displays a page that enable the user to add a new Post.</p>
+<ul>
+<li>Uses <code>TopicService</code> to retrieve and show the Topic list</li>
+<li>Uses <code>PostService</code> to submit the new post request</li>
+<li>Builds a reactive <code>FormGroup</code> with validation constraints for the new post</li>
+<li>Uses <code>MatSnackBar</code> to popup the user about the creation result</li>
+</ul>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-createpost</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>AsyncPipe</code>
+                            <code>RouterModule</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>MatIconModule</code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatSelectModule</code>
+                            <code>MatInputModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./createpost.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./createpost.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#createPostForm" >createPostForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#topics$" >topics$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#buildForm" >buildForm</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(formBuilder: FormBuilder, router: Router, topicService: <a href="../injectables/TopicService.html" target="_self">TopicService</a>, postService: <a href="../injectables/PostService.html" target="_self">PostService</a>, snackBar: MatSnackBar)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/feature/posts/createpost/createpost.component.ts:35</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>formBuilder</td>
+                                                  
+                                                        <td>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>topicService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TopicService.html" target="_self" >TopicService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>postService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PostService.html" target="_self" >PostService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buildForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>buildForm</b></span>
+                        <a href="#buildForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>buildForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/feature/posts/createpost/createpost.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Build the form with its constraints</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/feature/posts/createpost/createpost.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cleans up any active subscriptions to prevent memory leaks.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/feature/posts/createpost/createpost.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Initializes the component.</p>
+<ul>
+<li>Build <code>createPostForm</code></li>
+</ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/feature/posts/createpost/createpost.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Enable the user to create a new post
+Submit the form by calling postService.createPost</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createPostForm"></a>
+                    <span class="name">
+                        <span ><b>createPostForm</b></span>
+                        <a href="#createPostForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/feature/posts/createpost/createpost.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/feature/posts/createpost/createpost.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="topics$"></a>
+                    <span class="name">
+                        <span ><b>topics$</b></span>
+                        <a href="#topics$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Topic.html" target="_self" >Observable&lt;Topic[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.topicService.all()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/feature/posts/createpost/createpost.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AsyncPipe, CommonModule } from &#x27;@angular/common&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { MatFormField, MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;
+import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
+import { Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { PostRequest } from &#x27;app/core/interfaces/postRequest.interface&#x27;;
+import { Topic } from &#x27;app/core/interfaces/topic.interface&#x27;;
+import { PostService } from &#x27;app/core/services/post.service&#x27;;
+import { TopicService } from &#x27;app/core/services/topic.service&#x27;;
+import { Observable, Subject, takeUntil, tap } from &#x27;rxjs&#x27;;
+
+/**
+ * Displays a page that enable the user to add a new Post.
+ *
+ * @remarks
+ * - Uses &#x60;TopicService&#x60; to retrieve and show the Topic list
+ * - Uses &#x60;PostService&#x60; to submit the new post request
+ * - Builds a reactive &#x60;FormGroup&#x60; with validation constraints for the new post
+ * - Uses &#x60;MatSnackBar&#x60; to popup the user about the creation result
+ */
+@Component({
+  selector: &#x27;app-createpost&#x27;,
+  imports: [CommonModule, AsyncPipe, RouterModule, ReactiveFormsModule, MatIconModule, MatFormFieldModule, MatSelectModule, MatInputModule],
+  templateUrl: &#x27;./createpost.component.html&#x27;,
+  styleUrl: &#x27;./createpost.component.scss&#x27;
+})
+export class CreatepostComponent implements OnInit, OnDestroy {
+  createPostForm!: FormGroup;
+  topics$: Observable&lt;Topic[]&gt; &#x3D; this.topicService.all();
+  private destroy$ &#x3D; new Subject&lt;void&gt;();
+
+  constructor(private formBuilder: FormBuilder, private router: Router, private topicService: TopicService, private postService: PostService, private snackBar: MatSnackBar) {
+
+  }
+
+  /**
+  * Cleans up any active subscriptions to prevent memory leaks.
+  */
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+
+  }
+
+  /**
+  * Initializes the component.
+  *
+  * - Build &#x60;createPostForm&#x60;
+  */
+  ngOnInit(): void {
+    this.buildForm();
+  }
+
+  /**
+  * Enable the user to create a new post
+  * Submit the form by calling postService.createPost
+  */
+  onSubmit() {
+    if (this.createPostForm.invalid) {
+      this.createPostForm.markAllAsTouched();
+      return;
+    }
+
+    const postRequest: PostRequest &#x3D; this.createPostForm.value as PostRequest;
+    this.postService.createPost(postRequest)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () &#x3D;&gt; {
+          this.snackBar.open(&#x27;Article créé avec succès&#x27;, &#x27;Fermer&#x27;, { duration: 5000 });
+          this.router.navigate([&#x27;/posts&#x27;]);
+        },
+        error: () &#x3D;&gt; {
+          this.snackBar.open(&#x27;Erreur lors de la création de l\&#x27;article&#x27;, &#x27;Fermer&#x27;, { duration: 5000 });
+        }
+      }
+      );
+  }
+
+  /**
+  * Build the form with its constraints
+  */
+  private buildForm() {
+    this.createPostForm &#x3D; this.formBuilder.group({
+      topic_id: [
+        &#x27;&#x27;,
+        [
+          Validators.required,
+        ]
+      ],
+      title: [
+        &#x27;&#x27;,
+        [
+          Validators.required,
+        ]
+      ],
+      content: [
+        &#x27;&#x27;,
+        [
+          Validators.required,
+          Validators.min(10),
+          Validators.max(5000)
+        ]
+      ]
+    });
+  }
+
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;header&quot;&gt;
+    &lt;div class&#x3D;&quot;header-item&quot;&gt;
+        &lt;button mat-icon-button class&#x3D;&quot;icon-button&quot; routerLink&#x3D;&quot;/posts&quot;&gt;
+            &lt;mat-icon&gt;arrow_back&lt;/mat-icon&gt;
+        &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;h1 class&#x3D;&quot;header-title&quot;&gt;Créer un nouvel article&lt;/h1&gt;
+&lt;/div&gt;
+
+@if (createPostForm){
+&lt;form [formGroup]&#x3D;&quot;createPostForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
+    &lt;div class&#x3D;&quot;form-item&quot;&gt;
+        &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+            &lt;mat-label&gt;Sélectionner un thème&lt;/mat-label&gt;
+            &lt;mat-select formControlName&#x3D;&quot;topic_id&quot;&gt;
+                @for (topic of topics$ | async; track topic) {
+                &lt;mat-option value&#x3D;&quot;{{topic.id}}&quot;&gt;{{topic.name}}&lt;/mat-option&gt;
+                }
+            &lt;/mat-select&gt;
+        &lt;/mat-form-field&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;form-item&quot;&gt;
+        &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+            &lt;mat-label&gt;Titre de l&#x27;article&lt;/mat-label&gt;
+            &lt;input matInput formControlName&#x3D;&quot;title&quot;&gt;
+        &lt;/mat-form-field&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;form-item&quot;&gt;
+        &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+            &lt;mat-label&gt;Contenu de l&#x27;article&lt;/mat-label&gt;
+            &lt;textarea matInput formControlName&#x3D;&quot;content&quot;&gt;&lt;/textarea&gt;
+        &lt;/mat-form-field&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;form-item&quot;&gt;
+        &lt;button class&#x3D;&quot;standard-button&quot; mat-flat-button type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;createPostForm.invalid&quot;&gt;
+            Créer
+        &lt;/button&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+}</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="header">    <div class="header-item">        <button mat-icon-button class="icon-button" routerLink="/posts">            <mat-icon>arrow_back</mat-icon>        </button>    </div>    <h1 class="header-title">Créer un nouvel article</h1></div>@if (createPostForm){<form [formGroup]="createPostForm" (ngSubmit)="onSubmit()">    <div class="form-item">        <mat-form-field appearance="outline">            <mat-label>Sélectionner un thème</mat-label>            <mat-select formControlName="topic_id">                @for (topic of topics$ | async; track topic) {                <mat-option value="{{topic.id}}">{{topic.name}}</mat-option>                }            </mat-select>        </mat-form-field>    </div>    <div class="form-item">        <mat-form-field appearance="outline">            <mat-label>Titre de l\'article</mat-label>            <input matInput formControlName="title">        </mat-form-field>    </div>    <div class="form-item">        <mat-form-field appearance="outline">            <mat-label>Contenu de l\'article</mat-label>            <textarea matInput formControlName="content"></textarea>        </mat-form-field>    </div>    <div class="form-item">        <button class="standard-button" mat-flat-button type="submit" [disabled]="createPostForm.invalid">            Créer        </button>    </div></form>}</div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CreatepostComponent', 'selector': 'app-createpost'},{'name': 'GreetingComponent', 'selector': 'app-greeting-page'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MeComponent', 'selector': 'app-me'},{'name': 'PostComponent', 'selector': 'app-post'},{'name': 'PostDetailsComponent', 'selector': 'app-postdetails'},{'name': 'PostsComponent', 'selector': 'app-posts'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'TopicComponent', 'selector': 'app-topic'},{'name': 'TopicsComponent', 'selector': 'app-post'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CreatepostComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CreatepostComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
