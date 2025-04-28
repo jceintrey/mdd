@@ -1,58 +1,58 @@
 .global-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    border: 1px solid black;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  border: 1px solid black;
+  box-sizing: border-box;
 }
 
 
 
 .header {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .logo {
-    width: 76%;
-    max-width: 400px;
+  width: 76%;
+  max-width: 400px;
 
 }
 
 label {
-    width: 100%;
-    font-size: 1.143rem;
+  width: 100%;
+  font-size: 1.143rem;
 }
 
 
 
 h1 {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 
 
 .form {
-    width: 80%;
-    max-width: 250px;
-    display: flex;
-    flex-direction: column;
-    gap: 0px;
+  width: 80%;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
 }
 
 
 
 .icon-button mat-icon {
-    font-size: 40px !important;
-    width: 100%;
-    height: 100%;
+  font-size: 40px !important;
+  width: 100%;
+  height: 100%;
 }
 
 .full-width {
-    width: 100%;
+  width: 100%;
 
 
 }
@@ -62,16 +62,16 @@ h1 {
 
 
 .submit-button {
-    background-color: #7763C5;
-    border-radius: 8px;
-    border: none;
-    width: 47vw;
-    align-self: center;
-    margin-top: 10%;
-    padding: 12px;
-    font-weight: 700;
-    color: white;
-    max-width: 50%;
+  background-color: #7763C5;
+  border-radius: 8px;
+  border: none;
+  width: 47vw;
+  align-self: center;
+  margin-top: 10%;
+  padding: 12px;
+  font-weight: 700;
+  color: white;
+  max-width: 50%;
 }
 
 
@@ -79,21 +79,21 @@ h1 {
 
 /* Responsive : PC view */
 @media screen and (min-width: 800px) {
-    .logo {
-        height: 86%;
-        width: auto;
-    }
+  .logo {
+    height: 86%;
+    width: auto;
+  }
 
-    .header {
-        display: flex;
-        justify-content: flex-start;
-        border: 1px solid black;
-        width: 100%;
-    }
+  .header {
+    display: flex;
+    justify-content: flex-start;
+    border: 1px solid black;
+    width: 100%;
+  }
 
-    button[mat-icon-button] {
-        align-self: flex-start;
-    }
+  button[mat-icon-button] {
+    align-self: flex-start;
+  }
 
 
 }

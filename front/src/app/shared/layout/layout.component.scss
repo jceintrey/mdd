@@ -3,72 +3,72 @@ Global styles
 */
 
 .active-link {
-    color: #6C5CCF !important;
+  color: #6C5CCF !important;
 }
 
 .global-content {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 
 .main-content {
-    background-color: transparent;
-    // border: 1px solid black !important;
-    height: 89.5vh;
-    width: 100vw;
+  background-color: transparent;
+  // border: 1px solid black !important;
+  height: 89.5vh;
+  width: 100vw;
 }
 
 .spacer {
-    flex: 1;
+  flex: 1;
 }
 
 mat-toolbar-row {
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2.3vw;
-    background-color: white !important;
-    border: 1px solid black !important;
-    width: 100vw !important;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.3vw;
+  background-color: white !important;
+  border: 1px solid black !important;
+  width: 100vw !important;
 
 }
 
 
 mat-toolbar {
-    background-color: transparent !important;
-    width: 100% !important;
+  background-color: transparent !important;
+  width: 100% !important;
 }
 
 
 .logout-item {
-    font-family: 'Inter', sans-serif;
-    color: #A40F0F;
-    font-size: 0.875rem;
-    font-weight: 700;
-    line-height: 2;
+  font-family: 'Inter', sans-serif;
+  color: #A40F0F;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 2;
 }
 
 .nav-item {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 1.25rem;
-    line-height: 2;
-    letter-spacing: 0%;
-    color: black;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 2;
+  letter-spacing: 0%;
+  color: black;
 
 }
 
 .logo {
-    height: 7vh;
+  height: 7vh;
 
 }
 
 .user-icon {
-    height: 7vh;
-    box-sizing: border-box;
-    padding-top: 1vh;
+  height: 7vh;
+  box-sizing: border-box;
+  padding-top: 1vh;
 }
 
 
@@ -77,70 +77,70 @@ Only Mobile styles
 */
 
 button[mat-icon-button] {
-    border: none !important;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    outline: none !important;
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 mat-sidenav {
-    width: 45vw;
-    max-width: 100%;
-    height: 100vh;
-    padding-top: 10%;
-    padding-right: 3%;
-    border-radius: 0% !important;
-    border: 1px solid black !important;
+  width: 45vw;
+  max-width: 100%;
+  height: 100vh;
+  padding-top: 10%;
+  padding-right: 3%;
+  border-radius: 0% !important;
+  border: 1px solid black !important;
 }
 
 mat-nav-list {
-    display: flex;
-    flex-direction: column;
-    height: 97% !important;
-    align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  height: 97% !important;
+  align-items: flex-end;
 
 }
 
 .sidenav-container {
-    width: 95vw;
-    height: 95vh;
-    width: 100%;
-    height: 100%;
-    background-color: white !important;
+  width: 95vw;
+  height: 95vh;
+  width: 100%;
+  height: 100%;
+  background-color: white !important;
 }
 
 /**
 ovverides styles for Mobiles
 */
 @media screen and (max-width: 800px) {
-    .user-icon {
-        height: 6vh;
-    }
+  .user-icon {
+    height: 6vh;
+  }
 
-    .logo {
-        height: 7vh;
-    }
+  .logo {
+    height: 7vh;
+  }
 
-    mat-toolbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: transparent !important;
-    }
+  mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent !important;
+  }
 
-    .logout-item {
-        color: #A40F0F;
-        font-size: 0.875rem;
-        font-weight: 700;
-        line-height: 2;
-    }
+  .logout-item {
+    color: #A40F0F;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 2;
+  }
 
-    .nav-item {
-        font-family: 'Inter', sans-serif;
-        font-weight: 400;
-        font-size: 1.25rem;
-        line-height: 2;
-        letter-spacing: 0%;
-        color: black;
-    }
+  .nav-item {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 2;
+    letter-spacing: 0%;
+    color: black;
+  }
 }

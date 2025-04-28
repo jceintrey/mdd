@@ -14,7 +14,7 @@ import { Subscription } from 'app/core/interfaces/subscription.interface';
 
 /**
  * The component displays a page with all posts related to subscribed topics.
- * 
+ *
  *
  * @remarks
  * - Uses `SubscriptionService` to retrieve the user subscriptions

@@ -10,5 +10,5 @@
  *
  */
 export interface CommentRequest {
-    "content": string
+  "content": string
 }

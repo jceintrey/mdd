@@ -1,14 +1,14 @@
 <mat-card>
-    <mat-card-header>
-        <mat-card-title>
-            {{ topic.name }}
-        </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <p class="clamp-3">Description: {{ topic.description }}</p>
-    </mat-card-content>
-    <button mat-flat-button [ngClass]="topic.subscribed ? 'standard-button' : 'standard-button disabled-button'"
-        (click)="onToggleSubscription()">
-        {{ topic.subscribed ? 'Se désabonner' : 'S’abonner' }}
-    </button>
+  <mat-card-header>
+    <mat-card-title>
+      {{ topic.name }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p class="clamp-3">Description: {{ topic.description }}</p>
+  </mat-card-content>
+  <button mat-flat-button [ngClass]="topic.subscribed ? 'standard-button' : 'standard-button disabled-button'"
+    (click)="onToggleSubscription()">
+    {{ topic.subscribed ? 'Se désabonner' : 'S’abonner' }}
+  </button>
 </mat-card>

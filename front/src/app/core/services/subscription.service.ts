@@ -9,7 +9,7 @@ import { Subscription } from '../interfaces/subscription.interface';
  * like subscribing to a topic, unsubscribe from a topic or listing the user subscriptions
  *
  * @remarks
- * - Uses Angular’s `HttpClient` to interact with `/api/subscription` endpoints. 
+ * - Uses Angular’s `HttpClient` to interact with `/api/subscription` endpoints.
  */
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class SubscriptionService {
   /**
    * Subscribe to a topic given its id
    * @param id the topic identifier
-   * @returns an empty Observable 
+   * @returns an empty Observable
    */
   public subscribe(id: number): Observable<void> {
     return this.httpClient.post<void>(`${this.pathService}/subscribe/${id}`, null);
@@ -32,7 +32,7 @@ export class SubscriptionService {
   /**
    * Unsubscribe from a topic given its id
    * @param id the topic identifier
-   * @returns an empty Observable 
+   * @returns an empty Observable
    */
   public unsubscribe(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.pathService}/unsubscribe/${id}`);

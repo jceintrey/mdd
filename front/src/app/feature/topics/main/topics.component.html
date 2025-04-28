@@ -1,8 +1,8 @@
 <div class="card-container card-container--fit">
-    @for (topic of topics$ | async; track topic) {
-    <div class="card-element">
-        <app-topic [topic]="topic" (subscribe)="subscribe($event)" (unsubscribe)="unsubscribe($event)">
-        </app-topic>
-    </div>
-    }
+  @for (topic of topics$ | async; track topic) {
+  <div class="card-element">
+    <app-topic [topic]="topic" (subscribe)="subscribe($event)" (unsubscribe)="unsubscribe($event)">
+    </app-topic>
+  </div>
+  }
 </div>

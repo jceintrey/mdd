@@ -1,15 +1,15 @@
 
 /**
  * Reprensent the user shape used when getting profile informations
- * 
+ *
  * @property id - Unique identifier of the user
  * @property username - the unique username
  * @property email -  the unique user email
  */
 export interface User {
-    id: number;
-    username: string;
-    email: string;
+  id: number;
+  username: string;
+  email: string;
 }
 
 /**
@@ -22,7 +22,7 @@ export interface User {
  *
  */
 export interface UserUpdateRequest {
-    username: string;
-    email: string;
-    password?: string;
+  username: string;
+  email: string;
+  password?: string;
 }

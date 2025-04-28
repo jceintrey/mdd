@@ -11,7 +11,7 @@
  *
  */
 export interface PostRequest {
-    topicId: number;
-    title: string;
-    content: string;
+  topicId: number;
+  title: string;
+  content: string;
 }
