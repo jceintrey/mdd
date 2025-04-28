@@ -17,7 +17,7 @@ import { ScreenService } from 'app/core/services/screen.service';
  * - Use `ScreenService` to set isMobile flag used in template to manage the mobile and pc view
  * - Use `AuthService` to call logout method on logout
  * - Use `Router` and `RouterLink` for navigate operations
- * 
+ *
  */
 @Component({
   selector: 'app-layout',

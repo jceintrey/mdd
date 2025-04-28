@@ -13,8 +13,8 @@
  *
  */
 export interface Subscription {
-    "id": number,
-    "user_id": number,
-    "topic_id": number,
-    "topic_name": string
+  "id": number,
+  "user_id": number,
+  "topic_id": number,
+  "topic_name": string
 }

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
  * like retrieving topics
  *
  * @remarks
- * - Uses Angular’s `HttpClient` to interact with `/api/topic` endpoints. 
+ * - Uses Angular’s `HttpClient` to interact with `/api/topic` endpoints.
  */
 @Injectable({
   providedIn: 'root'

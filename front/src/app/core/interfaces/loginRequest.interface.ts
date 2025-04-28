@@ -10,6 +10,6 @@
  *
  */
 export interface LoginRequest {
-    identifier: string;
-    password: string;
+  identifier: string;
+  password: string;
 }

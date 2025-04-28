@@ -11,7 +11,7 @@ import { CommentRequest } from '../interfaces/commentRequest.interface';
  * like new post creation, new comment, or getting post informations
  *
  * @remarks
- * - Uses Angular’s `HttpClient` to interact with `/api/posts` endpoints. 
+ * - Uses Angular’s `HttpClient` to interact with `/api/posts` endpoints.
  */
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class PostService {
   constructor(private httpClient: HttpClient) { }
 
   /**
-   * 
+   *
    * @returns an Observable that emits all posts in PostResponse object
    */
   public all(): Observable<PostResponse> {
@@ -43,7 +43,7 @@ export class PostService {
   /**
    * Get a post by its id
    * @param id the indentifier of the expected post
-   * @returns 
+   * @returns
    */
   getPost(id: string | null): Observable<Post> {
     return this.httpClient.get<Post>(`${this.pathService}/${id}`);

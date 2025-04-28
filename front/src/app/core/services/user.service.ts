@@ -9,7 +9,7 @@ import { User, UserUpdateRequest } from '../interfaces/User.interface';
  * like retrieving or updating their profile
  *
  * @remarks
- * - Uses Angular’s `HttpClient` to interact with `/api/user/me` endpoints. 
+ * - Uses Angular’s `HttpClient` to interact with `/api/user/me` endpoints.
  */
 @Injectable({
   providedIn: 'root'

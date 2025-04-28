@@ -17,13 +17,13 @@ import { Topic } from "./topic.interface";
  *
  */
 export interface Post {
-    id?: number;
-    title: string;
-    created_at: string;
-    author: author;
-    topic: Topic;
-    content?: string;
-    comments?: Comment[]
+  id?: number;
+  title: string;
+  created_at: string;
+  author: author;
+  topic: Topic;
+  content?: string;
+  comments?: Comment[]
 }
 /**
  * Response shape for paginated post queries.
@@ -38,8 +38,8 @@ export interface Post {
  *
  */
 export interface PostResponse {
-    content: Post[];
-    pageable: any;
-    totalElements: number;
-    totalPages: number;
+  content: Post[];
+  pageable: any;
+  totalElements: number;
+  totalPages: number;
 }

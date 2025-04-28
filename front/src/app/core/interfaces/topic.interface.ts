@@ -10,10 +10,10 @@
  * @property subscribed – Boolean flag; `true` if the user is subscribed, `false` otherwise.
  */
 export interface Topic {
-    id: number;
-    name: string;
-    description: string;
-    subscribed: boolean;
+  id: number;
+  name: string;
+  description: string;
+  subscribed: boolean;
 }
 
 

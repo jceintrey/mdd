@@ -30,7 +30,7 @@ import { ScreenService } from 'app/core/services/screen.service';
 
 /**
 * Display a login page with a Reactive Form
-* 
+*
 *  @remarks
 *  - use AuthService to login the submited form
 */
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   /**
-  * Enable the user to login to the application 
+  * Enable the user to login to the application
   * Submit the form by calling authService.login
   */
   onSubmit() {
