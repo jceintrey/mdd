@@ -1,0 +1,63 @@
+services:
+  front:
+    container_name: mdd-front
+    build: front/.
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - back
+    networks:
+      - mdd_private
+      - mdd_public
+
+  back:
+    container_name: mdd-back
+    build: back/.
+    restart: unless-stopped
+    #expose only for information purpose
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env-mdd
+    depends_on:
+      - mysql
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mdd_private
+      - mdd_admin # uncomment to expose mysql to host
+
+  mysql:
+    image: mysql:8.0
+    container_name: mdd-mysql
+    restart: unless-stopped
+    ports: # comment/uncomment port config to access db from host
+    - "3309:3306"
+    env_file:
+      - .env-mysql
+    volumes:
+      - mdd_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mdd_private
+      - mdd_admin # comment/uncomment port config to access API from host
+
+volumes:
+  mdd_mysql_data:
+
+networks:
+  mdd_public:
+  mdd_private:
+    internal: true
+  mdd_admin:
+    internal: false

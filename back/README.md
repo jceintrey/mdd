@@ -1,21 +1,21 @@
 # MDD App back
 
 The Backend is based on Java21 using the SpringBoot 3.4.x Framework. It is a standard structured Rest Api application.
-It uses 
- * Spring Security Framework manage authentication and authorizations to api endpoints
- * OAuth2 Resssource Server Library to handle jwt operations
- * Lombok to manage boilerplate code
- * modelMapper library to handle conversions between DTOs and Entities
- * jpa/hibernate as ORM for data persistence
+It uses
 
-
+* Spring Security Framework manage authentication and authorizations to api endpoints
+* OAuth2 Resssource Server Library to handle jwt operations
+* Lombok to manage boilerplate code
+* modelMapper library to handle conversions between DTOs and Entities
+* jpa/hibernate as ORM for data persistence
 
 # Setup
 
 ## Prerequisites
- * Maven
- * Java 21
- * Mysql Server
+
+* Maven
+* Java 21
+* Mysql Server
 
 ## Install the application
 
@@ -59,7 +59,6 @@ flush privileges;
 ```
 
 You could also use a simple compose file to run a mysql server. You will find an example in docker-compose.yml, with .env-mysql-sample file as an example.
-
 
 ## Running the application
 
