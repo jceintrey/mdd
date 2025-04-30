@@ -15,6 +15,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -69,8 +70,9 @@ public class SpringSecurityConfig {
          */
         @Bean
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-                return http.csrf(AbstractHttpConfigurer::disable)
-
+                return http
+                                .cors(Customizer.withDefaults())
+                                .csrf(AbstractHttpConfigurer::disable)
                                 .sessionManagement(
                                                 session -> session
                                                                 .sessionCreationPolicy(
@@ -164,9 +166,15 @@ public class SpringSecurityConfig {
                         @Override
                         public void addCorsMappings(CorsRegistry registry) {
                                 registry.addMapping("/**")
-                                                .allowedOrigins("http://127.0.0.1:4200", "http://localhost:4200")
-                                                .allowedMethods("GET", "POST", "PUT", "DELETE");
+                                                // here *:80 is used for compose stack configuration and *:4200 for
+                                                // local dev configuration
+                                                .allowedOrigins("http://localhost:80", "http://127.0.0.1:80",
+                                                                "http://localhost:4200", "http://127.0.0.1:4200")
+                                                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                                                .allowedHeaders("*")
+                                                .allowCredentials(true); // si tu utilises des cookies / auth header
                         }
                 };
         }
+
 }
