@@ -14,6 +14,7 @@ import { OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ScreenService } from 'app/core/services/screen.service';
+import { passwordComplexityValidator } from 'app/core/validators/password.validator';
 
 /**
  * Displays the register page.
@@ -112,7 +113,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         '',
         [
           Validators.required,
-          Validators.min(8)
+          passwordComplexityValidator
         ]
       ]
     });
